@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReARC Labs &mdash; Trust Infrastructure for Autonomous AI Agents</title>
+  <meta
+    name="description"
+    content="ReARC builds on-chain reputation, dispute resolution, and trust enforcement for autonomous AI agents. Explore ARES Protocol and Docly."
+  >
+  <meta property="og:title" content="ReARC Labs &mdash; Trust Infrastructure for Autonomous AI Agents">
+  <meta
+    property="og:description"
+    content="ReARC builds on-chain reputation, dispute resolution, and trust enforcement for autonomous AI agents. Explore ARES Protocol and Docly."
+  >
+  <meta property="og:url" content="https://rearclabs.com">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050810">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@500;700;800&amp;display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg-primary: #050810;
+      --bg-secondary: #080d1a;
+      --bg-card: #0d1525;
+      --accent-cyan: #00e5ff;
+      --accent-amber: #ffb300;
+      --accent-green: #00ff88;
+      --text-primary: #f0f4ff;
+      --text-secondary: #8892aa;
+      --border: rgba(0, 229, 255, 0.12);
+      --glow-cyan: 0 0 40px rgba(0, 229, 255, 0.15);
+      --radius-sm: 18px;
+      --radius-md: 24px;
+      --radius-lg: 32px;
+      --container: 1200px;
+      --header-height: 84px;
+      --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-primary);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text-primary);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.12), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(255, 179, 0, 0.12), transparent 26%),
+        linear-gradient(180deg, #050810 0%, #060b15 34%, #04070e 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.16;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(0, 229, 255, 0.06), transparent 55%);
+      background-size: 84px 84px, 84px 84px, 100% 100%;
+      mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.16));
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.08;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.7) 0.8px, transparent 1px),
+        radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.6) 0.8px, transparent 1px),
+        radial-gradient(circle at 35% 80%, rgba(255, 255, 255, 0.55) 0.8px, transparent 1px);
+      background-size: 24px 24px, 18px 18px, 30px 30px;
+      mix-blend-mode: screen;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    main,
+    footer,
+    section[id] {
+      scroll-margin-top: calc(var(--header-height) + 24px);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section {
+      position: relative;
+      padding: 6rem 0;
+    }
+
+    .section-shell {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background:
+        linear-gradient(180deg, rgba(13, 21, 37, 0.92), rgba(7, 10, 18, 0.96));
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top right, rgba(0, 229, 255, 0.08), transparent 30%),
+        linear-gradient(135deg, rgba(255, 179, 0, 0.08), transparent 25%);
+      opacity: 0.95;
+    }
+
+    .section-inner {
+      position: relative;
+      padding: clamp(1.8rem, 2vw, 2.5rem);
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0 0 1rem;
+      color: var(--accent-cyan);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan));
+      opacity: 0.8;
+    }
+
+    .section-heading {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .section-copy {
+      max-width: 720px;
+      margin: 1rem 0 0;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      min-height: 52px;
+      padding: 0.9rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        box-shadow 220ms ease,
+        border-color 220ms ease,
+        color 220ms ease;
+      will-change: transform;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .button-primary {
+      color: #02131c;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 1), rgba(97, 245, 255, 0.9));
+      box-shadow: 0 18px 45px rgba(0, 229, 255, 0.22);
+    }
+
+    .button-primary:hover,
+    .button-primary:focus-visible {
+      box-shadow: 0 22px 60px rgba(0, 229, 255, 0.32);
+    }
+
+    .button-secondary,
+    .button-outline {
+      color: var(--text-primary);
+      border-color: rgba(0, 229, 255, 0.26);
+      background: rgba(0, 229, 255, 0.05);
+      box-shadow: inset 0 0 0 1px rgba(0, 229, 255, 0.04);
+    }
+
+    .button-secondary:hover,
+    .button-secondary:focus-visible,
+    .button-outline:hover,
+    .button-outline:focus-visible {
+      color: #02131c;
+      background: var(--accent-cyan);
+      border-color: rgba(0, 229, 255, 0.7);
+      box-shadow: 0 18px 48px rgba(0, 229, 255, 0.24);
+    }
+
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6);
+      animation: pulse-ring 2.6s ease-out infinite;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 30;
+      padding: 1rem 0;
+      transition:
+        background-color 220ms ease,
+        border-color 220ms ease,
+        backdrop-filter 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(5, 8, 16, 0.82);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    .nav-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      background: rgba(5, 8, 16, 0.55);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+      font-family: "Syne", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      color: var(--accent-cyan);
+      filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.22));
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 0.35rem 0;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .menu-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .mobile-panel {
+      display: none;
+      border: 1px solid rgba(0, 229, 255, 0.12);
+      border-radius: 24px;
+      background: rgba(6, 10, 18, 0.94);
+      backdrop-filter: blur(24px);
+      box-shadow: var(--shadow-soft);
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+      transform: translateY(-10px);
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        max-height 180ms ease,
+        margin-top 180ms ease,
+        padding 180ms ease,
+        border-width 180ms ease;
+    }
+
+    .mobile-panel.is-open {
+      max-height: 420px;
+      margin-top: 0.9rem;
+      padding: 1rem;
+      border-width: 1px;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-panel nav {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .mobile-panel a {
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .mobile-panel .button {
+      margin-top: 0.7rem;
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding-top: calc(var(--header-height) + 2rem);
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(0, 229, 255, 0.15), transparent 30%),
+        radial-gradient(circle at 80% 18%, rgba(255, 179, 0, 0.14), transparent 26%),
+        linear-gradient(180deg, rgba(5, 8, 16, 0.1), rgba(5, 8, 16, 0.82));
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(5, 8, 16, 0) 0%, rgba(5, 8, 16, 0) 60%, rgba(5, 8, 16, 0.95) 100%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.025) 0 1px,
+          transparent 1px 78px
+        );
+      opacity: 0.88;
+    }
+
+    #vanta-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(0, 229, 255, 0.2), transparent 35%),
+        linear-gradient(160deg, rgba(8, 13, 26, 0.85), rgba(5, 8, 16, 1));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 3.5rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.75rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.28);
+      background: rgba(5, 8, 16, 0.58);
+      color: var(--accent-cyan);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.84rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: var(--glow-cyan);
+      backdrop-filter: blur(18px);
+      animation: badge-pulse 3s ease-in-out infinite;
+    }
+
+    .hero-title {
+      max-width: 980px;
+      margin: 1.4rem auto 0;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(3.2rem, 9vw, 6.9rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      text-wrap: balance;
+    }
+
+    .hero-title span {
+      display: inline-block;
+      background: linear-gradient(90deg, #f0f4ff 0%, rgba(0, 229, 255, 0.92) 58%, rgba(255, 179, 0, 0.92) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 6px 24px rgba(0, 229, 255, 0.06));
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 1.35rem auto 0;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 1.9vw, 1.28rem);
+      text-wrap: balance;
+    }
+
+    .hero-copy strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 920px;
+      margin: 2.7rem auto 0;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      padding: 1.3rem 1.35rem;
+      text-align: left;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background:
+        linear-gradient(180deg, rgba(10, 16, 29, 0.9), rgba(5, 8, 16, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.9), transparent);
+      opacity: 0.7;
+    }
+
+    .stat-number {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      margin-top: 0.3rem;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .scroll-indicator {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      margin-top: 2.8rem;
+      color: rgba(240, 244, 255, 0.72);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .scroll-indicator svg {
+      width: 22px;
+      height: 22px;
+      animation: float-chevron 2.2s ease-in-out infinite;
+    }
+
+    .problem-grid,
+    .product-grid,
+    .stack-grid,
+    .about-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 2.2rem;
+    }
+
+    .problem-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stack-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: stretch;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background:
+        linear-gradient(180deg, rgba(13, 21, 37, 0.94), rgba(7, 10, 18, 0.98));
+      transition:
+        transform 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .card:hover,
+    .card:focus-within {
+      transform: translateY(-8px);
+      border-color: rgba(0, 229, 255, 0.2);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42), 0 0 32px rgba(0, 229, 255, 0.08);
+    }
+
+    .card-inner {
+      position: relative;
+      padding: 1.65rem;
+    }
+
+    .problem-card {
+      min-height: 100%;
+    }
+
+    .problem-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      margin-bottom: 1rem;
+      border-radius: 16px;
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.14);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .problem-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .card h3,
+    .product-title,
+    .timeline-step h3,
+    .cta-heading,
+    .footer-brandline {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      letter-spacing: -0.05em;
+    }
+
+    .card h3 {
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .card p {
+      margin: 0.85rem 0 0;
+      color: var(--text-secondary);
+    }
+
+    .product-card {
+      min-height: 100%;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .product-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .product-card.cyan {
+      border-color: rgba(0, 229, 255, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(0, 229, 255, 0.04);
+    }
+
+    .product-card.cyan::before {
+      background:
+        radial-gradient(circle at top right, rgba(0, 229, 255, 0.18), transparent 36%),
+        linear-gradient(180deg, transparent 0%, rgba(0, 229, 255, 0.04) 100%);
+    }
+
+    .product-card.amber {
+      border-color: rgba(255, 179, 0, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(255, 179, 0, 0.04);
+    }
+
+    .product-card.amber::before {
+      background:
+        radial-gradient(circle at top right, rgba(255, 179, 0, 0.18), transparent 36%),
+        linear-gradient(180deg, transparent 0%, rgba(255, 179, 0, 0.04) 100%);
+    }
+
+    .product-card.amber:hover,
+    .product-card.amber:focus-within {
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.46),
+        0 0 36px rgba(255, 179, 0, 0.12);
+      border-color: rgba(255, 179, 0, 0.35);
+    }
+
+    .product-card.cyan:hover,
+    .product-card.cyan:focus-within {
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.46),
+        0 0 36px rgba(0, 229, 255, 0.12);
+      border-color: rgba(0, 229, 255, 0.35);
+    }
+
+    .product-tag,
+    .chip,
+    .meta-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.77rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .product-tag {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      background: rgba(5, 8, 16, 0.52);
+    }
+
+    .cyan .product-tag,
+    .cyan .meta-line,
+    .timeline-step.cyan .step-index,
+    .stack-chip.cyan {
+      color: var(--accent-cyan);
+    }
+
+    .amber .product-tag,
+    .amber .meta-line,
+    .stack-chip.amber {
+      color: var(--accent-amber);
+    }
+
+    .green .stack-chip {
+      color: var(--accent-green);
+    }
+
+    .product-title {
+      margin-top: 1.15rem;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      line-height: 0.95;
+    }
+
+    .product-copy {
+      margin-top: 1rem;
+      max-width: 540px;
+      color: var(--text-secondary);
+      font-size: 1.02rem;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 0.7rem;
+      margin: 1.4rem 0 0;
+      padding: 0;
+      list-style: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+      color: rgba(240, 244, 255, 0.82);
+    }
+
+    .feature-list li {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.65rem;
+    }
+
+    .feature-list span {
+      color: inherit;
+    }
+
+    .feature-symbol {
+      opacity: 0.88;
+    }
+
+    .product-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.55rem;
+      font-weight: 700;
+      transition: gap 160ms ease, color 160ms ease;
+    }
+
+    .product-link:hover,
+    .product-link:focus-visible {
+      gap: 0.8rem;
+      outline: none;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 1.25rem;
+      height: 2px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(0, 229, 255, 0.95) 0 12px,
+          rgba(0, 229, 255, 0) 12px 24px
+        );
+      opacity: 0.7;
+      animation: dash-flow 16s linear infinite;
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-top: 1.2rem;
+    }
+
+    .timeline-step .step-node {
+      position: absolute;
+      top: 0;
+      left: 1.65rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.1);
+      z-index: 2;
+    }
+
+    .timeline-step:nth-child(4) .step-node {
+      background: var(--accent-amber);
+      box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.1);
+    }
+
+    .timeline-step .card-inner {
+      padding-top: 1.9rem;
+    }
+
+    .step-index {
+      margin-bottom: 0.9rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .timeline-step h3 {
+      font-size: 1.5rem;
+      line-height: 0.95;
+    }
+
+    .timeline-step p {
+      margin-top: 0.8rem;
+    }
+
+    .stack-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(13, 21, 37, 0.8);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background-color 180ms ease;
+    }
+
+    .stack-chip::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.8;
+      box-shadow: 0 0 16px currentColor;
+    }
+
+    .stack-chip:hover,
+    .stack-chip:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(17, 28, 49, 0.92);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24), 0 0 24px rgba(0, 229, 255, 0.08);
+      outline: none;
+    }
+
+    .ecosystem-card {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 1.2rem;
+      align-items: center;
+      margin-top: 2.2rem;
+    }
+
+    .ecosystem-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min(180px, 100%);
+      aspect-ratio: 1;
+      margin-left: auto;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 28%),
+        linear-gradient(145deg, rgba(42, 48, 62, 0.9), rgba(12, 17, 28, 0.96));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      color: rgba(240, 244, 255, 0.68);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: 0.18em;
+    }
+
+    .about-card,
+    .about-side {
+      min-height: 100%;
+    }
+
+    .mini-panels {
+      display: grid;
+      gap: 0.9rem;
+      height: 100%;
+    }
+
+    .mini-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 1.2rem 1.25rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(10, 15, 27, 0.84);
+      color: var(--text-secondary);
+    }
+
+    .mini-panel strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .cta-section {
+      padding-top: 2rem;
+    }
+
+    .cta-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 36px;
+      border: 1px solid rgba(0, 229, 255, 0.12);
+      background:
+        radial-gradient(circle at 12% 25%, rgba(0, 229, 255, 0.22), transparent 30%),
+        radial-gradient(circle at 86% 24%, rgba(255, 179, 0, 0.18), transparent 26%),
+        linear-gradient(135deg, rgba(7, 12, 22, 0.98), rgba(5, 8, 16, 1));
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    .cta-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 68px 68px;
+      mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.15));
+      opacity: 0.35;
+    }
+
+    .cta-shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          120deg,
+          transparent 0%,
+          rgba(0, 229, 255, 0.07) 22%,
+          transparent 48%,
+          rgba(255, 179, 0, 0.06) 68%,
+          transparent 100%
+        );
+      animation: sweep 14s linear infinite;
+      opacity: 0.8;
+    }
+
+    .cta-inner {
+      position: relative;
+      padding: clamp(2rem, 4vw, 4rem);
+      text-align: center;
+      z-index: 1;
+    }
+
+    .cta-heading {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      line-height: 0.92;
+      text-wrap: balance;
+    }
+
+    .cta-copy {
+      max-width: 720px;
+      margin: 1rem auto 0;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
+      text-wrap: balance;
+    }
+
+    .site-footer {
+      padding: 3rem 0 4rem;
+    }
+
+    .footer-shell {
+      padding: 2rem;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(9, 13, 23, 0.86);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .footer-brandline {
+      font-size: clamp(1.65rem, 3vw, 2.1rem);
+      line-height: 0.95;
+    }
+
+    .footer-tagline {
+      margin: 0.9rem 0 0;
+      max-width: 480px;
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .footer-link-group h3 {
+      margin: 0 0 0.7rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .footer-link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem 1.2rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-link-row a {
+      transition: color 180ms ease;
+    }
+
+    .footer-link-row a:hover,
+    .footer-link-row a:focus-visible {
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .legal-notes {
+      display: grid;
+      gap: 0.55rem;
+      max-width: 760px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .legal-notes p {
+      margin: 0;
+      color: rgba(136, 146, 170, 0.9);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity 720ms ease,
+        transform 720ms ease;
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .load-in {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fade-up 860ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes badge-pulse {
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.12), 0 0 28px rgba(0, 229, 255, 0.14);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(0, 229, 255, 0), 0 0 38px rgba(0, 229, 255, 0.2);
+      }
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.45);
+      }
+      100% {
+        box-shadow: 0 0 0 14px rgba(0, 229, 255, 0);
+      }
+    }
+
+    @keyframes float-chevron {
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.75;
+      }
+      50% {
+        transform: translateY(8px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes dash-flow {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 240px 0;
+      }
+    }
+
+    @keyframes sweep {
+      0% {
+        transform: translateX(-12%);
+      }
+      50% {
+        transform: translateX(6%);
+      }
+      100% {
+        transform: translateX(-12%);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-title {
+        max-width: 860px;
+      }
+
+      .problem-grid,
+      .stack-grid,
+      .timeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .timeline::before {
+        left: 6%;
+        right: 6%;
+      }
+
+      .ecosystem-card,
+      .about-grid,
+      .footer-main {
+        grid-template-columns: 1fr;
+      }
+
+      .ecosystem-logo {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .nav-links,
+      .nav-actions .button-outline {
+        display: none;
+      }
+
+      .menu-toggle,
+      .mobile-panel {
+        display: block;
+      }
+
+      .mobile-panel {
+        margin-top: 0;
+        padding: 0;
+        border-width: 0;
+      }
+
+      .nav-shell {
+        border-radius: 28px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-bottom: 4rem;
+      }
+
+      .hero-stats,
+      .problem-grid,
+      .product-grid,
+      .stack-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+        padding-top: 0;
+        padding-left: 1.6rem;
+      }
+
+      .timeline::before {
+        top: 0.5rem;
+        bottom: 0.5rem;
+        left: 0.42rem;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background:
+          repeating-linear-gradient(
+            180deg,
+            rgba(0, 229, 255, 0.9) 0 12px,
+            rgba(0, 229, 255, 0) 12px 24px
+          );
+      }
+
+      .timeline-step {
+        padding-top: 0;
+      }
+
+      .timeline-step .step-node {
+        top: 1.9rem;
+        left: -1.14rem;
+      }
+
+      .timeline-step .card-inner {
+        padding-top: 1.65rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .section {
+        padding: 4.5rem 0;
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - 1.1rem));
+      }
+
+      .nav-shell {
+        padding: 0.7rem 0.8rem;
+      }
+
+      .brand {
+        font-size: 1.2rem;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .section-inner,
+      .card-inner,
+      .footer-shell {
+        padding: 1.35rem;
+      }
+
+      .hero-content {
+        padding-top: 2rem;
+      }
+
+      .hero-badge {
+        font-size: 0.74rem;
+        letter-spacing: 0.13em;
+      }
+
+      .hero-copy,
+      .cta-copy,
+      .section-copy {
+        font-size: 0.98rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .button-row {
+        width: 100%;
+      }
+
+      .hero-actions {
+        justify-content: stretch;
+      }
+
+      .hero-stats {
+        gap: 0.85rem;
+      }
+
+      .footer-bottom {
+        font-size: 0.84rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal,
+      .load-in {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-shell">
+        <a class="brand" href="#top" aria-label="ReARC Labs home">
+          <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M10 24C10 16.268 16.268 10 24 10H32" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M24 38C31.732 38 38 31.732 38 24V16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M24 10V4" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M38 24H44" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="24" cy="4" r="3" fill="currentColor"/>
+            <circle cx="44" cy="24" r="3" fill="currentColor"/>
+            <circle cx="10" cy="24" r="3" fill="currentColor"/>
+            <circle cx="32" cy="10" r="2.5" fill="currentColor"/>
+            <circle cx="38" cy="16" r="2.5" fill="currentColor"/>
+          </svg>
+          <span>ReARC</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#products">Products</a>
+          <a href="#ares">ARES Protocol</a>
+          <a href="#docly">Docly</a>
+          <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+            <span class="signal-dot" aria-hidden="true"></span>
+            Explore ARES
+          </a>
+          <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 7H20"/>
+              <path d="M4 12H20"/>
+              <path d="M4 17H14"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-panel" id="mobile-menu" aria-label="Mobile menu" aria-hidden="true">
+        <nav>
+          <a href="#products" data-nav-link>Products</a>
+          <a href="#ares" data-nav-link>ARES Protocol</a>
+          <a href="#docly" data-nav-link>Docly</a>
+          <a href="#about" data-nav-link>About</a>
+        </nav>
+        <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+          Explore ARES
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="hero" aria-label="Hero section">
+      <div id="vanta-bg" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="hero-badge load-in" style="--delay: 0.04s;">
+          <span aria-hidden="true">⬡</span>
+          TRUST INFRASTRUCTURE
+        </div>
+
+        <h1 class="hero-title load-in" style="--delay: 0.12s;">
+          The Enforcement Layer<br>
+          <span>for Autonomous Agents</span>
+        </h1>
+
+        <p class="hero-copy load-in" style="--delay: 0.2s;">
+          ReARC builds the trust, reputation, and dispute infrastructure that autonomous AI agents need to transact with accountability.
+          <strong>Not just discovery. Enforcement.</strong>
+        </p>
+
+        <div class="button-row hero-actions load-in" style="--delay: 0.28s;">
+          <a class="button button-primary" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+            Explore ARES Protocol
+          </a>
+          <a class="button button-secondary" href="https://docly.work/" target="_blank" rel="noreferrer">
+            Try Docly
+          </a>
+        </div>
+
+        <div class="hero-stats load-in" style="--delay: 0.36s;">
+          <div class="stat-card">
+            <p class="stat-number" data-count="106">0</p>
+            <div class="stat-label">Smart contract tests passing</div>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number" data-count="6">0</p>
+            <div class="stat-label">Core contracts deployed</div>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number">Base</p>
+            <div class="stat-label">Deployed on Sepolia</div>
+          </div>
+        </div>
+
+        <a class="scroll-indicator load-in" style="--delay: 0.46s;" href="#problem" aria-label="Scroll to the next section">
+          Scroll
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 10L12 15L17 10"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker">// THE PROBLEM</p>
+            <h2 class="section-heading">Agents can transact.<br>But can you trust them?</h2>
+
+            <div class="problem-grid">
+              <article class="card problem-card reveal" style="--reveal-delay: 0.05s;">
+                <div class="card-inner">
+                  <div class="problem-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 3H17L20 6V19A2 2 0 0 1 18 21H6A2 2 0 0 1 4 19V6A2 2 0 0 1 6 4"/>
+                      <path d="M8 10H16"/>
+                      <path d="M8 14H16"/>
+                      <path d="M8 18H13"/>
+                    </svg>
+                  </div>
+                  <h3>No Verifiable History</h3>
+                  <p>An agent can claim anything. There&apos;s no on-chain record of what it actually did.</p>
+                </div>
+              </article>
+
+              <article class="card problem-card reveal" style="--reveal-delay: 0.12s;">
+                <div class="card-inner">
+                  <div class="problem-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 20H20"/>
+                      <path d="M8 5H16"/>
+                      <path d="M12 5V12"/>
+                      <path d="M9 12L12 15L15 12"/>
+                    </svg>
+                  </div>
+                  <h3>No Dispute Mechanism</h3>
+                  <p>When an agent fails a job, there&apos;s no way to penalize it. A bad rating is not enforcement.</p>
+                </div>
+              </article>
+
+              <article class="card problem-card reveal" style="--reveal-delay: 0.19s;">
+                <div class="card-inner">
+                  <div class="problem-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 3L19 6V11C19 16 15.6 20 12 21C8.4 20 5 16 5 11V6L12 3Z"/>
+                      <path d="M9 12L11 14L15 10"/>
+                    </svg>
+                  </div>
+                  <h3>No Economic Accountability</h3>
+                  <p>Without financial consequence for failure, reputation means nothing.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker">// OUR PRODUCTS</p>
+            <h2 class="section-heading">Two products. One trust thesis.</h2>
+            <p class="section-copy">
+              ReARC Labs operates the trust substrate for agentic systems and a live software business that proves the team ships, monetizes, and scales real infrastructure.
+            </p>
+
+            <div class="product-grid">
+              <article class="card product-card cyan reveal" id="ares" style="--reveal-delay: 0.05s;">
+                <div class="card-inner">
+                  <div class="product-tag">FLAGSHIP · TESTNET LIVE</div>
+                  <h3 class="product-title">ARES Protocol</h3>
+                  <p class="product-copy">
+                    On-chain identity, verifiable reputation scores (ARI), economic dispute resolution with slashing, and programmable trust enforcement for autonomous AI agents. Live on Base Sepolia — mainnet targeting Q2 2026.
+                  </p>
+                  <ul class="feature-list">
+                    <li><span class="feature-symbol">✦</span><span>ERC-8004 + ERC-8183 compatible</span></li>
+                    <li><span class="feature-symbol">✦</span><span>Dispute mechanism with slashing</span></li>
+                    <li><span class="feature-symbol">✦</span><span>ARI reputation engine</span></li>
+                    <li><span class="feature-symbol">✦</span><span>Governance via TimelockController</span></li>
+                    <li><span class="feature-symbol">✦</span><span>Base (EVM) native</span></li>
+                  </ul>
+                  <a class="product-link" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">View Protocol →</a>
+                </div>
+              </article>
+
+              <article class="card product-card amber reveal" id="docly" style="--reveal-delay: 0.12s;">
+                <div class="card-inner">
+                  <div class="product-tag">LIVE · EARLY ACCESS</div>
+                  <h3 class="product-title">Docly.work</h3>
+                  <p class="product-copy">
+                    Fast, privacy-first document processing tools. PDF compression, conversion, OCR, and more. No signup required.
+                  </p>
+                  <ul class="feature-list">
+                    <li><span class="feature-symbol">✦</span><span>11 document processing tools</span></li>
+                    <li><span class="feature-symbol">✦</span><span>PDF to Word, Merge, Split, OCR</span></li>
+                    <li><span class="feature-symbol">✦</span><span>No signup required</span></li>
+                    <li><span class="feature-symbol">✦</span><span>API access available</span></li>
+                    <li><span class="feature-symbol">✦</span><span>Privacy-first architecture</span></li>
+                  </ul>
+                  <a class="product-link" href="https://docly.work/" target="_blank" rel="noreferrer">Try Docly →</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker">// HOW IT WORKS</p>
+            <h2 class="section-heading">Trust with Economic Consequence</h2>
+            <p class="section-copy">
+              ARES moves trust from vibes and screenshots into cryptographic history, machine-readable scoring, and programmable enforcement.
+            </p>
+
+            <div class="timeline" aria-label="ARES workflow timeline">
+              <article class="card timeline-step cyan reveal" style="--reveal-delay: 0.05s;">
+                <span class="step-node" aria-hidden="true"></span>
+                <div class="card-inner">
+                  <div class="step-index">01 · REGISTER</div>
+                  <h3>Register</h3>
+                  <p>Agent registers on-chain identity via AresRegistry. Immutable, verifiable.</p>
+                </div>
+              </article>
+
+              <article class="card timeline-step cyan reveal" style="--reveal-delay: 0.11s;">
+                <span class="step-node" aria-hidden="true"></span>
+                <div class="card-inner">
+                  <div class="step-index">02 · ACT</div>
+                  <h3>Act</h3>
+                  <p>Every agent action gets recorded on AresScorecardLedger. Signed, timestamped, permanent.</p>
+                </div>
+              </article>
+
+              <article class="card timeline-step cyan reveal" style="--reveal-delay: 0.17s;">
+                <span class="step-node" aria-hidden="true"></span>
+                <div class="card-inner">
+                  <div class="step-index">03 · SCORE</div>
+                  <h3>Score</h3>
+                  <p>ARI Engine aggregates records into a reputation score. Decays with inactivity, improves with success.</p>
+                </div>
+              </article>
+
+              <article class="card timeline-step amber reveal" style="--reveal-delay: 0.23s;">
+                <span class="step-node" aria-hidden="true"></span>
+                <div class="card-inner">
+                  <div class="step-index">04 · ENFORCE</div>
+                  <h3>Enforce</h3>
+                  <p>Disputes trigger economic slashing. Bad actors pay. Good actors are rewarded.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker">// STACK</p>
+            <h2 class="section-heading">Protocol-native, developer-native.</h2>
+            <p class="section-copy">
+              Built with battle-tested EVM primitives and modern developer tooling so integration teams can move from spec to shipping without translation layers.
+            </p>
+
+            <div class="stack-grid">
+              <div class="stack-chip cyan reveal" style="--reveal-delay: 0.04s;">Solidity</div>
+              <div class="stack-chip amber reveal" style="--reveal-delay: 0.08s;">Foundry</div>
+              <div class="stack-chip cyan reveal" style="--reveal-delay: 0.12s;">Base (EVM)</div>
+              <div class="stack-chip amber reveal" style="--reveal-delay: 0.16s;">OpenZeppelin</div>
+              <div class="stack-chip cyan reveal" style="--reveal-delay: 0.2s;">ERC-8004</div>
+              <div class="stack-chip amber reveal" style="--reveal-delay: 0.24s;">ERC-8183</div>
+              <div class="stack-chip green reveal" style="--reveal-delay: 0.28s;">Node.js</div>
+              <div class="stack-chip cyan reveal" style="--reveal-delay: 0.32s;">React</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ecosystem">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker">// ECOSYSTEM</p>
+            <h2 class="section-heading">Network effects start with verifiable metadata.</h2>
+
+            <article class="card ecosystem-card reveal" style="--reveal-delay: 0.08s;">
+              <div class="card-inner">
+                <div class="meta-line cyan">INTEGRATION PARTNER · IN PROGRESS</div>
+                <h3 style="margin-top: 0.85rem; font-size: clamp(1.9rem, 3vw, 2.7rem);">Hashgraph Online</h3>
+                <p>
+                  ARES trust metadata is being mapped into HOL&apos;s Registry Broker — bringing verifiable on-chain reputation and dispute signals into a discovery network spanning
+                  <strong style="color: var(--text-primary);">121K+ indexed agents</strong> across 15 registries.
+                </p>
+              </div>
+              <div class="card-inner" style="display:flex; align-items:center; justify-content:center;">
+                <div class="ecosystem-logo" aria-label="Hashgraph Online mark">
+                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                    <circle cx="36" cy="36" r="34" stroke="rgba(0,229,255,0.25)" stroke-width="1.5"/>
+                    <circle cx="36" cy="36" r="22" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
+                    <path d="M20 36C20 27.163 27.163 20 36 20" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M36 52C44.837 52 52 44.837 52 36" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="36" cy="20" r="3" fill="var(--accent-cyan)"/>
+                    <circle cx="36" cy="52" r="3" fill="var(--accent-cyan)" opacity="0.6"/>
+                    <text x="36" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="rgba(240,244,255,0.7)" letter-spacing="0.1em">HOL</text>
+                  </svg>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker">// ABOUT REARC</p>
+            <h2 class="section-heading">A trust company for the agentic internet.</h2>
+
+            <div class="about-grid">
+              <article class="card about-card reveal" style="--reveal-delay: 0.05s;">
+                <div class="card-inner">
+                  <p class="meta-line cyan">PARENT COMPANY</p>
+                  <h3 style="margin-top: 0.9rem; font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;">
+                    ReARC Labs operates beneath the interface layer.
+                  </h3>
+                  <p style="margin-top: 1rem;">
+                    ReARC is not a registry or discovery product. It is the layer that decides how much to trust an agent and what happens when it fails.
+                    ARES establishes the enforcement substrate for autonomous agents. Docly proves the company can turn deterministic workflow infrastructure into revenue-bearing software.
+                  </p>
+                </div>
+              </article>
+
+              <aside class="about-side mini-panels">
+                <div class="mini-panel reveal" style="--reveal-delay: 0.11s;">
+                  <strong>Enforcement first</strong>
+                  Reputation without slashing, dispute windows, or stake is just UI.
+                </div>
+                <div class="mini-panel reveal" style="--reveal-delay: 0.17s;">
+                  <strong>Shipping discipline</strong>
+                  Testnet protocol execution and a live SaaS product are running in parallel.
+                </div>
+                <div class="mini-panel reveal" style="--reveal-delay: 0.23s;">
+                  <strong>Built for integrators</strong>
+                  AI infrastructure teams, agent platforms, and Web3 developers can plug trust into existing flows.
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section" id="contact">
+      <div class="container">
+        <div class="cta-shell reveal">
+          <div class="cta-inner">
+            <p class="section-kicker" style="justify-content: center;">// BUILD WITH REARC</p>
+            <h2 class="cta-heading">Build on Trust Infrastructure</h2>
+            <p class="cta-copy">
+              ARES Protocol is live on Base Sepolia — mainnet targeting Q2 2026. Early integration partners get priority access to trust scoring, dispute enforcement, and programmable reputation hooks.
+            </p>
+            <div class="button-row" style="justify-content: center; margin-top: 2rem;">
+              <a class="button button-primary" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+                Explore ARES
+              </a>
+              <a class="button button-secondary" href="mailto:atakan@ares-protocol.xyz" aria-label="Contact ReARC Labs via email">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-shell">
+        <div class="footer-main">
+          <div>
+            <a class="brand" href="#top" aria-label="ReARC Labs home">
+              <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M10 24C10 16.268 16.268 10 24 10H32" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                <path d="M24 38C31.732 38 38 31.732 38 24V16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                <path d="M24 10V4" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                <path d="M38 24H44" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                <circle cx="24" cy="4" r="3" fill="currentColor"/>
+                <circle cx="44" cy="24" r="3" fill="currentColor"/>
+                <circle cx="10" cy="24" r="3" fill="currentColor"/>
+                <circle cx="32" cy="10" r="2.5" fill="currentColor"/>
+                <circle cx="38" cy="16" r="2.5" fill="currentColor"/>
+              </svg>
+              <span>ReARC</span>
+            </a>
+            <h2 class="footer-brandline">Trust Infrastructure for the Agentic Internet</h2>
+            <p class="footer-tagline">
+              ReARC Labs builds the systems that let autonomous agents carry identity, reputation, and consequences into every high-stakes interaction.
+            </p>
+            <p style="margin-top: 0.8rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--accent-cyan); opacity: 0.7;">rearclabs.com</p>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-link-group">
+              <h3>Links</h3>
+              <div class="footer-link-row">
+                <a href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">ARES Protocol</a>
+                <a href="https://docly.work/" target="_blank" rel="noreferrer">Docly.work</a>
+                <a href="https://github.com/atakanelik34" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://x.com/AtakanElik_" target="_blank" rel="noreferrer">Twitter / X</a>
+                <a href="https://www.linkedin.com/in/atakanelik/" target="_blank" rel="noreferrer">LinkedIn</a>
+              </div>
+            </div>
+
+            <div class="footer-link-group">
+              <h3>Legal</h3>
+              <div class="footer-link-row">
+                <a href="#privacy-policy">Privacy Policy</a>
+                <a href="#terms-of-use">Terms</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>© 2026 ReARC Labs</div>
+          <div class="legal-notes">
+            <p id="privacy-policy">
+              <strong style="color: var(--text-primary);">Privacy Policy:</strong> ReARC Labs products are designed around minimal data retention, explicit processing surfaces, and transparent integration boundaries.
+            </p>
+            <p id="terms-of-use">
+              <strong style="color: var(--text-primary);">Terms:</strong> Product access and protocol integrations remain subject to service-specific limits, protocol risk disclosures, and applicable partner agreements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const body = document.body;
+      const header = document.querySelector(".site-header");
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobilePanel = document.querySelector(".mobile-panel");
+      const navLinks = document.querySelectorAll("[data-nav-link]");
+      const heroBackground = document.getElementById("vanta-bg");
+      const statNumbers = document.querySelectorAll(".stat-number[data-count]");
+      const revealItems = document.querySelectorAll(".reveal");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let vantaEffect = null;
+
+      function syncHeader() {
+        header.classList.toggle("is-scrolled", window.scrollY > 24);
+      }
+
+      function closeMenu() {
+        if (!mobilePanel) {
+          return;
+        }
+        mobilePanel.classList.remove("is-open");
+        body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        mobilePanel.setAttribute("aria-hidden", "true");
+      }
+
+      function toggleMenu() {
+        const isOpen = mobilePanel.classList.toggle("is-open");
+        body.classList.toggle("menu-open", isOpen);
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        mobilePanel.setAttribute("aria-hidden", String(!isOpen));
+      }
+
+      function animateCount(element) {
+        if (element.dataset.played === "true") {
+          return;
+        }
+
+        element.dataset.played = "true";
+
+        const target = Number(element.dataset.count || 0);
+        const suffix = element.dataset.suffix || "";
+
+        if (reducedMotion.matches) {
+          element.textContent = String(target) + suffix;
+          return;
+        }
+
+        const duration = 1500;
+        const startTime = performance.now();
+
+        function frame(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = Math.floor(target * eased);
+          element.textContent = String(value) + suffix;
+
+          if (progress < 1) {
+            window.requestAnimationFrame(frame);
+          } else {
+            element.textContent = String(target) + suffix;
+          }
+        }
+
+        window.requestAnimationFrame(frame);
+      }
+
+      function markVisible(entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }
+
+      function runCount(entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }
+
+      function shouldUseVanta() {
+        return window.innerWidth > 900 && !reducedMotion.matches;
+      }
+
+      function destroyVanta() {
+        if (vantaEffect && typeof vantaEffect.destroy === "function") {
+          vantaEffect.destroy();
+          vantaEffect = null;
+        }
+      }
+
+      function initVanta() {
+        if (!heroBackground || vantaEffect || !shouldUseVanta() || !window.VANTA || !window.THREE) {
+          return;
+        }
+
+        vantaEffect = window.VANTA.NET({
+          el: "#vanta-bg",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          color: 0x00e5ff,
+          backgroundColor: 0x050810,
+          points: 12.0,
+          maxDistance: 22.0,
+          spacing: 18.0
+        });
+      }
+
+      function manageVanta() {
+        if (shouldUseVanta()) {
+          initVanta();
+        } else {
+          destroyVanta();
+        }
+      }
+
+      syncHeader();
+      window.addEventListener("scroll", syncHeader, { passive: true });
+
+      if (menuToggle && mobilePanel) {
+        menuToggle.addEventListener("click", toggleMenu);
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", closeMenu);
+        });
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 960) {
+            closeMenu();
+          }
+        });
+      }
+
+      if (reducedMotion.matches) {
+        revealItems.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+        statNumbers.forEach(animateCount);
+      } else {
+        const revealObserver = new IntersectionObserver(markVisible, {
+          threshold: 0.16,
+          rootMargin: "0px 0px -10% 0px"
+        });
+
+        revealItems.forEach(function (item) {
+          revealObserver.observe(item);
+        });
+
+        const countObserver = new IntersectionObserver(runCount, {
+          threshold: 0.6
+        });
+
+        statNumbers.forEach(function (item) {
+          countObserver.observe(item);
+        });
+      }
+
+      manageVanta();
+
+      let resizeTimer = null;
+      window.addEventListener("resize", function () {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(manageVanta, 200);
+      }, { passive: true });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", manageVanta);
+      } else if (typeof reducedMotion.addListener === "function") {
+        reducedMotion.addListener(manageVanta);
+      }
+    });
+  </script>
+</body>
+</html>
