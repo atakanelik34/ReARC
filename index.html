@@ -2158,6 +2158,7 @@
           <a href="#products" data-i18n="nav_products">Products</a>
           <a href="#ares-deep" data-i18n="nav_ares">ARES</a>
           <a href="#docly-deep" data-i18n="nav_docly">Docly</a>
+          <a href="/agents/" data-i18n="nav_agents">Agents</a>
           <a href="#about" data-i18n="nav_about">About</a>
         </nav>
 
@@ -2185,6 +2186,7 @@
           <a href="#products" data-nav-link data-i18n="nav_products">Products</a>
           <a href="#ares-deep" data-nav-link data-i18n="nav_ares">ARES</a>
           <a href="#docly-deep" data-nav-link data-i18n="nav_docly">Docly</a>
+          <a href="/agents/" data-nav-link data-i18n="nav_agents">Agents</a>
           <a href="#about" data-nav-link data-i18n="nav_about">About</a>
         </nav>
         <div class="locale-toggle" role="group" aria-label="Language switcher" data-i18n-aria-label="lang_group_aria">
@@ -2313,9 +2315,9 @@
         <div class="section-shell reveal">
           <div class="section-inner">
             <p class="section-kicker" data-i18n="products_kicker">// OUR PRODUCTS</p>
-            <h2 class="section-heading" data-i18n="products_heading">Two products. One trust thesis.</h2>
+            <h2 class="section-heading" data-i18n="products_heading">Two products. 4 Agents. One trust thesis.</h2>
             <p class="section-copy" data-i18n="products_copy">
-              ReARC Labs operates the trust substrate for agentic systems and a live software business that proves the team ships, monetizes, and scales real infrastructure.
+              ReARC Labs operates the trust substrate for agentic systems, a live software business that proves the team ships and monetizes real infrastructure — and a fleet of autonomous trading agents that prove the stack works in production.
             </p>
 
             <div class="product-grid">
@@ -2366,6 +2368,27 @@
                     </ul>
                     <div class="product-link-row">
                       <a class="product-link" href="https://docly.work/" target="_blank" rel="noreferrer" data-i18n="docly_link_1">Try Docly →</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="product-column reveal" id="agents" style="--reveal-delay: 0.19s;">
+                <h3 class="product-title">ReARC Labs Agents</h3>
+                <article class="card product-card cyan">
+                  <div class="card-inner">
+                    <div class="product-tag">LIVE · 4 AGENTS DEPLOYED</div>
+                    <p class="product-copy">
+                      Autonomous trading agents operating on Polymarket — built on the same trust and observability primitives that power ARES Protocol. Every agent is monitored, auditable, and kill-switchable.
+                    </p>
+                    <ul class="feature-list">
+                      <li><span class="feature-symbol">✦</span><span>ZEUS — weather market arb, 30+ cities, 4-model signal pipeline</span></li>
+                      <li><span class="feature-symbol">✦</span><span>POSEIDON — whale copy trading engine (in development)</span></li>
+                      <li><span class="feature-symbol">✦</span><span>TRITON — self-tuning BTC bot, rewrites own config via Claude API every 2h</span></li>
+                      <li><span class="feature-symbol">✦</span><span>HERMES — 3 parallel arb strategies, NegRisk + UMA + High-Conf, 24/7</span></li>
+                    </ul>
+                    <div class="product-link-row">
+                      <a class="product-link" href="/agents">View Agent Roster →</a>
                     </div>
                   </div>
                 </article>
@@ -3155,6 +3178,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           nav_products: "Ürünler",
           nav_ares: "ARES",
           nav_docly: "Docly",
+          nav_agents: "Agents",
           nav_about: "Hakkında",
           nav_cta: "ARES'i İncele",
           lang_en: "ENG",
