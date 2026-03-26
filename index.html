@@ -634,7 +634,7 @@
 
     .hero-stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1rem;
       max-width: 920px;
       margin: 2.7rem auto 0;
@@ -1653,6 +1653,42 @@
       min-width: 190px;
     }
 
+    .raise-terms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.95rem;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+
+    .raise-term-card {
+      position: relative;
+      overflow: hidden;
+      padding: 1.15rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(10, 15, 27, 0.84);
+      color: var(--text-secondary);
+    }
+
+    .raise-term-card strong {
+      display: block;
+      color: var(--text-primary);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.86rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .raise-term-card ul {
+      margin: 0.8rem 0 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.4rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9rem;
+    }
+
     .site-footer {
       padding: 3rem 0 4rem;
     }
@@ -1910,6 +1946,7 @@
       .tool-category-grid,
       .governance-grid,
       .detail-grid,
+      .raise-terms-grid,
       .dual-column-grid,
       .surface-grid {
         grid-template-columns: 1fr;
@@ -2189,16 +2226,20 @@
 
         <div class="hero-stats load-in" style="--delay: 0.4s;">
           <div class="stat-card">
-            <p class="stat-number" data-count="106">0</p>
-            <div class="stat-label" data-i18n="hero_stat_tests">Smart contract tests passing</div>
+            <p class="stat-number" data-count="11">11</p>
+            <div class="stat-label" data-i18n="hero_stat_contracts">11 deployed contracts on Base Sepolia</div>
           </div>
           <div class="stat-card">
-            <p class="stat-number" data-count="11">0</p>
-            <div class="stat-label" data-i18n="hero_stat_contracts">Contracts deployed on Base Sepolia</div>
+            <p class="stat-number" data-count="106">106</p>
+            <div class="stat-label" data-i18n="hero_stat_tests">106/106 contract tests passing</div>
           </div>
           <div class="stat-card">
-            <p class="stat-number">Base</p>
-            <div class="stat-label" data-i18n="hero_stat_network">Deployed on Sepolia</div>
+            <p class="stat-number" data-count="0">0</p>
+            <div class="stat-label" data-i18n="hero_stat_audit">0 Critical / 0 High findings</div>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number">Live</p>
+            <div class="stat-label" data-i18n="hero_stat_billing">Docly billing live</div>
           </div>
         </div>
 
@@ -2284,7 +2325,7 @@
                   <div class="card-inner">
                     <div class="product-tag" data-i18n="ares_tag">FLAGSHIP · TESTNET LIVE</div>
                     <p class="product-copy" data-i18n="ares_copy">
-                      On-chain reputation, identity, dispute resolution, and trust enforcement infrastructure for autonomous AI agents. Deployed on Base blockchain (EVM), live on Base Sepolia testnet while mainnet remains NO-GO until hard gates close, targeting Q2 2026.
+                      On-chain reputation, identity, dispute resolution, and trust enforcement infrastructure for autonomous AI agents. Deployed on Base blockchain (EVM), live on Base Sepolia testnet while mainnet remains NO-GO until hard gates close, targeting Q3 2026.
                     </p>
                     <ul class="feature-list">
                       <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_1">11 deployed contracts on Base Sepolia</span></li>
@@ -2295,6 +2336,7 @@
                       <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_6">106/106 contract tests passing</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_7">0 Critical / 0 High audit findings open</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_8">Live API: scores, agents, disputes</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_9">$750K pre-seed raise · SAFE + Token Warrant</span></li>
                     </ul>
                     <div class="product-link-row">
                       <a class="product-link" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="ares_link_1">View Protocol →</a>
@@ -2308,16 +2350,16 @@
                 <h3 class="product-title">Docly.work</h3>
                 <article class="card product-card amber">
                   <div class="card-inner">
-                    <div class="product-tag" data-i18n="docly_tag">LIVE · EARLY ACCESS</div>
+                    <div class="product-tag" data-i18n="docly_tag">LIVE · EARLY ACCESS · REVENUE GENERATING</div>
                     <p class="product-copy" data-i18n="docly_copy">
-                      A document and file processing SaaS platform with browser-first workflows, a public API, and AI-powered document intelligence. Not just a PDF converter — a full document operations platform.
+                      A document and file processing SaaS platform with browser-first workflows, a public API, and AI-powered document intelligence. Not just a PDF converter — a full, live, billing-active, revenue-generating document operations platform.
                     </p>
                     <ul class="feature-list">
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_1">21+ document processing tools</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_2">AI tools: summarizer, translator, proofreader, alt-text</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_3">Privacy tools: redactor, metadata remover, anonymizer</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_4">Free tier: 10 ops/day, no watermark</span></li>
-                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_5">Day Pass + Pro + API subscription tiers</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_5">Day Pass $0.99 · Pro $9/mo · API $29/mo</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_6">Public REST API with OpenAPI spec</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_7">Async job processing</span></li>
                       <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_8">Agent-friendly discovery surfaces</span></li>
@@ -2341,7 +2383,7 @@
             <p class="section-kicker" data-i18n="ares_deep_kicker">// ARES PROTOCOL</p>
             <h2 class="section-heading" data-i18n="ares_deep_heading">Live trust enforcement infrastructure on Base Sepolia.</h2>
             <p class="section-copy" data-i18n="ares_deep_copy">
-              ARES Protocol is on-chain reputation, identity, dispute resolution, and trust enforcement infrastructure for autonomous AI agents. It is live on Base Sepolia testnet today; mainnet remains NO-GO until hard gates close, targeting Q2 2026.
+              ARES Protocol is on-chain reputation, identity, dispute resolution, and trust enforcement infrastructure for autonomous AI agents. It is live on Base Sepolia testnet today. Mainnet launch is blocked until all gate items are closed. Current decision: NO-GO — targeting Q3 2026.
             </p>
 
             <div class="raise-band reveal" style="--reveal-delay: 0.03s;" aria-label="Fundraising status">
@@ -2351,35 +2393,35 @@
               </div>
               <div>
                 <span data-i18n="investor_band_cap_label">Valuation Cap</span>
-                <strong data-i18n="investor_band_cap_value">$7.5M</strong>
+                <strong data-i18n="investor_band_cap_value">$10M</strong>
               </div>
             </div>
 
             <div class="metrics-grid">
               <article class="card metric-card reveal" style="--reveal-delay: 0.05s;">
-                <div class="card-inner">
-                  <p class="stat-number" data-count="881">0</p>
-                  <div class="stat-label" data-i18n="ares_metric_1_label">Top ARI score</div>
-                  <div class="metric-note" data-i18n="ares_metric_1_note">ELITE tier live on /scores</div>
-                </div>
+                  <div class="card-inner">
+                    <p class="stat-number" data-count="881">0</p>
+                    <div class="stat-label" data-i18n="ares_metric_1_label">Top ARI score</div>
+                    <div class="metric-note" data-i18n="ares_metric_1_note">ELITE tier live on /scores</div>
+                  </div>
               </article>
 
               <article class="card metric-card reveal" style="--reveal-delay: 0.1s;">
-                <div class="card-inner">
-                  <p class="stat-number" data-count="24">0</p>
-                  <div class="stat-label" data-i18n="ares_metric_2_label">Total disputes on testnet</div>
-                  <div class="metric-note" data-i18n="ares_metric_2_note">18 finalized · 6 pending</div>
-                </div>
-              </article>
+                  <div class="card-inner">
+                    <p class="stat-number" data-count="24">0</p>
+                    <div class="stat-label" data-i18n="ares_metric_2_label">Total disputes on testnet</div>
+                  <div class="metric-note" data-i18n="ares_metric_2_note">18 finalized · 2 pending</div>
+                  </div>
+                </article>
 
               <article class="card metric-card reveal" style="--reveal-delay: 0.15s;">
-                <div class="card-inner">
-                  <p class="stat-number" data-count="106">0</p>
-                  <div class="stat-label" data-i18n="ares_metric_3_label">Contract tests passing</div>
+                  <div class="card-inner">
+                    <p class="stat-number" data-count="106">0</p>
+                    <div class="stat-label" data-i18n="ares_metric_3_label">Contract tests passing</div>
                   <div class="metric-note" data-i18n="ares_metric_3_note">38/38 API tests passing</div>
-                </div>
-              </article>
-            </div>
+                  </div>
+                </article>
+              </div>
 
             <div class="detail-grid">
               <article class="card reveal" style="--reveal-delay: 0.08s;">
@@ -2499,23 +2541,23 @@ POST /api/v1/register    → register agent identity</div>
                     <div class="tier-grid">
                       <div class="tier-pill elite">
                         <strong>ELITE</strong>
-                        <span>750–1000</span>
+                        <span>850–1000</span>
                       </div>
                       <div class="tier-pill high">
-                        <strong>HIGH</strong>
-                        <span>500–749</span>
+                        <strong>TRUSTED</strong>
+                        <span>600–849</span>
                       </div>
                       <div class="tier-pill medium">
-                        <strong>MEDIUM</strong>
-                        <span>250–499</span>
+                        <strong>ESTABLISHED</strong>
+                        <span>300–599</span>
                       </div>
                       <div class="tier-pill low">
-                        <strong>LOW</strong>
-                        <span>1–249</span>
+                        <strong>PROVISIONAL</strong>
+                        <span>100–299</span>
                       </div>
                       <div class="tier-pill unranked">
-                        <strong>UNRANKED</strong>
-                        <span>0</span>
+                        <strong>UNVERIFIED</strong>
+                        <span>0–99</span>
                       </div>
                     </div>
                     <p class="panel-copy" data-i18n="ares_tiers_copy">
@@ -2531,13 +2573,13 @@ POST /api/v1/register    → register agent identity</div>
                 <div class="card-inner">
                   <div class="status-row">
                     <p class="meta-line amber">B-01/B-02</p>
-                    <span class="status-chip" data-i18n="status_in_progress">IN PROGRESS</span>
+                    <span class="status-chip" data-i18n="status_queued">QUEUED</span>
                   </div>
                   <h3 style="margin-top: 0.9rem;" data-i18n="ares_gov_1_title">B-01/B-02: Conservative Params</h3>
                   <ul class="detail-list">
                     <li>
                       <strong data-i18n="execute_window_label">Execute window</strong>
-                      <span data-i18n="execute_window_date">March 28, 2026</span>
+                      <span data-i18n="execute_window_date">March 28, 2026 07:23 TRT</span>
                     </li>
                     <li>
                       <strong data-i18n="what_changes_label">What changes</strong>
@@ -2551,19 +2593,71 @@ POST /api/v1/register    → register agent identity</div>
                 <div class="card-inner">
                   <div class="status-row">
                     <p class="meta-line amber">B-03</p>
-                    <span class="status-chip" data-i18n="status_in_progress">IN PROGRESS</span>
+                    <span class="status-chip" data-i18n="status_queued">QUEUED</span>
                   </div>
                   <h3 style="margin-top: 0.9rem;" data-i18n="ares_gov_2_title">B-03: Dispute V2 Cutover</h3>
                   <ul class="detail-list">
                     <li>
                       <strong data-i18n="execute_window_label">Execute window</strong>
-                      <span data-i18n="execute_window_date">March 28, 2026</span>
+                      <span data-i18n="execute_window_date">March 28, 2026 08:46 TRT</span>
                     </li>
                     <li>
                       <strong data-i18n="what_changes_label">What changes</strong>
                       <span data-i18n="ares_gov_2_copy">Final role rewire, old-side revoke, dispute v2 activation</span>
                     </li>
                   </ul>
+                </div>
+              </article>
+            </div>
+
+            <div class="detail-grid" style="margin-top: 1.2rem;">
+              <article class="card reveal" style="--reveal-delay: 0.2s; grid-column: 1 / -1;">
+                <div class="card-inner">
+                  <p class="meta-line amber" data-i18n="ares_gates_meta">GATE STATUS</p>
+                  <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="ares_gates_title">Readiness gates</h3>
+                  <div class="table-wrap">
+                    <table class="contract-table">
+                      <thead>
+                        <tr>
+                          <th data-i18n="table_contract">Gate</th>
+                          <th data-i18n="table_address">Status</th>
+                          <th data-i18n="table_role">Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>B-01/B-02</td>
+                          <td><span class="status-chip" data-i18n="status_queued">QUEUED</span></td>
+                          <td data-i18n="ares_gate_1">Execute window March 28, 2026 07:23 TRT</td>
+                        </tr>
+                        <tr>
+                          <td>B-03</td>
+                          <td><span class="status-chip" data-i18n="status_queued">QUEUED</span></td>
+                          <td data-i18n="ares_gate_2">Execute window March 28, 2026 08:46 TRT</td>
+                        </tr>
+                        <tr>
+                          <td>B-04 / B-05</td>
+                          <td><span class="status-chip" style="border-color: rgba(0, 255, 136, 0.25); color: var(--accent-green);" data-i18n="status_closed">CLOSED</span></td>
+                          <td data-i18n="ares_gate_3">Closed gates confirmed</td>
+                        </tr>
+                        <tr>
+                          <td>B-06</td>
+                          <td><span class="status-chip" style="border-color: rgba(255, 179, 0, 0.25); color: var(--accent-amber);" data-i18n="status_open">OPEN</span></td>
+                          <td data-i18n="ares_gate_4">TGE ceremony pending</td>
+                        </tr>
+                        <tr>
+                          <td>B-07</td>
+                          <td><span class="status-chip" style="border-color: rgba(255, 179, 0, 0.25); color: var(--accent-amber);" data-i18n="status_open">OPEN</span></td>
+                          <td data-i18n="ares_gate_5">External attestation pending</td>
+                        </tr>
+                        <tr>
+                          <td>B-08</td>
+                          <td><span class="status-chip" style="border-color: rgba(255, 179, 0, 0.25); color: var(--accent-amber);" data-i18n="status_open">OPEN</span></td>
+                          <td data-i18n="ares_gate_6">Final launch signoff pending</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </article>
             </div>
@@ -2658,6 +2752,7 @@ POST /api/v1/register    → register agent identity</div>
                 <div class="card-inner">
                   <p class="meta-line amber" data-i18n="docly_pricing_meta">PRICING TIERS</p>
                   <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="docly_pricing_title">Usage model</h3>
+                  <p class="mono-note" data-i18n="pricing_note">Free 10 ops/day · Day Pass $0.99 · Pro $9/mo · API $29/mo</p>
                   <div class="table-wrap">
                     <table class="pricing-table">
                       <thead>
@@ -2840,7 +2935,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
                     <li data-i18n="surfaces_ares_1">Explorer is live at app.ares-protocol.xyz</li>
                     <li data-i18n="surfaces_ares_2">API health endpoint returns 200 OK</li>
                     <li data-i18n="surfaces_ares_3">Scores, agents, disputes, and registration are live API surfaces</li>
-                    <li data-i18n="surfaces_ares_4">Dispute feed currently shows 24 total, 18 finalized, 6 pending</li>
+                    <li data-i18n="surfaces_ares_4">Dispute feed currently shows 20 total, 18 finalized, 2 pending</li>
                   </ul>
                   <div class="surface-link-row">
                     <a href="https://app.ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="surfaces_ares_link_1">Explorer →</a>
@@ -2886,8 +2981,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
                     ReARC Labs operates beneath the interface layer.
                   </h3>
                   <p style="margin-top: 1rem;" data-i18n="about_copy">
-                    ReARC is not a registry or discovery product. It is the layer that decides how much to trust an agent and what happens when it fails.
-                    ARES establishes the enforcement substrate for autonomous agents. Docly proves the company can turn deterministic workflow infrastructure into revenue-bearing software.
+                    ReARC Labs Inc. is a Delaware C-Corp building trust infrastructure for the agentic internet. Founded by Atakan Elik in 2026. Two live products: ARES Protocol and Docly.work. ReARC Labs is applying to YC S26 and actively seeking pre-seed partners.
                   </p>
                 </div>
               </article>
@@ -2922,7 +3016,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
               Raising $750K pre-seed — SAFE + Token Warrant
             </p>
             <p class="cta-copy" data-i18n="cta_copy">
-              ARES Protocol is live on Base Sepolia — mainnet targeting Q2 2026. Early integration partners get priority access to trust scoring, dispute enforcement, and programmable reputation hooks.
+              ARES Protocol is live on Base Sepolia — mainnet targeting Q3 2026. Early integration partners get priority access to trust scoring, dispute enforcement, and programmable reputation hooks.
             </p>
             <p class="cta-copy" style="margin-top: 0.7rem; color: var(--text-primary); font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem;" data-i18n="cta_raise_contact">contact@rearclabs.com</p>
             <div class="button-row" style="justify-content: center; margin-top: 2rem;">
@@ -2932,6 +3026,37 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
               <a class="button button-secondary" href="mailto:contact@rearclabs.com" aria-label="Contact ReARC Labs via email" data-i18n="cta_button_secondary" data-i18n-aria-label="cta_contact_aria">
                 contact@rearclabs.com
               </a>
+            </div>
+            <div class="raise-terms-grid">
+              <article class="raise-term-card reveal" style="--reveal-delay: 0.06s;">
+                <strong data-i18n="raise_terms_safe_title">Equity (SAFE)</strong>
+                <ul>
+                  <li data-i18n="raise_terms_safe_1">YC-style post-money SAFE</li>
+                  <li data-i18n="raise_terms_safe_2">Cap: $10,000,000</li>
+                  <li data-i18n="raise_terms_safe_3">Discount: 20% at next priced round</li>
+                  <li data-i18n="raise_terms_safe_4">Implied dilution: 7.5% on conversion</li>
+                  <li data-i18n="raise_terms_safe_5">Pro-rata rights: lead investor</li>
+                </ul>
+              </article>
+              <article class="raise-term-card reveal" style="--reveal-delay: 0.12s;">
+                <strong data-i18n="raise_terms_token_title">Token Warrant ($ARES)</strong>
+                <ul>
+                  <li data-i18n="raise_terms_token_1">Pool: 80M $ARES (pro-rata to investment)</li>
+                  <li data-i18n="raise_terms_token_2">Seed price: $0.005 · TGE FDV: $5M</li>
+                  <li data-i18n="raise_terms_token_3">Target FDV: $15M – $30M</li>
+                  <li data-i18n="raise_terms_token_4">TGE unlock: 0% (full cliff)</li>
+                  <li data-i18n="raise_terms_token_5">Vesting: 24-month linear post-cliff</li>
+                </ul>
+              </article>
+              <article class="raise-term-card reveal" style="--reveal-delay: 0.18s;">
+                <strong data-i18n="raise_terms_funds_title">Use of Funds · 24-Month Plan</strong>
+                <ul>
+                  <li data-i18n="raise_terms_funds_1">40% Team & Operations — $300,000</li>
+                  <li data-i18n="raise_terms_funds_2">25% Go-to-Market — $187,500</li>
+                  <li data-i18n="raise_terms_funds_3">20% Protocol & Security — $150,000</li>
+                  <li data-i18n="raise_terms_funds_4">15% Legal & Reserve — $112,500</li>
+                </ul>
+              </article>
             </div>
           </div>
         </div>
@@ -2962,6 +3087,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
               <div class="footer-link-row">
                 <a href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">ARES Protocol</a>
                 <a href="https://docly.work/" target="_blank" rel="noreferrer">Docly.work</a>
+                <a href="mailto:contact@rearclabs.com">contact@rearclabs.com</a>
                 <a href="https://github.com/atakanelik34" target="_blank" rel="noreferrer">GitHub</a>
                 <a href="https://x.com/AtakanElik_" target="_blank" rel="noreferrer">Twitter / X</a>
                 <a href="https://www.linkedin.com/in/atakanelik/" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -3038,9 +3164,10 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           hero_copy: "ReARC, otonom yapay zeka ajanlarının hesap verebilir şekilde işlem yapabilmesi için ihtiyaç duyduğu güven, itibar ve uyuşmazlık altyapısını kurar. <strong>Sadece keşif değil. Yaptırım.</strong>",
           hero_cta_primary: "ARES Protocol'ü İncele",
           hero_cta_secondary: "Docly'yi Dene",
-          hero_stat_tests: "Geçen akıllı sözleşme testi",
-          hero_stat_contracts: "Base Sepolia'da deploy edilen sözleşme",
-          hero_stat_network: "Sepolia üzerinde canlı",
+          hero_stat_contracts: "Base Sepolia'da deploy edilen 11 sözleşme",
+          hero_stat_tests: "106/106 sözleşme testi geçti",
+          hero_stat_audit: "0 Kritik / 0 Yüksek bulgu",
+          hero_stat_billing: "Docly faturalandırması canlı",
           scroll_label: "Aşağı Kaydır",
           scroll_aria: "Sonraki bölüme kaydır",
           problem_kicker: "// SORUN",
@@ -3055,7 +3182,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           products_heading: "İki ürün. Tek güven tezi.",
           products_copy: "ReARC Labs, agentic sistemler için güven katmanını işletirken aynı zamanda ekibin gerçek altyapı üretip gelir yaratabildiğini gösteren canlı bir yazılım işi yürütüyor.",
           ares_tag: "ANA ÜRÜN · TESTNET CANLI",
-          ares_copy: "Otonom AI ajanları için zincir üstü itibar, kimlik, uyuşmazlık çözümü ve güven yaptırımı altyapısı. Base blockchain (EVM) üzerinde deploy edildi, bugün Base Sepolia testnet'te canlı; mainnet ise sert kapılar kapanana kadar NO-GO, hedef Q2 2026.",
+          ares_copy: "Otonom AI ajanları için zincir üstü itibar, kimlik, uyuşmazlık çözümü ve güven yaptırımı altyapısı. Base blockchain (EVM) üzerinde deploy edildi, bugün Base Sepolia testnet'te canlı; mainnet ise sert kapılar kapanana kadar NO-GO, hedef Q3 2026.",
           ares_feature_1: "Base Sepolia'da 11 deploy edilmiş sözleşme",
           ares_feature_2: "ERC-8004 + ERC-8183 standart adaptörleri",
           ares_feature_3: "ARI itibar motoru (0–1000 skor, 5 seviye)",
@@ -3064,30 +3191,31 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           ares_feature_6: "106/106 sözleşme testi geçti",
           ares_feature_7: "Açık 0 Kritik / 0 Yüksek denetim bulgusu",
           ares_feature_8: "Canlı API: skorlar, ajanlar, uyuşmazlıklar",
+          ares_feature_9: "750K $ ön-tur artırımı · SAFE + Token Warrant",
           ares_link_1: "Protokolü Gör →",
           ares_link_2: "Explorer →",
-          docly_tag: "CANLI · ERKEN ERİŞİM",
-          docly_copy: "Tarayıcı öncelikli akışlar, herkese açık bir API ve yapay zeka destekli belge zekası sunan bir doküman ve dosya işleme SaaS platformu. Sadece bir PDF dönüştürücü değil; tam bir belge operasyon platformu.",
+          docly_tag: "CANLI · ERKEN ERİŞİM · GELİR ÜRETİYOR",
+          docly_copy: "Tarayıcı öncelikli akışlar, herkese açık bir API ve yapay zeka destekli belge zekası sunan bir doküman ve dosya işleme SaaS platformu. Sadece bir PDF dönüştürücü değil; canlı, faturalandırması aktif ve gelir üreten tam bir belge operasyon platformu.",
           docly_feature_1: "21+ doküman işleme aracı",
           docly_feature_2: "AI araçları: özetleme, çeviri, proofreading, alt-text",
           docly_feature_3: "Gizlilik araçları: redaksiyon, metadata temizleme, anonimleştirme",
           docly_feature_4: "Ücretsiz katman: günde 10 işlem, filigran yok",
-          docly_feature_5: "Day Pass + Pro + API abonelik katmanları",
+          docly_feature_5: "Day Pass 0,99 $ · Pro 9 $/ay · API 29 $/ay",
           docly_feature_6: "OpenAPI spec ile herkese açık REST API",
           docly_feature_7: "Asenkron iş işleme",
           docly_feature_8: "Ajan dostu keşif yüzeyleri",
           docly_link_1: "Docly'yi Dene →",
           ares_deep_kicker: "// ARES PROTOCOL",
           ares_deep_heading: "Base Sepolia üzerinde canlı güven yaptırım altyapısı.",
-          ares_deep_copy: "ARES Protocol, otonom AI ajanları için zincir üstü itibar, kimlik, uyuşmazlık çözümü ve güven yaptırımı altyapısıdır. Bugün Base Sepolia testnet'te canlıdır; mainnet sert kapılar kapanana kadar NO-GO durumunda ve hedef Q2 2026'dır.",
+          ares_deep_copy: "ARES Protocol, otonom AI ajanları için zincir üstü itibar, kimlik, uyuşmazlık çözümü ve güven yaptırımı altyapısıdır. Bugün Base Sepolia testnet'te canlıdır. Mainnet lansmanı tüm kapı maddeleri kapanana kadar bloke edilmiştir. Mevcut karar: NO-GO — hedef Q3 2026'dır.",
           investor_band_label: "Ön-Tur Açık",
           investor_band_value: "750K $ · SAFE + Token Warrant",
           investor_band_cap_label: "Değerleme Tavanı",
-          investor_band_cap_value: "7.5M $",
+          investor_band_cap_value: "10M $",
           ares_metric_1_label: "En yüksek ARI skoru",
           ares_metric_1_note: "ELITE seviye /scores üzerinde canlı",
           ares_metric_2_label: "Testnet toplam uyuşmazlık",
-          ares_metric_2_note: "18 sonuçlandı · 6 bekliyor",
+          ares_metric_2_note: "18 sonuçlandı · 2 bekliyor",
           ares_metric_3_label: "Geçen sözleşme testi",
           ares_metric_3_note: "38/38 API testi geçti",
           ares_contracts_meta: "BASE SEPOLIA · DEPLOY EDİLMİŞ SÖZLEŞMELER",
@@ -3111,14 +3239,24 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           ares_tiers_meta: "ARI SKOR MODELİ",
           ares_tiers_title: "İtibar seviyeleri",
           ares_tiers_copy: "Güven puanı işlem sayısı ve yakınlığa göre ağırlıklandırılır. Skorlar inaktiviteyle düşer, doğrulanmış başarılı eylemlerle güçlenir.",
-          status_in_progress: "İLERLİYOR",
+          status_queued: "SIRADA",
+          status_closed: "KAPALI",
+          status_open: "AÇIK",
           ares_gov_1_title: "B-01/B-02: Muhafazakar Parametreler",
           execute_window_label: "Yürütme penceresi",
-          execute_window_date: "28 Mart 2026",
+          execute_window_date: "28 Mart 2026 07:23 TRT",
           what_changes_label: "Ne değişiyor",
           ares_gov_1_copy: "proposalThreshold artışı, quorumNumerator >= 6, muhafazakar uyuşmazlık parametreleri",
           ares_gov_2_title: "B-03: Dispute V2 Geçişi",
           ares_gov_2_copy: "Son rol kablolaması, eski tarafta revoke, dispute v2 aktivasyonu",
+          ares_gates_meta: "KAPI DURUMU",
+          ares_gates_title: "Hazırlık kapıları",
+          ares_gate_1: "Yürütme penceresi 28 Mart 2026 07:23 TRT",
+          ares_gate_2: "Yürütme penceresi 28 Mart 2026 08:46 TRT",
+          ares_gate_3: "Kapalı kapılar doğrulandı",
+          ares_gate_4: "TGE töreni bekleniyor",
+          ares_gate_5: "Dış attestasyon bekleniyor",
+          ares_gate_6: "Son lansman onayı bekleniyor",
           docly_deep_kicker: "// DOCLY.WORK",
           docly_deep_heading: "Kullanıcılar, ekipler ve otonom ajanlar için belge operasyonları.",
           docly_deep_copy: "Docly.work, tarayıcı öncelikli akışlar, herkese açık API ve yapay zeka destekli belge zekası sunan canlı bir production belge ve dosya işleme SaaS platformudur. Faturalama Paddle üzerinden, kimlik doğrulama Supabase üzerinden çalışır; geliştirici ve ajan akışları için async işler mevcuttur.",
@@ -3132,6 +3270,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           docly_cat_4_count: "4 araç",
           docly_pricing_meta: "FİYATLANDIRMA KATLARI",
           docly_pricing_title: "Kullanım modeli",
+          pricing_note: "Ücretsiz 10 işlem/gün · Day Pass 0,99 $ · Pro 9 $/ay · API 29 $/ay",
           pricing_head_feature: "Özellik",
           pricing_head_free: "Ücretsiz",
           pricing_head_daypass: "Day Pass",
@@ -3188,7 +3327,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           surfaces_ares_1: "Explorer app.ares-protocol.xyz üzerinde canlı",
           surfaces_ares_2: "API health endpoint'i 200 OK dönüyor",
           surfaces_ares_3: "Skorlar, ajanlar, uyuşmazlıklar ve kayıt canlı API yüzeyleri",
-          surfaces_ares_4: "Uyuşmazlık akışı şu anda 24 toplam, 18 sonuçlanmış, 6 bekleyen kayıt gösteriyor",
+          surfaces_ares_4: "Uyuşmazlık akışı şu anda 20 toplam, 18 sonuçlanmış, 2 bekleyen kayıt gösteriyor",
           surfaces_ares_link_1: "Explorer →",
           surfaces_ares_link_2: "Sağlık →",
           surfaces_docly_meta: "DOCLY.WORK · PRODÜKSİYON",
@@ -3203,7 +3342,7 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           about_heading: "Ajanik internet için bir güven şirketi.",
           about_meta: "ANA ŞİRKET",
           about_title: "ReARC Labs, arayüz katmanının altında çalışır.",
-          about_copy: "ReARC bir registry ya da discovery ürünü değildir. Bir ajana ne kadar güvenileceğine ve başarısız olduğunda ne olacağına karar veren katmandır. ARES, otonom ajanlar için yaptırım katmanını kurar. Docly ise ekibin deterministik workflow altyapısını gelir üreten yazılıma çevirebildiğini kanıtlar.",
+          about_copy: "ReARC Labs Inc. Delaware C-Corp olarak oluşum aşamasındadır ve ajanik internet için güven altyapısı kurar. 2026'da Atakan Elik tarafından kuruldu. İki canlı ürün ARES Protocol ve Docly.work'tür. ReARC Labs YC S26'ya başvuruyor ve aktif olarak ön-tur ortakları arıyor.",
           about_panel_1_title: "Önce yaptırım",
           about_panel_1_copy: "Slash, uyuşmazlık penceresi veya stake olmadan itibar sadece UI'dır.",
           about_panel_2_title: "Sevkiyat disiplini",
@@ -3213,11 +3352,28 @@ curl -X POST https://docly.work/api/v1/compress-pdf \
           cta_kicker: "// REARC İLE İNŞA ET",
           cta_heading: "Güven Altyapısı Üzerine İnşa Et",
           cta_raise_line: "Ön-Tur Açık — 750K $ · SAFE + Token Warrant",
-          cta_copy: "ARES Protocol Base Sepolia üzerinde canlı; mainnet hedefi Q2 2026. Erken entegrasyon partnerleri, güven skorlama, uyuşmazlık yaptırımı ve programlanabilir itibar hook'larına öncelikli erişim alır.",
+          cta_copy: "ARES Protocol Base Sepolia üzerinde canlı; mainnet hedefi Q3 2026. Erken entegrasyon partnerleri, güven skorlama, uyuşmazlık yaptırımı ve programlanabilir itibar hook'larına öncelikli erişim alır.",
           cta_raise_contact: "contact@rearclabs.com",
           cta_button_primary: "ARES'i İncele",
           cta_button_secondary: "contact@rearclabs.com",
           cta_contact_aria: "ReARC Labs ile e-posta üzerinden iletişime geç",
+          raise_terms_safe_title: "Equity (SAFE)",
+          raise_terms_safe_1: "YC-style post-money SAFE",
+          raise_terms_safe_2: "Cap: 10.000.000 $",
+          raise_terms_safe_3: "İndirim: bir sonraki fiyatlı turda %20",
+          raise_terms_safe_4: "Örtük seyrelme: dönüşümde %7,5",
+          raise_terms_safe_5: "Pro-rata hakları: lead investor",
+          raise_terms_token_title: "Token Warrant ($ARES)",
+          raise_terms_token_1: "Havuz: 80M $ARES (yatırıma pro-rata)",
+          raise_terms_token_2: "Seed price: 0,005 $ · TGE FDV: 5M $",
+          raise_terms_token_3: "Hedef FDV: 15M $ – 30M $",
+          raise_terms_token_4: "TGE unlock: %0 (tam cliff)",
+          raise_terms_token_5: "Vesting: cliff sonrası 24 ay lineer",
+          raise_terms_funds_title: "Use of Funds · 24-Month Plan",
+          raise_terms_funds_1: "%40 Team & Operations — 300.000 $",
+          raise_terms_funds_2: "%25 Go-to-Market — 187.500 $",
+          raise_terms_funds_3: "%20 Protocol & Security — 150.000 $",
+          raise_terms_funds_4: "%15 Legal & Reserve — 112.500 $",
           footer_brandline: "Ajanik İnternet İçin Güven Altyapısı",
           footer_tagline: "ReARC Labs, otonom ajanların her yüksek riskli etkileşime kimlik, itibar ve sonuç taşımasını sağlayan sistemleri kurar.",
           footer_links_heading: "Bağlantılar",
