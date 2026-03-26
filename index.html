@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReARC Labs &mdash; Trust Infrastructure for Autonomous AI Agents</title>
   <meta
+    id="meta-description"
     name="description"
     content="ReARC builds on-chain reputation, dispute resolution, and trust enforcement for autonomous AI agents. Explore ARES Protocol and Docly."
   >
-  <meta property="og:title" content="ReARC Labs &mdash; Trust Infrastructure for Autonomous AI Agents">
+  <meta id="meta-og-title" property="og:title" content="ReARC Labs &mdash; Trust Infrastructure for Autonomous AI Agents">
   <meta
+    id="meta-og-description"
     property="og:description"
     content="ReARC builds on-chain reputation, dispute resolution, and trust enforcement for autonomous AI agents. Explore ARES Protocol and Docly."
   >
@@ -34,6 +36,10 @@
       --text-secondary: #8892aa;
       --border: rgba(0, 229, 255, 0.12);
       --glow-cyan: 0 0 40px rgba(0, 229, 255, 0.15);
+      --logo-metal-1: #fbfdff;
+      --logo-metal-2: #d9e1eb;
+      --logo-metal-3: #a9b4c5;
+      --logo-flat: #eff3f8;
       --radius-sm: 18px;
       --radius-md: 24px;
       --radius-lg: 32px;
@@ -112,6 +118,12 @@
 
     button {
       font: inherit;
+    }
+
+    code {
+      color: var(--text-primary);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92em;
     }
 
     main,
@@ -321,23 +333,41 @@
     }
 
     .brand-mark {
-      width: 38px;
-      height: 38px;
-      color: var(--accent-cyan);
-      filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.22));
+      width: 46px;
+      height: 46px;
+      color: var(--logo-flat);
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.28));
+      flex: 0 0 auto;
+    }
+
+    .brand-word {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      min-width: 0;
+      color: var(--logo-flat);
+    }
+
+    .brand-word small {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.58em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240, 244, 255, 0.58);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
-      font-size: 0.95rem;
+      gap: clamp(0.95rem, 1.2vw, 1.8rem);
+      font-size: clamp(1.25rem, 1.85vw + 0.15rem, 1.9rem);
+      font-weight: 500;
       color: var(--text-secondary);
     }
 
     .nav-links a {
       position: relative;
-      padding: 0.35rem 0;
+      padding: 0.45rem 0;
       transition: color 180ms ease;
     }
 
@@ -369,6 +399,52 @@
       display: flex;
       align-items: center;
       gap: 0.9rem;
+    }
+
+    .locale-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.28rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      flex: 0 0 auto;
+    }
+
+    .locale-button {
+      min-width: 56px;
+      min-height: 38px;
+      padding: 0.42rem 0.8rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition:
+        color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .locale-button:hover,
+    .locale-button:focus-visible {
+      color: var(--text-primary);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .locale-button.is-active {
+      color: #02131c;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.96), rgba(97, 245, 255, 0.88));
+      box-shadow: 0 10px 24px rgba(0, 229, 255, 0.18);
     }
 
     .menu-toggle {
@@ -435,6 +511,16 @@
     .mobile-panel .button {
       margin-top: 0.7rem;
       width: 100%;
+    }
+
+    .mobile-panel .locale-toggle {
+      display: flex;
+      width: 100%;
+      margin-top: 0.7rem;
+    }
+
+    .mobile-panel .locale-button {
+      flex: 1;
     }
 
     .hero {
@@ -626,6 +712,7 @@
 
     .product-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
     }
 
     .stack-grid {
@@ -711,6 +798,12 @@
       border-color: rgba(255, 255, 255, 0.08);
     }
 
+    .product-card .card-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     .product-card::before {
       content: "";
       position: absolute;
@@ -770,10 +863,16 @@
     }
 
     .product-tag {
-      padding: 0.45rem 0.8rem;
+      align-self: flex-start;
+      width: auto;
+      max-width: 100%;
+      padding: 0.32rem 0.72rem;
       border-radius: 999px;
       border: 1px solid currentColor;
       background: rgba(5, 8, 16, 0.52);
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      line-height: 1.1;
     }
 
     .cyan .product-tag,
@@ -793,8 +892,20 @@
       color: var(--accent-green);
     }
 
+    .product-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+      min-width: 0;
+    }
+
+    .product-column .product-card {
+      height: 100%;
+    }
+
     .product-title {
-      margin-top: 1.15rem;
+      margin: 0;
+      padding-left: 0.2rem;
       font-size: clamp(2rem, 3vw, 2.8rem);
       line-height: 0.95;
     }
@@ -835,7 +946,6 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 1.55rem;
       font-weight: 700;
       transition: gap 160ms ease, color 160ms ease;
     }
@@ -844,6 +954,436 @@
     .product-link:focus-visible {
       gap: 0.8rem;
       outline: none;
+    }
+
+    .product-link-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.9rem 1.2rem;
+      margin-top: auto;
+      padding-top: 1.55rem;
+    }
+
+    .product-card.cyan .product-link {
+      color: var(--accent-cyan);
+    }
+
+    .product-card.amber .product-link {
+      color: var(--accent-amber);
+    }
+
+    .product-link.secondary {
+      color: var(--text-primary) !important;
+      opacity: 0.84;
+    }
+
+    .stacked-panels,
+    .metrics-grid,
+    .detail-grid,
+    .governance-grid,
+    .tool-category-grid,
+    .dual-column-grid,
+    .surface-grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .metrics-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .metric-card .card-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-height: 100%;
+    }
+
+    .metric-card .stat-number {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+    }
+
+    .metric-card .stat-label {
+      margin-top: 0;
+    }
+
+    .metric-note {
+      margin-top: 0.35rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(240, 244, 255, 0.58);
+    }
+
+    .detail-grid,
+    .dual-column-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      margin-top: 1.6rem;
+      align-items: start;
+    }
+
+    .stacked-panels {
+      align-content: start;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      font-size: 1.55rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .panel-copy {
+      margin-top: 0.8rem;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .mono-note {
+      margin-top: 0.8rem;
+      color: rgba(240, 244, 255, 0.72);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      line-height: 1.75;
+    }
+
+    .api-code,
+    .code-block {
+      margin-top: 1rem;
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(4, 8, 16, 0.84);
+    }
+
+    .api-code {
+      padding: 1.2rem 1.25rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: #dff9ff;
+      white-space: pre;
+    }
+
+    .code-block pre {
+      margin: 0;
+      padding: 1.2rem 1.25rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: #dff9ff;
+      white-space: pre;
+    }
+
+    .code-comment {
+      color: rgba(255, 179, 0, 0.92);
+    }
+
+    .table-wrap {
+      margin-top: 1.15rem;
+      overflow-x: auto;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(4, 8, 16, 0.84);
+    }
+
+    .contract-table,
+    .pricing-table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.84rem;
+      color: rgba(240, 244, 255, 0.88);
+    }
+
+    .contract-table th,
+    .contract-table td,
+    .pricing-table th,
+    .pricing-table td {
+      padding: 0.95rem 1rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .contract-table th,
+    .pricing-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: rgba(240, 244, 255, 0.58);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .contract-table tbody tr:hover,
+    .pricing-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .copy-address {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(0, 229, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(0, 229, 255, 0.06);
+      color: var(--text-primary);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .copy-address:hover,
+    .copy-address:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(0, 229, 255, 0.34);
+      background: rgba(0, 229, 255, 0.1);
+      box-shadow: 0 16px 34px rgba(0, 229, 255, 0.1);
+      outline: none;
+    }
+
+    .copy-address .copy-hint {
+      color: var(--accent-cyan);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .copy-address.is-copied {
+      border-color: rgba(0, 255, 136, 0.3);
+      background: rgba(0, 255, 136, 0.08);
+    }
+
+    .copy-address.is-copied .copy-hint {
+      color: var(--accent-green);
+    }
+
+    .tier-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .tier-pill {
+      min-width: 132px;
+      padding: 0.82rem 0.95rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03);
+      font-family: "IBM Plex Mono", monospace;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .tier-pill strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--text-primary);
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .tier-pill span {
+      color: rgba(240, 244, 255, 0.72);
+      font-size: 0.76rem;
+    }
+
+    .tier-pill.elite {
+      border-color: rgba(0, 229, 255, 0.3);
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.16), rgba(0, 229, 255, 0.04));
+    }
+
+    .tier-pill.high {
+      border-color: rgba(0, 229, 255, 0.2);
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(0, 255, 136, 0.04));
+    }
+
+    .tier-pill.medium {
+      border-color: rgba(0, 255, 136, 0.18);
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.12), rgba(255, 179, 0, 0.04));
+    }
+
+    .tier-pill.low {
+      border-color: rgba(255, 179, 0, 0.2);
+      background: linear-gradient(135deg, rgba(255, 179, 0, 0.14), rgba(255, 179, 0, 0.04));
+    }
+
+    .tier-pill.unranked {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .status-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 179, 0, 0.22);
+      background: rgba(255, 179, 0, 0.08);
+      color: var(--accent-amber);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .detail-list,
+    .surface-list {
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.8rem;
+      color: rgba(240, 244, 255, 0.82);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.84rem;
+    }
+
+    .detail-list strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--text-primary);
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .governance-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 1.6rem;
+    }
+
+    .tool-category-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .tool-card {
+      min-height: 100%;
+    }
+
+    .tool-card.cyan {
+      border-color: rgba(0, 229, 255, 0.18);
+    }
+
+    .tool-card.amber {
+      border-color: rgba(255, 179, 0, 0.18);
+    }
+
+    .tool-card.green {
+      border-color: rgba(0, 255, 136, 0.18);
+    }
+
+    .tool-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tool-card.cyan .tool-icon {
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.07);
+      border-color: rgba(0, 229, 255, 0.14);
+    }
+
+    .tool-card.amber .tool-icon {
+      color: var(--accent-amber);
+      background: rgba(255, 179, 0, 0.07);
+      border-color: rgba(255, 179, 0, 0.14);
+    }
+
+    .tool-card.green .tool-icon {
+      color: var(--accent-green);
+      background: rgba(0, 255, 136, 0.07);
+      border-color: rgba(0, 255, 136, 0.14);
+    }
+
+    .tool-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .tool-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tool-count {
+      color: rgba(240, 244, 255, 0.58);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tool-list {
+      margin: 1rem 0 0;
+      color: rgba(240, 244, 255, 0.78);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      line-height: 1.8;
+    }
+
+    .pricing-table th:first-child,
+    .pricing-table td:first-child {
+      color: var(--text-primary);
+      min-width: 150px;
+    }
+
+    .callout-card {
+      margin-top: 1.2rem;
+      border-style: dashed;
+      border-color: rgba(0, 229, 255, 0.22);
+      background: linear-gradient(180deg, rgba(13, 21, 37, 0.96), rgba(8, 13, 26, 0.98));
+    }
+
+    .surface-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .surface-link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem 1.1rem;
+      margin-top: 1.15rem;
+    }
+
+    .surface-link-row a {
+      color: var(--accent-cyan);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
     }
 
     .timeline {
@@ -1077,6 +1617,42 @@
       text-wrap: balance;
     }
 
+    .raise-band {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem 1.15rem;
+      margin-top: 1.2rem;
+      padding: 0.95rem 1.15rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 229, 255, 0.12);
+      background: rgba(5, 8, 16, 0.62);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      font-family: "IBM Plex Mono", monospace;
+      text-align: left;
+    }
+
+    .raise-band span {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .raise-band strong {
+      display: block;
+      margin-top: 0.22rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .raise-band > div {
+      min-width: 190px;
+    }
+
     .site-footer {
       padding: 3rem 0 4rem;
     }
@@ -1099,6 +1675,20 @@
     .footer-brandline {
       font-size: clamp(1.65rem, 3vw, 2.1rem);
       line-height: 0.95;
+    }
+
+    .footer-corporate-link {
+      display: inline-flex;
+      width: min(260px, 100%);
+      margin-bottom: 1rem;
+    }
+
+    .footer-corporate-logo {
+      width: 100%;
+      height: auto;
+      color: var(--logo-flat);
+      opacity: 0.96;
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.28));
     }
 
     .footer-tagline {
@@ -1270,6 +1860,17 @@
         grid-template-columns: 1fr;
       }
 
+      .detail-grid,
+      .dual-column-grid,
+      .governance-grid,
+      .surface-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tool-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .ecosystem-logo {
         margin-left: 0;
       }
@@ -1304,7 +1905,13 @@
       .hero-stats,
       .problem-grid,
       .product-grid,
-      .stack-grid {
+      .stack-grid,
+      .metrics-grid,
+      .tool-category-grid,
+      .governance-grid,
+      .detail-grid,
+      .dual-column-grid,
+      .surface-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1362,8 +1969,8 @@
       }
 
       .brand-mark {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
       }
 
       .section-inner,
@@ -1431,36 +2038,101 @@
   </style>
 </head>
 <body>
+  <svg aria-hidden="true" style="position:absolute; width:0; height:0; overflow:hidden;">
+    <defs>
+      <linearGradient id="rearc-metal-stroke" x1="36" y1="22" x2="304" y2="338" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fcfdff"/>
+        <stop offset="0.34" stop-color="#d9e1eb"/>
+        <stop offset="0.68" stop-color="#aab4c5"/>
+        <stop offset="1" stop-color="#f4f7fb"/>
+      </linearGradient>
+      <linearGradient id="rearc-metal-fill" x1="62" y1="320" x2="324" y2="438" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fcfdff"/>
+        <stop offset="0.42" stop-color="#d6dee9"/>
+        <stop offset="1" stop-color="#eef2f7"/>
+      </linearGradient>
+      <filter id="rearc-depth" x="-20%" y="-20%" width="160%" height="170%">
+        <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#000000" flood-opacity="0.42"/>
+      </filter>
+      <symbol id="rearc-logo-primary" viewBox="0 0 380 468">
+        <g filter="url(#rearc-depth)">
+          <g fill="none" stroke="url(#rearc-metal-stroke)" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M98 292V58H176C232 58 274 98 274 148C274 195 242 229 192 236L272 325H216L160 257H135V325H98Z" stroke-width="17"/>
+            <path d="M135 178H172C197 178 216 160 216 136C216 111 197 95 172 95H135V178Z" stroke-width="15"/>
+            <path d="M38 205C78 149 154 108 252 94C280 90 300 92 312 97C299 112 285 128 268 143C213 191 134 231 55 239C35 241 22 240 14 236C18 228 24 217 38 205Z" stroke-width="17"/>
+            <path d="M98 96V49H177" stroke-width="13"/>
+            <path d="M137 178V88H215" stroke-width="12"/>
+            <path d="M98 292V236H150" stroke-width="12"/>
+            <path d="M234 162C261 183 276 215 274 252C272 286 259 313 239 330" stroke-width="11"/>
+            <path d="M210 183C228 199 239 221 237 245C235 268 227 287 214 301" stroke-width="10"/>
+            <path d="M220 274L282 336" stroke-width="12"/>
+          </g>
+          <g fill="url(#rearc-metal-fill)">
+            <circle cx="98" cy="49" r="9"/>
+            <circle cx="137" cy="88" r="8"/>
+            <circle cx="98" cy="292" r="8"/>
+            <circle cx="282" cy="336" r="8"/>
+            <text x="40" y="412" font-family="'DM Sans', sans-serif" font-size="78" font-weight="700" letter-spacing="0.05em">REARC</text>
+            <text x="262" y="452" font-family="'IBM Plex Mono', monospace" font-size="30" font-weight="600" letter-spacing="0.12em">LTD</text>
+          </g>
+        </g>
+      </symbol>
+      <symbol id="rearc-logo-flat" viewBox="0 0 380 450">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M98 290V58H176C232 58 274 98 274 148C274 195 242 229 192 236L272 323H216L160 255H135V323H98Z" stroke-width="17"/>
+          <path d="M135 178H172C197 178 216 160 216 136C216 111 197 95 172 95H135V178Z" stroke-width="15"/>
+          <path d="M38 205C78 149 154 108 252 94C280 90 300 92 312 97C299 112 285 128 268 143C213 191 134 231 55 239C35 241 22 240 14 236C18 228 24 217 38 205Z" stroke-width="17"/>
+          <path d="M98 96V49H177" stroke-width="13"/>
+          <path d="M137 178V88H215" stroke-width="12"/>
+          <path d="M98 290V236H150" stroke-width="12"/>
+          <path d="M234 162C261 183 276 215 274 252C272 286 259 313 239 330" stroke-width="11"/>
+          <path d="M210 183C228 199 239 221 237 245C235 268 227 287 214 301" stroke-width="10"/>
+          <path d="M220 274L282 336" stroke-width="12"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="98" cy="49" r="9"/>
+          <circle cx="137" cy="88" r="8"/>
+          <circle cx="98" cy="290" r="8"/>
+          <circle cx="282" cy="336" r="8"/>
+          <text x="40" y="404" font-family="'DM Sans', sans-serif" font-size="78" font-weight="700" letter-spacing="0.05em">REARC</text>
+          <text x="262" y="442" font-family="'IBM Plex Mono', monospace" font-size="30" font-weight="600" letter-spacing="0.12em">LTD</text>
+        </g>
+      </symbol>
+      <symbol id="rearc-logo-mark" viewBox="0 0 320 340">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M96 289V57H174C229 57 270 97 270 146C270 193 238 228 189 234L268 321H212L156 255H132V321H96Z" stroke-width="18"/>
+          <path d="M132 177H171C196 177 215 159 215 136C215 111 196 95 171 95H132V177Z" stroke-width="16"/>
+          <path d="M30 206C70 150 147 110 246 96C274 92 294 93 306 98C293 113 280 128 264 142C210 190 132 230 53 239C34 241 22 240 14 236C18 228 23 217 30 206Z" stroke-width="18"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
   <header class="site-header" aria-label="Main navigation">
     <div class="container">
       <div class="nav-shell">
         <a class="brand" href="#top" aria-label="ReARC Labs home">
-          <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <path d="M10 24C10 16.268 16.268 10 24 10H32" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M24 38C31.732 38 38 31.732 38 24V16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M24 10V4" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M38 24H44" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-            <circle cx="24" cy="4" r="3" fill="currentColor"/>
-            <circle cx="44" cy="24" r="3" fill="currentColor"/>
-            <circle cx="10" cy="24" r="3" fill="currentColor"/>
-            <circle cx="32" cy="10" r="2.5" fill="currentColor"/>
-            <circle cx="38" cy="16" r="2.5" fill="currentColor"/>
+          <svg class="brand-mark" viewBox="0 0 320 340" aria-hidden="true">
+            <use href="#rearc-logo-mark"></use>
           </svg>
-          <span>ReARC</span>
+          <span class="brand-word">ReARC <small>LTD</small></span>
         </a>
 
         <nav class="nav-links" aria-label="Primary">
-          <a href="#products">Products</a>
-          <a href="#ares">ARES Protocol</a>
-          <a href="#docly">Docly</a>
-          <a href="#about">About</a>
+          <a href="#products" data-i18n="nav_products">Products</a>
+          <a href="#ares-deep" data-i18n="nav_ares">ARES</a>
+          <a href="#docly-deep" data-i18n="nav_docly">Docly</a>
+          <a href="#about" data-i18n="nav_about">About</a>
         </nav>
 
         <div class="nav-actions">
           <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
             <span class="signal-dot" aria-hidden="true"></span>
-            Explore ARES
+            <span data-i18n="nav_cta">Explore ARES</span>
           </a>
+          <div class="locale-toggle" role="group" aria-label="Language switcher" data-i18n-aria-label="lang_group_aria">
+            <button class="locale-button is-active" type="button" data-lang="en" aria-pressed="true" data-i18n="lang_en">ENG</button>
+            <button class="locale-button" type="button" data-lang="tr" aria-pressed="false" data-i18n="lang_tr">TR</button>
+          </div>
           <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M4 7H20"/>
@@ -1473,14 +2145,16 @@
 
       <div class="mobile-panel" id="mobile-menu" aria-label="Mobile menu" aria-hidden="true">
         <nav>
-          <a href="#products" data-nav-link>Products</a>
-          <a href="#ares" data-nav-link>ARES Protocol</a>
-          <a href="#docly" data-nav-link>Docly</a>
-          <a href="#about" data-nav-link>About</a>
+          <a href="#products" data-nav-link data-i18n="nav_products">Products</a>
+          <a href="#ares-deep" data-nav-link data-i18n="nav_ares">ARES</a>
+          <a href="#docly-deep" data-nav-link data-i18n="nav_docly">Docly</a>
+          <a href="#about" data-nav-link data-i18n="nav_about">About</a>
         </nav>
-        <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
-          Explore ARES
-        </a>
+        <div class="locale-toggle" role="group" aria-label="Language switcher" data-i18n-aria-label="lang_group_aria">
+          <button class="locale-button is-active" type="button" data-lang="en" aria-pressed="true" data-i18n="lang_en">ENG</button>
+          <button class="locale-button" type="button" data-lang="tr" aria-pressed="false" data-i18n="lang_tr">TR</button>
+        </div>
+        <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="nav_cta">Explore ARES</a>
       </div>
     </div>
   </header>
@@ -1491,45 +2165,45 @@
       <div class="container hero-content">
         <div class="hero-badge load-in" style="--delay: 0.04s;">
           <span aria-hidden="true">⬡</span>
-          TRUST INFRASTRUCTURE
+          <span data-i18n="hero_badge">TRUST INFRASTRUCTURE</span>
         </div>
 
-        <h1 class="hero-title load-in" style="--delay: 0.12s;">
+        <h1 class="hero-title load-in" style="--delay: 0.16s;" data-i18n="hero_title">
           The Enforcement Layer<br>
           <span>for Autonomous Agents</span>
         </h1>
 
-        <p class="hero-copy load-in" style="--delay: 0.2s;">
+        <p class="hero-copy load-in" style="--delay: 0.24s;" data-i18n="hero_copy">
           ReARC builds the trust, reputation, and dispute infrastructure that autonomous AI agents need to transact with accountability.
           <strong>Not just discovery. Enforcement.</strong>
         </p>
 
-        <div class="button-row hero-actions load-in" style="--delay: 0.28s;">
-          <a class="button button-primary" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+        <div class="button-row hero-actions load-in" style="--delay: 0.32s;">
+          <a class="button button-primary" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="hero_cta_primary">
             Explore ARES Protocol
           </a>
-          <a class="button button-secondary" href="https://docly.work/" target="_blank" rel="noreferrer">
+          <a class="button button-secondary" href="https://docly.work/" target="_blank" rel="noreferrer" data-i18n="hero_cta_secondary">
             Try Docly
           </a>
         </div>
 
-        <div class="hero-stats load-in" style="--delay: 0.36s;">
+        <div class="hero-stats load-in" style="--delay: 0.4s;">
           <div class="stat-card">
             <p class="stat-number" data-count="106">0</p>
-            <div class="stat-label">Smart contract tests passing</div>
+            <div class="stat-label" data-i18n="hero_stat_tests">Smart contract tests passing</div>
           </div>
           <div class="stat-card">
-            <p class="stat-number" data-count="6">0</p>
-            <div class="stat-label">Core contracts deployed</div>
+            <p class="stat-number" data-count="11">0</p>
+            <div class="stat-label" data-i18n="hero_stat_contracts">Contracts deployed on Base Sepolia</div>
           </div>
           <div class="stat-card">
             <p class="stat-number">Base</p>
-            <div class="stat-label">Deployed on Sepolia</div>
+            <div class="stat-label" data-i18n="hero_stat_network">Deployed on Sepolia</div>
           </div>
         </div>
 
-        <a class="scroll-indicator load-in" style="--delay: 0.46s;" href="#problem" aria-label="Scroll to the next section">
-          Scroll
+        <a class="scroll-indicator load-in" style="--delay: 0.5s;" href="#problem" aria-label="Scroll to the next section" data-i18n-aria-label="scroll_aria">
+          <span data-i18n="scroll_label">Scroll</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M7 10L12 15L17 10"/>
           </svg>
@@ -1541,8 +2215,8 @@
       <div class="container">
         <div class="section-shell reveal">
           <div class="section-inner">
-            <p class="section-kicker">// THE PROBLEM</p>
-            <h2 class="section-heading">Agents can transact.<br>But can you trust them?</h2>
+            <p class="section-kicker" data-i18n="problem_kicker">// THE PROBLEM</p>
+            <h2 class="section-heading" data-i18n="problem_heading">Agents can transact.<br>But can you trust them?</h2>
 
             <div class="problem-grid">
               <article class="card problem-card reveal" style="--reveal-delay: 0.05s;">
@@ -1555,8 +2229,8 @@
                       <path d="M8 18H13"/>
                     </svg>
                   </div>
-                  <h3>No Verifiable History</h3>
-                  <p>An agent can claim anything. There&apos;s no on-chain record of what it actually did.</p>
+                  <h3 data-i18n="problem_1_title">No Verifiable History</h3>
+                  <p data-i18n="problem_1_copy">An agent can claim anything. There&apos;s no on-chain record of what it actually did.</p>
                 </div>
               </article>
 
@@ -1570,8 +2244,8 @@
                       <path d="M9 12L12 15L15 12"/>
                     </svg>
                   </div>
-                  <h3>No Dispute Mechanism</h3>
-                  <p>When an agent fails a job, there&apos;s no way to penalize it. A bad rating is not enforcement.</p>
+                  <h3 data-i18n="problem_2_title">No Dispute Mechanism</h3>
+                  <p data-i18n="problem_2_copy">When an agent fails a job, there&apos;s no way to penalize it. A bad rating is not enforcement.</p>
                 </div>
               </article>
 
@@ -1583,8 +2257,8 @@
                       <path d="M9 12L11 14L15 10"/>
                     </svg>
                   </div>
-                  <h3>No Economic Accountability</h3>
-                  <p>Without financial consequence for failure, reputation means nothing.</p>
+                  <h3 data-i18n="problem_3_title">No Economic Accountability</h3>
+                  <p data-i18n="problem_3_copy">Without financial consequence for failure, reputation means nothing.</p>
                 </div>
               </article>
             </div>
@@ -1597,49 +2271,474 @@
       <div class="container">
         <div class="section-shell reveal">
           <div class="section-inner">
-            <p class="section-kicker">// OUR PRODUCTS</p>
-            <h2 class="section-heading">Two products. One trust thesis.</h2>
-            <p class="section-copy">
+            <p class="section-kicker" data-i18n="products_kicker">// OUR PRODUCTS</p>
+            <h2 class="section-heading" data-i18n="products_heading">Two products. One trust thesis.</h2>
+            <p class="section-copy" data-i18n="products_copy">
               ReARC Labs operates the trust substrate for agentic systems and a live software business that proves the team ships, monetizes, and scales real infrastructure.
             </p>
 
             <div class="product-grid">
-              <article class="card product-card cyan reveal" id="ares" style="--reveal-delay: 0.05s;">
+              <div class="product-column reveal" id="ares" style="--reveal-delay: 0.05s;">
+                <h3 class="product-title">ARES Protocol</h3>
+                <article class="card product-card cyan">
+                  <div class="card-inner">
+                    <div class="product-tag" data-i18n="ares_tag">FLAGSHIP · TESTNET LIVE</div>
+                    <p class="product-copy" data-i18n="ares_copy">
+                      On-chain reputation, identity, dispute resolution, and trust enforcement infrastructure for autonomous AI agents. Deployed on Base blockchain (EVM), live on Base Sepolia testnet while mainnet remains NO-GO until hard gates close, targeting Q2 2026.
+                    </p>
+                    <ul class="feature-list">
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_1">11 deployed contracts on Base Sepolia</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_2">ERC-8004 + ERC-8183 standard adapters</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_3">ARI reputation engine (0–1000 score, 5 tiers)</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_4">Economic dispute resolution with slashing</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_5">Token-weighted governance (TimelockController)</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_6">106/106 contract tests passing</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_7">0 Critical / 0 High audit findings open</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="ares_feature_8">Live API: scores, agents, disputes</span></li>
+                    </ul>
+                    <div class="product-link-row">
+                      <a class="product-link" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="ares_link_1">View Protocol →</a>
+                      <a class="product-link secondary" href="https://app.ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="ares_link_2">Explorer →</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="product-column reveal" id="docly" style="--reveal-delay: 0.12s;">
+                <h3 class="product-title">Docly.work</h3>
+                <article class="card product-card amber">
+                  <div class="card-inner">
+                    <div class="product-tag" data-i18n="docly_tag">LIVE · EARLY ACCESS</div>
+                    <p class="product-copy" data-i18n="docly_copy">
+                      A document and file processing SaaS platform with browser-first workflows, a public API, and AI-powered document intelligence. Not just a PDF converter — a full document operations platform.
+                    </p>
+                    <ul class="feature-list">
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_1">21+ document processing tools</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_2">AI tools: summarizer, translator, proofreader, alt-text</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_3">Privacy tools: redactor, metadata remover, anonymizer</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_4">Free tier: 10 ops/day, no watermark</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_5">Day Pass + Pro + API subscription tiers</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_6">Public REST API with OpenAPI spec</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_7">Async job processing</span></li>
+                      <li><span class="feature-symbol">✦</span><span data-i18n="docly_feature_8">Agent-friendly discovery surfaces</span></li>
+                    </ul>
+                    <div class="product-link-row">
+                      <a class="product-link" href="https://docly.work/" target="_blank" rel="noreferrer" data-i18n="docly_link_1">Try Docly →</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ares-deep">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker" data-i18n="ares_deep_kicker">// ARES PROTOCOL</p>
+            <h2 class="section-heading" data-i18n="ares_deep_heading">Live trust enforcement infrastructure on Base Sepolia.</h2>
+            <p class="section-copy" data-i18n="ares_deep_copy">
+              ARES Protocol is on-chain reputation, identity, dispute resolution, and trust enforcement infrastructure for autonomous AI agents. It is live on Base Sepolia testnet today; mainnet remains NO-GO until hard gates close, targeting Q2 2026.
+            </p>
+
+            <div class="raise-band reveal" style="--reveal-delay: 0.03s;" aria-label="Fundraising status">
+              <div>
+                <span data-i18n="investor_band_label">Pre-Seed Round Open</span>
+                <strong data-i18n="investor_band_value">$750K · SAFE + Token Warrant</strong>
+              </div>
+              <div>
+                <span data-i18n="investor_band_cap_label">Valuation Cap</span>
+                <strong data-i18n="investor_band_cap_value">$7.5M</strong>
+              </div>
+            </div>
+
+            <div class="metrics-grid">
+              <article class="card metric-card reveal" style="--reveal-delay: 0.05s;">
                 <div class="card-inner">
-                  <div class="product-tag">FLAGSHIP · TESTNET LIVE</div>
-                  <h3 class="product-title">ARES Protocol</h3>
-                  <p class="product-copy">
-                    On-chain identity, verifiable reputation scores (ARI), economic dispute resolution with slashing, and programmable trust enforcement for autonomous AI agents. Live on Base Sepolia — mainnet targeting Q2 2026.
-                  </p>
-                  <ul class="feature-list">
-                    <li><span class="feature-symbol">✦</span><span>ERC-8004 + ERC-8183 compatible</span></li>
-                    <li><span class="feature-symbol">✦</span><span>Dispute mechanism with slashing</span></li>
-                    <li><span class="feature-symbol">✦</span><span>ARI reputation engine</span></li>
-                    <li><span class="feature-symbol">✦</span><span>Governance via TimelockController</span></li>
-                    <li><span class="feature-symbol">✦</span><span>Base (EVM) native</span></li>
-                  </ul>
-                  <a class="product-link" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">View Protocol →</a>
+                  <p class="stat-number" data-count="881">0</p>
+                  <div class="stat-label" data-i18n="ares_metric_1_label">Top ARI score</div>
+                  <div class="metric-note" data-i18n="ares_metric_1_note">ELITE tier live on /scores</div>
                 </div>
               </article>
 
-              <article class="card product-card amber reveal" id="docly" style="--reveal-delay: 0.12s;">
+              <article class="card metric-card reveal" style="--reveal-delay: 0.1s;">
                 <div class="card-inner">
-                  <div class="product-tag">LIVE · EARLY ACCESS</div>
-                  <h3 class="product-title">Docly.work</h3>
-                  <p class="product-copy">
-                    Fast, privacy-first document processing tools. PDF compression, conversion, OCR, and more. No signup required.
-                  </p>
-                  <ul class="feature-list">
-                    <li><span class="feature-symbol">✦</span><span>11 document processing tools</span></li>
-                    <li><span class="feature-symbol">✦</span><span>PDF to Word, Merge, Split, OCR</span></li>
-                    <li><span class="feature-symbol">✦</span><span>No signup required</span></li>
-                    <li><span class="feature-symbol">✦</span><span>API access available</span></li>
-                    <li><span class="feature-symbol">✦</span><span>Privacy-first architecture</span></li>
-                  </ul>
-                  <a class="product-link" href="https://docly.work/" target="_blank" rel="noreferrer">Try Docly →</a>
+                  <p class="stat-number" data-count="24">0</p>
+                  <div class="stat-label" data-i18n="ares_metric_2_label">Total disputes on testnet</div>
+                  <div class="metric-note" data-i18n="ares_metric_2_note">18 finalized · 6 pending</div>
+                </div>
+              </article>
+
+              <article class="card metric-card reveal" style="--reveal-delay: 0.15s;">
+                <div class="card-inner">
+                  <p class="stat-number" data-count="106">0</p>
+                  <div class="stat-label" data-i18n="ares_metric_3_label">Contract tests passing</div>
+                  <div class="metric-note" data-i18n="ares_metric_3_note">38/38 API tests passing</div>
                 </div>
               </article>
             </div>
+
+            <div class="detail-grid">
+              <article class="card reveal" style="--reveal-delay: 0.08s;">
+                <div class="card-inner">
+                  <p class="meta-line cyan" data-i18n="ares_contracts_meta">BASE SEPOLIA · DEPLOYED CONTRACTS</p>
+                  <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="ares_contracts_title">Contract map</h3>
+                  <p class="panel-copy" data-i18n="ares_contracts_copy">
+                    Identity, scoring, dispute resolution, and governance are already split across production-style contracts on Base Sepolia. Click any address to copy the full value.
+                  </p>
+                  <div class="table-wrap">
+                    <table class="contract-table">
+                      <thead>
+                        <tr>
+                          <th data-i18n="table_contract">Contract</th>
+                          <th data-i18n="table_address">Address</th>
+                          <th data-i18n="table_role">Role</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>AresRegistry</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0x8df897ed117078983d9a097ee731104b6a7b843f" aria-label="Copy full AresRegistry address">
+                              <span>0x8df8...843f</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_registry">Agent identity anchor</td>
+                        </tr>
+                        <tr>
+                          <td>AresARIEngine</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0xc78e9bf65ab6db5f638cb4448dc5ebcb7c6e99f3" aria-label="Copy full AresARIEngine address">
+                              <span>0xc78e...99f3</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_ari">Reputation scoring</td>
+                        </tr>
+                        <tr>
+                          <td>AresScorecardLedger</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0xf87343a973f75a2cba9fb93616fa8331e5fff2b1" aria-label="Copy full AresScorecardLedger address">
+                              <span>0xf873...f2b1</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_ledger">Immutable action ledger</td>
+                        </tr>
+                        <tr>
+                          <td>AresDispute</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0x66168715b5a760d775a9672255bd49087063613f" aria-label="Copy full AresDispute address">
+                              <span>0x6616...613f</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_dispute">Dispute + slashing</td>
+                        </tr>
+                        <tr>
+                          <td>AresToken</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0x89f8748435b048e0f2944376cb793cf193b87af4" aria-label="Copy full AresToken address">
+                              <span>0x89f8...7af4</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_token">Governance token</td>
+                        </tr>
+                        <tr>
+                          <td>AresGovernor</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0x99aa690870a0df973b97e63b63c2a8375a80188e" aria-label="Copy full AresGovernor address">
+                              <span>0x99aa...188e</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_governor">Proposal + voting</td>
+                        </tr>
+                        <tr>
+                          <td>TimelockController</td>
+                          <td>
+                            <button class="copy-address" type="button" data-copy="0xb7c54e5fb3bf2ab308f69889081742a1c87d3b5e" aria-label="Copy full TimelockController address">
+                              <span>0xb7c5...3b5e</span>
+                              <span class="copy-hint" data-i18n="copy_hint">Copy</span>
+                            </button>
+                          </td>
+                          <td data-i18n="ares_role_timelock">48h execution delay</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </article>
+
+              <div class="stacked-panels">
+                <article class="card reveal" style="--reveal-delay: 0.14s;">
+                  <div class="card-inner">
+                    <p class="meta-line cyan" data-i18n="ares_api_meta">LIVE API · 38/38 PASSING</p>
+                    <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="ares_api_title">API reference</h3>
+                    <p class="mono-note" data-i18n="ares_api_base">Base URL: https://ares-protocol.xyz/api/v1</p>
+                    <div class="api-code" data-i18n="ares_api_code">GET  /api/v1/health      → { ok: true }
+GET  /api/v1/scores      → agent ARI scores + tiers
+GET  /api/v1/agents      → registered agent profiles
+GET  /api/v1/disputes    → dispute feed + resolution labels
+POST /api/v1/register    → register agent identity</div>
+                    <div class="product-link-row">
+                      <a class="product-link secondary" href="https://ares-protocol.xyz/api" target="_blank" rel="noreferrer" data-i18n="ares_api_link">View Full API Docs →</a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="card reveal" style="--reveal-delay: 0.18s;">
+                  <div class="card-inner">
+                    <p class="meta-line amber" data-i18n="ares_tiers_meta">ARI SCORE MODEL</p>
+                    <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="ares_tiers_title">Reputation tiers</h3>
+                    <div class="tier-grid">
+                      <div class="tier-pill elite">
+                        <strong>ELITE</strong>
+                        <span>750–1000</span>
+                      </div>
+                      <div class="tier-pill high">
+                        <strong>HIGH</strong>
+                        <span>500–749</span>
+                      </div>
+                      <div class="tier-pill medium">
+                        <strong>MEDIUM</strong>
+                        <span>250–499</span>
+                      </div>
+                      <div class="tier-pill low">
+                        <strong>LOW</strong>
+                        <span>1–249</span>
+                      </div>
+                      <div class="tier-pill unranked">
+                        <strong>UNRANKED</strong>
+                        <span>0</span>
+                      </div>
+                    </div>
+                    <p class="panel-copy" data-i18n="ares_tiers_copy">
+                      Confidence is weighted by action count and recency. Scores decay with inactivity and strengthen with verified successful actions.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="governance-grid">
+              <article class="card reveal" style="--reveal-delay: 0.12s;">
+                <div class="card-inner">
+                  <div class="status-row">
+                    <p class="meta-line amber">B-01/B-02</p>
+                    <span class="status-chip" data-i18n="status_in_progress">IN PROGRESS</span>
+                  </div>
+                  <h3 style="margin-top: 0.9rem;" data-i18n="ares_gov_1_title">B-01/B-02: Conservative Params</h3>
+                  <ul class="detail-list">
+                    <li>
+                      <strong data-i18n="execute_window_label">Execute window</strong>
+                      <span data-i18n="execute_window_date">March 28, 2026</span>
+                    </li>
+                    <li>
+                      <strong data-i18n="what_changes_label">What changes</strong>
+                      <span data-i18n="ares_gov_1_copy">proposalThreshold uplift, quorumNumerator >= 6, conservative dispute params</span>
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="card reveal" style="--reveal-delay: 0.18s;">
+                <div class="card-inner">
+                  <div class="status-row">
+                    <p class="meta-line amber">B-03</p>
+                    <span class="status-chip" data-i18n="status_in_progress">IN PROGRESS</span>
+                  </div>
+                  <h3 style="margin-top: 0.9rem;" data-i18n="ares_gov_2_title">B-03: Dispute V2 Cutover</h3>
+                  <ul class="detail-list">
+                    <li>
+                      <strong data-i18n="execute_window_label">Execute window</strong>
+                      <span data-i18n="execute_window_date">March 28, 2026</span>
+                    </li>
+                    <li>
+                      <strong data-i18n="what_changes_label">What changes</strong>
+                      <span data-i18n="ares_gov_2_copy">Final role rewire, old-side revoke, dispute v2 activation</span>
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="docly-deep">
+      <div class="container">
+        <div class="section-shell reveal">
+          <div class="section-inner">
+            <p class="section-kicker" data-i18n="docly_deep_kicker">// DOCLY.WORK</p>
+            <h2 class="section-heading" data-i18n="docly_deep_heading">Document operations for users, teams, and autonomous agents.</h2>
+            <p class="section-copy" data-i18n="docly_deep_copy">
+              Docly.work is a live production document and file processing SaaS platform with browser-first workflows, a public API, and AI-powered document intelligence. Billing runs through Paddle, authentication through Supabase, and async jobs are available for developer and agent workflows.
+            </p>
+
+            <div class="tool-category-grid">
+              <article class="card tool-card cyan reveal" style="--reveal-delay: 0.04s;">
+                <div class="card-inner">
+                  <div class="tool-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 3H14L19 8V21H7A2 2 0 0 1 5 19V5A2 2 0 0 1 7 3Z"/>
+                      <path d="M14 3V8H19"/>
+                      <path d="M9 13H15"/>
+                      <path d="M9 17H15"/>
+                    </svg>
+                  </div>
+                  <div class="tool-head">
+                    <h3 data-i18n="docly_cat_1_title">PDF Tools</h3>
+                    <span class="tool-count" data-i18n="docly_cat_1_count">13 tools</span>
+                  </div>
+                  <p class="tool-list">compress-pdf · merge-pdf · split-pdf · pdf-to-word · word-to-pdf · pdf-to-markdown · ocr-pdf · json-to-pdf · image-to-pdf · pdf-to-jpg · pdf-password-protect · pdf-password-remove · screenshot-to-pdf</p>
+                </div>
+              </article>
+
+              <article class="card tool-card amber reveal" style="--reveal-delay: 0.08s;">
+                <div class="card-inner">
+                  <div class="tool-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 3L19 6V11C19 16 15.6 20 12 21C8.4 20 5 16 5 11V6L12 3Z"/>
+                      <path d="M9 12L11 14L15 10"/>
+                    </svg>
+                  </div>
+                  <div class="tool-head">
+                    <h3 data-i18n="docly_cat_2_title">Privacy Tools</h3>
+                    <span class="tool-count" data-i18n="docly_cat_2_count">4 tools</span>
+                  </div>
+                  <p class="tool-list">pdf-redactor · pdf-metadata-remover · image-exif-remover · image-anonymizer</p>
+                </div>
+              </article>
+
+              <article class="card tool-card green reveal" style="--reveal-delay: 0.12s;">
+                <div class="card-inner">
+                  <div class="tool-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 7H20"/>
+                      <path d="M9 7V5A3 3 0 0 1 15 5V7"/>
+                      <rect x="5" y="7" width="14" height="12" rx="3"/>
+                      <circle cx="12" cy="13" r="2.5"/>
+                    </svg>
+                  </div>
+                  <div class="tool-head">
+                    <h3 data-i18n="docly_cat_3_title">Image Tools</h3>
+                    <span class="tool-count" data-i18n="docly_cat_3_count">2 tools</span>
+                  </div>
+                  <p class="tool-list">background-remover · image-compressor</p>
+                </div>
+              </article>
+
+              <article class="card tool-card cyan reveal" style="--reveal-delay: 0.16s;">
+                <div class="card-inner">
+                  <div class="tool-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 3L20 7V17L12 21L4 17V7L12 3Z"/>
+                      <path d="M12 7V12"/>
+                      <path d="M9.5 10.5L12 13L14.5 10.5"/>
+                    </svg>
+                  </div>
+                  <div class="tool-head">
+                    <h3 data-i18n="docly_cat_4_title">AI Tools</h3>
+                    <span class="tool-count" data-i18n="docly_cat_4_count">4 tools</span>
+                  </div>
+                  <p class="tool-list">ai-pdf-summarizer · ai-text-proofreader · ai-document-translator · ai-image-alt-text</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="dual-column-grid">
+              <article class="card reveal" style="--reveal-delay: 0.1s;">
+                <div class="card-inner">
+                  <p class="meta-line amber" data-i18n="docly_pricing_meta">PRICING TIERS</p>
+                  <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="docly_pricing_title">Usage model</h3>
+                  <div class="table-wrap">
+                    <table class="pricing-table">
+                      <thead>
+                        <tr>
+                          <th data-i18n="pricing_head_feature">Feature</th>
+                          <th data-i18n="pricing_head_free">Free</th>
+                          <th data-i18n="pricing_head_daypass">Day Pass</th>
+                          <th>Pro</th>
+                          <th>API</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td data-i18n="pricing_row_1_label">Daily ops</td>
+                          <td data-i18n="pricing_row_1_free">10/day</td>
+                          <td data-i18n="pricing_row_1_daypass">Unlimited 24h</td>
+                          <td data-i18n="pricing_row_1_pro">Unlimited</td>
+                          <td data-i18n="pricing_row_1_api">Quota-based</td>
+                        </tr>
+                        <tr>
+                          <td data-i18n="pricing_row_2_label">File size</td>
+                          <td data-i18n="pricing_row_2_free">25MB</td>
+                          <td data-i18n="pricing_row_2_daypass">Pro limits</td>
+                          <td data-i18n="pricing_row_2_pro">Larger</td>
+                          <td data-i18n="pricing_row_2_api">Larger</td>
+                        </tr>
+                        <tr>
+                          <td data-i18n="pricing_row_3_label">AI tools</td>
+                          <td data-i18n="pricing_row_3_free">Limited</td>
+                          <td data-i18n="pricing_row_3_daypass">Full</td>
+                          <td data-i18n="pricing_row_3_pro">Full</td>
+                          <td data-i18n="pricing_row_3_api">Full</td>
+                        </tr>
+                        <tr>
+                          <td data-i18n="pricing_row_4_label">API access</td>
+                          <td data-i18n="shared_no">No</td>
+                          <td data-i18n="shared_no">No</td>
+                          <td data-i18n="shared_no">No</td>
+                          <td data-i18n="pricing_row_4_api">Yes</td>
+                        </tr>
+                        <tr>
+                          <td data-i18n="pricing_row_5_label">Watermark</td>
+                          <td data-i18n="shared_no">No</td>
+                          <td data-i18n="shared_no">No</td>
+                          <td data-i18n="shared_no">No</td>
+                          <td data-i18n="shared_no">No</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card reveal" style="--reveal-delay: 0.15s;">
+                <div class="card-inner">
+                  <p class="meta-line cyan" data-i18n="docly_api_meta">PUBLIC API · OPENAPI</p>
+                  <h3 class="panel-title" style="margin-top: 0.9rem;" data-i18n="docly_api_title">Agent-ready request surface</h3>
+                  <div class="code-block"><pre><span class="code-comment" data-i18n="docly_api_comment"># Compress a PDF via Docly API</span>
+curl -X POST https://docly.work/api/v1/compress-pdf \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "file=@document.pdf" \
+  --output compressed.pdf</pre></div>
+                  <p class="mono-note" data-i18n="docly_api_note">Async support: add <code>?async=1</code> and poll <code>GET /api/v1/jobs/:jobId</code>. OpenAPI spec is live at <code>/api/openapi.json</code>.</p>
+                  <div class="product-link-row">
+                    <a class="product-link secondary" href="https://docly.work/pricing" target="_blank" rel="noreferrer" data-i18n="docly_api_link">Get API Key →</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <article class="card callout-card reveal" style="--reveal-delay: 0.2s;">
+              <div class="card-inner">
+                <p class="meta-line cyan" data-i18n="docly_callout_meta">AGENT INTEGRATION NOTE</p>
+                <p style="margin-top: 0.9rem;" data-i18n="docly_callout_copy">
+                  Docly exposes machine-readable discovery surfaces including an OpenAPI spec at <strong style="color: var(--text-primary);">/api/openapi.json</strong> — making it compatible with AI agent workflows and automated document pipelines.
+                </p>
+                <div class="surface-link-row">
+                  <a href="https://docly.work/api/openapi.json" target="_blank" rel="noreferrer" data-i18n="docly_callout_link">OpenAPI spec →</a>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -1649,9 +2748,9 @@
       <div class="container">
         <div class="section-shell reveal">
           <div class="section-inner">
-            <p class="section-kicker">// HOW IT WORKS</p>
-            <h2 class="section-heading">Trust with Economic Consequence</h2>
-            <p class="section-copy">
+            <p class="section-kicker" data-i18n="how_kicker">// HOW IT WORKS</p>
+            <h2 class="section-heading" data-i18n="how_heading">Trust with Economic Consequence</h2>
+            <p class="section-copy" data-i18n="how_copy">
               ARES moves trust from vibes and screenshots into cryptographic history, machine-readable scoring, and programmable enforcement.
             </p>
 
@@ -1659,36 +2758,36 @@
               <article class="card timeline-step cyan reveal" style="--reveal-delay: 0.05s;">
                 <span class="step-node" aria-hidden="true"></span>
                 <div class="card-inner">
-                  <div class="step-index">01 · REGISTER</div>
-                  <h3>Register</h3>
-                  <p>Agent registers on-chain identity via AresRegistry. Immutable, verifiable.</p>
+                  <div class="step-index" data-i18n="how_step_1_index">01 · REGISTER</div>
+                  <h3 data-i18n="how_step_1_title">Register</h3>
+                  <p data-i18n="how_step_1_copy">Agent registers on-chain identity via AresRegistry. Immutable, verifiable.</p>
                 </div>
               </article>
 
               <article class="card timeline-step cyan reveal" style="--reveal-delay: 0.11s;">
                 <span class="step-node" aria-hidden="true"></span>
                 <div class="card-inner">
-                  <div class="step-index">02 · ACT</div>
-                  <h3>Act</h3>
-                  <p>Every agent action gets recorded on AresScorecardLedger. Signed, timestamped, permanent.</p>
+                  <div class="step-index" data-i18n="how_step_2_index">02 · ACT</div>
+                  <h3 data-i18n="how_step_2_title">Act</h3>
+                  <p data-i18n="how_step_2_copy">Every agent action gets recorded on AresScorecardLedger. Signed, timestamped, permanent.</p>
                 </div>
               </article>
 
               <article class="card timeline-step cyan reveal" style="--reveal-delay: 0.17s;">
                 <span class="step-node" aria-hidden="true"></span>
                 <div class="card-inner">
-                  <div class="step-index">03 · SCORE</div>
-                  <h3>Score</h3>
-                  <p>ARI Engine aggregates records into a reputation score. Decays with inactivity, improves with success.</p>
+                  <div class="step-index" data-i18n="how_step_3_index">03 · SCORE</div>
+                  <h3 data-i18n="how_step_3_title">Score</h3>
+                  <p data-i18n="how_step_3_copy">ARI Engine aggregates records into a reputation score. Decays with inactivity, improves with success.</p>
                 </div>
               </article>
 
               <article class="card timeline-step amber reveal" style="--reveal-delay: 0.23s;">
                 <span class="step-node" aria-hidden="true"></span>
                 <div class="card-inner">
-                  <div class="step-index">04 · ENFORCE</div>
-                  <h3>Enforce</h3>
-                  <p>Disputes trigger economic slashing. Bad actors pay. Good actors are rewarded.</p>
+                  <div class="step-index" data-i18n="how_step_4_index">04 · ENFORCE</div>
+                  <h3 data-i18n="how_step_4_title">Enforce</h3>
+                  <p data-i18n="how_step_4_copy">Disputes trigger economic slashing. Bad actors pay. Good actors are rewarded.</p>
                 </div>
               </article>
             </div>
@@ -1701,9 +2800,9 @@
       <div class="container">
         <div class="section-shell reveal">
           <div class="section-inner">
-            <p class="section-kicker">// STACK</p>
-            <h2 class="section-heading">Protocol-native, developer-native.</h2>
-            <p class="section-copy">
+            <p class="section-kicker" data-i18n="stack_kicker">// STACK</p>
+            <h2 class="section-heading" data-i18n="stack_heading">Protocol-native, developer-native.</h2>
+            <p class="section-copy" data-i18n="stack_copy">
               Built with battle-tested EVM primitives and modern developer tooling so integration teams can move from spec to shipping without translation layers.
             </p>
 
@@ -1726,32 +2825,47 @@
       <div class="container">
         <div class="section-shell reveal">
           <div class="section-inner">
-            <p class="section-kicker">// ECOSYSTEM</p>
-            <h2 class="section-heading">Network effects start with verifiable metadata.</h2>
+            <p class="section-kicker" data-i18n="surfaces_kicker">// LIVE SURFACES</p>
+            <h2 class="section-heading" data-i18n="surfaces_heading">Everything here resolves to a working surface.</h2>
+            <p class="section-copy" data-i18n="surfaces_copy">
+              ReARC is already operating across a live protocol testnet surface and a production SaaS stack. The difference is not vision versus execution; it is protocol gating versus product maturity.
+            </p>
 
-            <article class="card ecosystem-card reveal" style="--reveal-delay: 0.08s;">
-              <div class="card-inner">
-                <div class="meta-line cyan">INTEGRATION PARTNER · IN PROGRESS</div>
-                <h3 style="margin-top: 0.85rem; font-size: clamp(1.9rem, 3vw, 2.7rem);">Hashgraph Online</h3>
-                <p>
-                  ARES trust metadata is being mapped into HOL&apos;s Registry Broker — bringing verifiable on-chain reputation and dispute signals into a discovery network spanning
-                  <strong style="color: var(--text-primary);">121K+ indexed agents</strong> across 15 registries.
-                </p>
-              </div>
-              <div class="card-inner" style="display:flex; align-items:center; justify-content:center;">
-                <div class="ecosystem-logo" aria-label="Hashgraph Online mark">
-                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-                    <circle cx="36" cy="36" r="34" stroke="rgba(0,229,255,0.25)" stroke-width="1.5"/>
-                    <circle cx="36" cy="36" r="22" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
-                    <path d="M20 36C20 27.163 27.163 20 36 20" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M36 52C44.837 52 52 44.837 52 36" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="36" cy="20" r="3" fill="var(--accent-cyan)"/>
-                    <circle cx="36" cy="52" r="3" fill="var(--accent-cyan)" opacity="0.6"/>
-                    <text x="36" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="rgba(240,244,255,0.7)" letter-spacing="0.1em">HOL</text>
-                  </svg>
+            <div class="surface-grid">
+              <article class="card reveal" style="--reveal-delay: 0.08s;">
+                <div class="card-inner">
+                  <p class="meta-line cyan" data-i18n="surfaces_ares_meta">ARES PROTOCOL · BASE SEPOLIA</p>
+                  <h3 style="margin-top: 0.9rem;" data-i18n="surfaces_ares_title">Protocol surfaces</h3>
+                  <ul class="surface-list">
+                    <li data-i18n="surfaces_ares_1">Explorer is live at app.ares-protocol.xyz</li>
+                    <li data-i18n="surfaces_ares_2">API health endpoint returns 200 OK</li>
+                    <li data-i18n="surfaces_ares_3">Scores, agents, disputes, and registration are live API surfaces</li>
+                    <li data-i18n="surfaces_ares_4">Dispute feed currently shows 24 total, 18 finalized, 6 pending</li>
+                  </ul>
+                  <div class="surface-link-row">
+                    <a href="https://app.ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="surfaces_ares_link_1">Explorer →</a>
+                    <a href="https://ares-protocol.xyz/api/v1/health" target="_blank" rel="noreferrer" data-i18n="surfaces_ares_link_2">Health →</a>
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
+
+              <article class="card reveal" style="--reveal-delay: 0.14s;">
+                <div class="card-inner">
+                  <p class="meta-line amber" data-i18n="surfaces_docly_meta">DOCLY.WORK · PRODUCTION</p>
+                  <h3 style="margin-top: 0.9rem;" data-i18n="surfaces_docly_title">Product surfaces</h3>
+                  <ul class="surface-list">
+                    <li data-i18n="surfaces_docly_1">Production site is live at docly.work</li>
+                    <li data-i18n="surfaces_docly_2">Billing is active through Paddle</li>
+                    <li data-i18n="surfaces_docly_3">Authentication is active through Supabase</li>
+                    <li data-i18n="surfaces_docly_4">OpenAPI discovery and async processing are exposed for developers and agents</li>
+                  </ul>
+                  <div class="surface-link-row">
+                    <a href="https://docly.work/" target="_blank" rel="noreferrer" data-i18n="surfaces_docly_link_1">Site →</a>
+                    <a href="https://docly.work/api/openapi.json" target="_blank" rel="noreferrer" data-i18n="surfaces_docly_link_2">OpenAPI →</a>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
@@ -1761,17 +2875,17 @@
       <div class="container">
         <div class="section-shell reveal">
           <div class="section-inner">
-            <p class="section-kicker">// ABOUT REARC</p>
-            <h2 class="section-heading">A trust company for the agentic internet.</h2>
+            <p class="section-kicker" data-i18n="about_kicker">// ABOUT REARC</p>
+            <h2 class="section-heading" data-i18n="about_heading">A trust company for the agentic internet.</h2>
 
             <div class="about-grid">
               <article class="card about-card reveal" style="--reveal-delay: 0.05s;">
                 <div class="card-inner">
-                  <p class="meta-line cyan">PARENT COMPANY</p>
-                  <h3 style="margin-top: 0.9rem; font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;">
+                  <p class="meta-line cyan" data-i18n="about_meta">PARENT COMPANY</p>
+                  <h3 style="margin-top: 0.9rem; font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;" data-i18n="about_title">
                     ReARC Labs operates beneath the interface layer.
                   </h3>
-                  <p style="margin-top: 1rem;">
+                  <p style="margin-top: 1rem;" data-i18n="about_copy">
                     ReARC is not a registry or discovery product. It is the layer that decides how much to trust an agent and what happens when it fails.
                     ARES establishes the enforcement substrate for autonomous agents. Docly proves the company can turn deterministic workflow infrastructure into revenue-bearing software.
                   </p>
@@ -1780,16 +2894,16 @@
 
               <aside class="about-side mini-panels">
                 <div class="mini-panel reveal" style="--reveal-delay: 0.11s;">
-                  <strong>Enforcement first</strong>
-                  Reputation without slashing, dispute windows, or stake is just UI.
+                  <strong data-i18n="about_panel_1_title">Enforcement first</strong>
+                  <span data-i18n="about_panel_1_copy">Reputation without slashing, dispute windows, or stake is just UI.</span>
                 </div>
                 <div class="mini-panel reveal" style="--reveal-delay: 0.17s;">
-                  <strong>Shipping discipline</strong>
-                  Testnet protocol execution and a live SaaS product are running in parallel.
+                  <strong data-i18n="about_panel_2_title">Shipping discipline</strong>
+                  <span data-i18n="about_panel_2_copy">Testnet protocol execution and a live SaaS product are running in parallel.</span>
                 </div>
                 <div class="mini-panel reveal" style="--reveal-delay: 0.23s;">
-                  <strong>Built for integrators</strong>
-                  AI infrastructure teams, agent platforms, and Web3 developers can plug trust into existing flows.
+                  <strong data-i18n="about_panel_3_title">Built for integrators</strong>
+                  <span data-i18n="about_panel_3_copy">AI infrastructure teams, agent platforms, and Web3 developers can plug trust into existing flows.</span>
                 </div>
               </aside>
             </div>
@@ -1802,17 +2916,21 @@
       <div class="container">
         <div class="cta-shell reveal">
           <div class="cta-inner">
-            <p class="section-kicker" style="justify-content: center;">// BUILD WITH REARC</p>
-            <h2 class="cta-heading">Build on Trust Infrastructure</h2>
-            <p class="cta-copy">
+            <p class="section-kicker" style="justify-content: center;" data-i18n="cta_kicker">// BUILD WITH REARC</p>
+            <h2 class="cta-heading" data-i18n="cta_heading">Build on Trust Infrastructure</h2>
+            <p class="cta-copy" style="margin-top: 1.05rem; color: var(--accent-amber); font-family: 'IBM Plex Mono', monospace; font-size: clamp(0.84rem, 1.9vw, 1rem); letter-spacing: 0.08em; text-transform: uppercase;" data-i18n="cta_raise_line">
+              Raising $750K pre-seed — SAFE + Token Warrant
+            </p>
+            <p class="cta-copy" data-i18n="cta_copy">
               ARES Protocol is live on Base Sepolia — mainnet targeting Q2 2026. Early integration partners get priority access to trust scoring, dispute enforcement, and programmable reputation hooks.
             </p>
+            <p class="cta-copy" style="margin-top: 0.7rem; color: var(--text-primary); font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem;" data-i18n="cta_raise_contact">contact@rearclabs.com</p>
             <div class="button-row" style="justify-content: center; margin-top: 2rem;">
-              <a class="button button-primary" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+              <a class="button button-primary" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer" data-i18n="cta_button_primary">
                 Explore ARES
               </a>
-              <a class="button button-secondary" href="mailto:atakan@ares-protocol.xyz" aria-label="Contact ReARC Labs via email">
-                Contact Us
+              <a class="button button-secondary" href="mailto:contact@rearclabs.com" aria-label="Contact ReARC Labs via email" data-i18n="cta_button_secondary" data-i18n-aria-label="cta_contact_aria">
+                contact@rearclabs.com
               </a>
             </div>
           </div>
@@ -1826,22 +2944,13 @@
       <div class="footer-shell">
         <div class="footer-main">
           <div>
-            <a class="brand" href="#top" aria-label="ReARC Labs home">
-              <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                <path d="M10 24C10 16.268 16.268 10 24 10H32" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-                <path d="M24 38C31.732 38 38 31.732 38 24V16" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-                <path d="M24 10V4" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-                <path d="M38 24H44" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
-                <circle cx="24" cy="4" r="3" fill="currentColor"/>
-                <circle cx="44" cy="24" r="3" fill="currentColor"/>
-                <circle cx="10" cy="24" r="3" fill="currentColor"/>
-                <circle cx="32" cy="10" r="2.5" fill="currentColor"/>
-                <circle cx="38" cy="16" r="2.5" fill="currentColor"/>
+            <a class="footer-corporate-link" href="#top" aria-label="ReARC Labs home">
+              <svg class="footer-corporate-logo" viewBox="0 0 380 450" aria-hidden="true">
+                <use href="#rearc-logo-flat"></use>
               </svg>
-              <span>ReARC</span>
             </a>
-            <h2 class="footer-brandline">Trust Infrastructure for the Agentic Internet</h2>
-            <p class="footer-tagline">
+            <h2 class="footer-brandline" data-i18n="footer_brandline">Trust Infrastructure for the Agentic Internet</h2>
+            <p class="footer-tagline" data-i18n="footer_tagline">
               ReARC Labs builds the systems that let autonomous agents carry identity, reputation, and consequences into every high-stakes interaction.
             </p>
             <p style="margin-top: 0.8rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--accent-cyan); opacity: 0.7;">rearclabs.com</p>
@@ -1849,7 +2958,7 @@
 
           <div class="footer-links">
             <div class="footer-link-group">
-              <h3>Links</h3>
+              <h3 data-i18n="footer_links_heading">Links</h3>
               <div class="footer-link-row">
                 <a href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">ARES Protocol</a>
                 <a href="https://docly.work/" target="_blank" rel="noreferrer">Docly.work</a>
@@ -1860,22 +2969,22 @@
             </div>
 
             <div class="footer-link-group">
-              <h3>Legal</h3>
+              <h3 data-i18n="footer_legal_heading">Legal</h3>
               <div class="footer-link-row">
-                <a href="#privacy-policy">Privacy Policy</a>
-                <a href="#terms-of-use">Terms</a>
+                <a href="#privacy-policy" data-i18n="footer_privacy_link">Privacy Policy</a>
+                <a href="#terms-of-use" data-i18n="footer_terms_link">Terms</a>
               </div>
             </div>
           </div>
         </div>
 
         <div class="footer-bottom">
-          <div>© 2026 ReARC Labs</div>
+          <div data-i18n="footer_copyright">© 2026 ReARC Labs</div>
           <div class="legal-notes">
-            <p id="privacy-policy">
+            <p id="privacy-policy" data-i18n="footer_privacy_copy">
               <strong style="color: var(--text-primary);">Privacy Policy:</strong> ReARC Labs products are designed around minimal data retention, explicit processing surfaces, and transparent integration boundaries.
             </p>
-            <p id="terms-of-use">
+            <p id="terms-of-use" data-i18n="footer_terms_copy">
               <strong style="color: var(--text-primary);">Terms:</strong> Product access and protocol integrations remain subject to service-specific limits, protocol risk disclosures, and applicable partner agreements.
             </p>
           </div>
@@ -1896,8 +3005,327 @@
       const heroBackground = document.getElementById("vanta-bg");
       const statNumbers = document.querySelectorAll(".stat-number[data-count]");
       const revealItems = document.querySelectorAll(".reveal");
+      const copyButtons = document.querySelectorAll("[data-copy]");
+      const localeButtons = document.querySelectorAll("[data-lang]");
+      const i18nNodes = Array.from(document.querySelectorAll("[data-i18n]"));
+      const i18nAriaNodes = Array.from(document.querySelectorAll("[data-i18n-aria-label]"));
+      const metaDescription = document.getElementById("meta-description");
+      const metaOgTitle = document.getElementById("meta-og-title");
+      const metaOgDescription = document.getElementById("meta-og-description");
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const englishContent = new Map();
+      const englishAria = new Map();
+      const englishMeta = {
+        title: document.title,
+        description: metaDescription ? metaDescription.content : "",
+        ogTitle: metaOgTitle ? metaOgTitle.content : "",
+        ogDescription: metaOgDescription ? metaOgDescription.content : ""
+      };
+      const translations = {
+        tr: {
+          meta_title: "ReARC Labs — Otonom Yapay Zeka Ajanları İçin Güven Altyapısı",
+          meta_description: "ReARC, otonom yapay zeka ajanları için zincir üstü itibar, uyuşmazlık çözümü ve güven yaptırımı altyapısı geliştirir. ARES Protocol ve Docly'yi inceleyin.",
+          lang_group_aria: "Dil seçici",
+          nav_products: "Ürünler",
+          nav_ares: "ARES",
+          nav_docly: "Docly",
+          nav_about: "Hakkında",
+          nav_cta: "ARES'i İncele",
+          lang_en: "ENG",
+          lang_tr: "TR",
+          hero_badge: "GÜVEN ALTYAPISI",
+          hero_title: "Yaptırım Katmanı<br><span>Otonom Ajanlar için</span>",
+          hero_copy: "ReARC, otonom yapay zeka ajanlarının hesap verebilir şekilde işlem yapabilmesi için ihtiyaç duyduğu güven, itibar ve uyuşmazlık altyapısını kurar. <strong>Sadece keşif değil. Yaptırım.</strong>",
+          hero_cta_primary: "ARES Protocol'ü İncele",
+          hero_cta_secondary: "Docly'yi Dene",
+          hero_stat_tests: "Geçen akıllı sözleşme testi",
+          hero_stat_contracts: "Base Sepolia'da deploy edilen sözleşme",
+          hero_stat_network: "Sepolia üzerinde canlı",
+          scroll_label: "Aşağı Kaydır",
+          scroll_aria: "Sonraki bölüme kaydır",
+          problem_kicker: "// SORUN",
+          problem_heading: "Ajanlar işlem yapabiliyor.<br>Ama onlara güvenebilir misin?",
+          problem_1_title: "Doğrulanabilir Geçmiş Yok",
+          problem_1_copy: "Bir ajan her şeyi iddia edebilir. Gerçekte ne yaptığını gösteren zincir üstü bir kayıt yok.",
+          problem_2_title: "Uyuşmazlık Mekanizması Yok",
+          problem_2_copy: "Bir ajan işi bozduğunda onu cezalandırmanın bir yolu yok. Kötü puan yaptırım değildir.",
+          problem_3_title: "Ekonomik Sorumluluk Yok",
+          problem_3_copy: "Başarısızlığın finansal sonucu yoksa itibarın anlamı kalmaz.",
+          products_kicker: "// ÜRÜNLERİMİZ",
+          products_heading: "İki ürün. Tek güven tezi.",
+          products_copy: "ReARC Labs, agentic sistemler için güven katmanını işletirken aynı zamanda ekibin gerçek altyapı üretip gelir yaratabildiğini gösteren canlı bir yazılım işi yürütüyor.",
+          ares_tag: "ANA ÜRÜN · TESTNET CANLI",
+          ares_copy: "Otonom AI ajanları için zincir üstü itibar, kimlik, uyuşmazlık çözümü ve güven yaptırımı altyapısı. Base blockchain (EVM) üzerinde deploy edildi, bugün Base Sepolia testnet'te canlı; mainnet ise sert kapılar kapanana kadar NO-GO, hedef Q2 2026.",
+          ares_feature_1: "Base Sepolia'da 11 deploy edilmiş sözleşme",
+          ares_feature_2: "ERC-8004 + ERC-8183 standart adaptörleri",
+          ares_feature_3: "ARI itibar motoru (0–1000 skor, 5 seviye)",
+          ares_feature_4: "Slash içeren ekonomik uyuşmazlık çözümü",
+          ares_feature_5: "Token ağırlıklı yönetişim (TimelockController)",
+          ares_feature_6: "106/106 sözleşme testi geçti",
+          ares_feature_7: "Açık 0 Kritik / 0 Yüksek denetim bulgusu",
+          ares_feature_8: "Canlı API: skorlar, ajanlar, uyuşmazlıklar",
+          ares_link_1: "Protokolü Gör →",
+          ares_link_2: "Explorer →",
+          docly_tag: "CANLI · ERKEN ERİŞİM",
+          docly_copy: "Tarayıcı öncelikli akışlar, herkese açık bir API ve yapay zeka destekli belge zekası sunan bir doküman ve dosya işleme SaaS platformu. Sadece bir PDF dönüştürücü değil; tam bir belge operasyon platformu.",
+          docly_feature_1: "21+ doküman işleme aracı",
+          docly_feature_2: "AI araçları: özetleme, çeviri, proofreading, alt-text",
+          docly_feature_3: "Gizlilik araçları: redaksiyon, metadata temizleme, anonimleştirme",
+          docly_feature_4: "Ücretsiz katman: günde 10 işlem, filigran yok",
+          docly_feature_5: "Day Pass + Pro + API abonelik katmanları",
+          docly_feature_6: "OpenAPI spec ile herkese açık REST API",
+          docly_feature_7: "Asenkron iş işleme",
+          docly_feature_8: "Ajan dostu keşif yüzeyleri",
+          docly_link_1: "Docly'yi Dene →",
+          ares_deep_kicker: "// ARES PROTOCOL",
+          ares_deep_heading: "Base Sepolia üzerinde canlı güven yaptırım altyapısı.",
+          ares_deep_copy: "ARES Protocol, otonom AI ajanları için zincir üstü itibar, kimlik, uyuşmazlık çözümü ve güven yaptırımı altyapısıdır. Bugün Base Sepolia testnet'te canlıdır; mainnet sert kapılar kapanana kadar NO-GO durumunda ve hedef Q2 2026'dır.",
+          investor_band_label: "Ön-Tur Açık",
+          investor_band_value: "750K $ · SAFE + Token Warrant",
+          investor_band_cap_label: "Değerleme Tavanı",
+          investor_band_cap_value: "7.5M $",
+          ares_metric_1_label: "En yüksek ARI skoru",
+          ares_metric_1_note: "ELITE seviye /scores üzerinde canlı",
+          ares_metric_2_label: "Testnet toplam uyuşmazlık",
+          ares_metric_2_note: "18 sonuçlandı · 6 bekliyor",
+          ares_metric_3_label: "Geçen sözleşme testi",
+          ares_metric_3_note: "38/38 API testi geçti",
+          ares_contracts_meta: "BASE SEPOLIA · DEPLOY EDİLMİŞ SÖZLEŞMELER",
+          ares_contracts_title: "Sözleşme haritası",
+          ares_contracts_copy: "Kimlik, skor, uyuşmazlık çözümü ve yönetişim Base Sepolia üzerinde production-style sözleşmelere ayrılmış durumda. Tam değeri kopyalamak için herhangi bir adrese tıkla.",
+          table_contract: "Sözleşme",
+          table_address: "Adres",
+          table_role: "Rol",
+          ares_role_registry: "Ajan kimlik çapası",
+          ares_role_ari: "İtibar skorlama",
+          ares_role_ledger: "Değiştirilemez eylem defteri",
+          ares_role_dispute: "Uyuşmazlık + slash",
+          ares_role_token: "Yönetişim tokenı",
+          ares_role_governor: "Teklif + oylama",
+          ares_role_timelock: "48 saat yürütme gecikmesi",
+          ares_api_meta: "CANLI API · 38/38 GEÇTİ",
+          ares_api_title: "API referansı",
+          ares_api_base: "Base URL: https://ares-protocol.xyz/api/v1",
+          ares_api_code: "GET  /api/v1/health      → { ok: true }\nGET  /api/v1/scores      → ajan ARI skorları + seviyeler\nGET  /api/v1/agents      → kayıtlı ajan profilleri\nGET  /api/v1/disputes    → uyuşmazlık akışı + çözüm etiketleri\nPOST /api/v1/register    → ajan kimliğini kaydet",
+          ares_api_link: "Tüm API Dokümanları →",
+          ares_tiers_meta: "ARI SKOR MODELİ",
+          ares_tiers_title: "İtibar seviyeleri",
+          ares_tiers_copy: "Güven puanı işlem sayısı ve yakınlığa göre ağırlıklandırılır. Skorlar inaktiviteyle düşer, doğrulanmış başarılı eylemlerle güçlenir.",
+          status_in_progress: "İLERLİYOR",
+          ares_gov_1_title: "B-01/B-02: Muhafazakar Parametreler",
+          execute_window_label: "Yürütme penceresi",
+          execute_window_date: "28 Mart 2026",
+          what_changes_label: "Ne değişiyor",
+          ares_gov_1_copy: "proposalThreshold artışı, quorumNumerator >= 6, muhafazakar uyuşmazlık parametreleri",
+          ares_gov_2_title: "B-03: Dispute V2 Geçişi",
+          ares_gov_2_copy: "Son rol kablolaması, eski tarafta revoke, dispute v2 aktivasyonu",
+          docly_deep_kicker: "// DOCLY.WORK",
+          docly_deep_heading: "Kullanıcılar, ekipler ve otonom ajanlar için belge operasyonları.",
+          docly_deep_copy: "Docly.work, tarayıcı öncelikli akışlar, herkese açık API ve yapay zeka destekli belge zekası sunan canlı bir production belge ve dosya işleme SaaS platformudur. Faturalama Paddle üzerinden, kimlik doğrulama Supabase üzerinden çalışır; geliştirici ve ajan akışları için async işler mevcuttur.",
+          docly_cat_1_title: "PDF Araçları",
+          docly_cat_1_count: "13 araç",
+          docly_cat_2_title: "Gizlilik Araçları",
+          docly_cat_2_count: "4 araç",
+          docly_cat_3_title: "Görsel Araçları",
+          docly_cat_3_count: "2 araç",
+          docly_cat_4_title: "Yapay Zeka Araçları",
+          docly_cat_4_count: "4 araç",
+          docly_pricing_meta: "FİYATLANDIRMA KATLARI",
+          docly_pricing_title: "Kullanım modeli",
+          pricing_head_feature: "Özellik",
+          pricing_head_free: "Ücretsiz",
+          pricing_head_daypass: "Day Pass",
+          pricing_row_1_label: "Günlük işlem",
+          pricing_row_1_free: "10/gün",
+          pricing_row_1_daypass: "24 saat sınırsız",
+          pricing_row_1_pro: "Sınırsız",
+          pricing_row_1_api: "Kota bazlı",
+          pricing_row_2_label: "Dosya boyutu",
+          pricing_row_2_free: "25MB",
+          pricing_row_2_daypass: "Pro limitleri",
+          pricing_row_2_pro: "Daha büyük",
+          pricing_row_2_api: "Daha büyük",
+          pricing_row_3_label: "AI araçları",
+          pricing_row_3_free: "Sınırlı",
+          pricing_row_3_daypass: "Tam",
+          pricing_row_3_pro: "Tam",
+          pricing_row_3_api: "Tam",
+          pricing_row_4_label: "API erişimi",
+          pricing_row_4_api: "Evet",
+          pricing_row_5_label: "Filigran",
+          shared_no: "Hayır",
+          docly_api_meta: "PUBLIC API · OPENAPI",
+          docly_api_title: "Ajana hazır istek yüzeyi",
+          docly_api_comment: "# Docly API ile bir PDF sıkıştır",
+          docly_api_note: "Async destek için <code>?async=1</code> ekleyin ve <code>GET /api/v1/jobs/:jobId</code> endpoint'ini sorgulayın. OpenAPI spec canlı olarak <code>/api/openapi.json</code> altında yayınlanıyor.",
+          docly_api_link: "API Anahtarı Al →",
+          docly_callout_meta: "AJAN ENTEGRASYON NOTU",
+          docly_callout_copy: "Docly, <strong style=\"color: var(--text-primary);\">/api/openapi.json</strong> altında makine tarafından okunabilir keşif yüzeyleri yayınlar; bu da onu AI ajan iş akışları ve otomatik belge pipeline'ları ile uyumlu hale getirir.",
+          docly_callout_link: "OpenAPI spec →",
+          how_kicker: "// NASIL ÇALIŞIR",
+          how_heading: "Ekonomik Sonuçları Olan Güven",
+          how_copy: "ARES, güveni hislerden ve ekran görüntülerinden alıp kriptografik geçmişe, makine tarafından okunabilir skorlara ve programlanabilir yaptırıma taşır.",
+          how_step_1_index: "01 · KAYIT",
+          how_step_1_title: "Kayıt",
+          how_step_1_copy: "Ajan, zincir üstü kimliğini AresRegistry üzerinden kaydeder. Değiştirilemez ve doğrulanabilir.",
+          how_step_2_index: "02 · EYLEM",
+          how_step_2_title: "Eylem",
+          how_step_2_copy: "Her ajan eylemi AresScorecardLedger üzerinde kaydedilir. İmzalı, zaman damgalı ve kalıcıdır.",
+          how_step_3_index: "03 · SKOR",
+          how_step_3_title: "Skor",
+          how_step_3_copy: "ARI Engine kayıtları bir itibar skorunda toplar. İnaktiviteyle düşer, başarıyla yükselir.",
+          how_step_4_index: "04 · YAPTIRIM",
+          how_step_4_title: "Yaptırım",
+          how_step_4_copy: "Uyuşmazlıklar ekonomik slash tetikler. Kötü aktörler bedel öder. İyiler ödüllendirilir.",
+          stack_kicker: "// STACK",
+          stack_heading: "Protokol odaklı, geliştirici odaklı.",
+          stack_copy: "Battle-tested EVM primitive'leri ve modern geliştirici araçlarıyla kuruldu; böylece entegrasyon ekipleri spec'ten yayına çeviri katmanı olmadan ilerleyebilir.",
+          surfaces_kicker: "// CANLI YÜZEYLER",
+          surfaces_heading: "Buradaki her şey çalışan bir yüzeye açılır.",
+          surfaces_copy: "ReARC, zaten canlı bir protokol testnet yüzeyi ile production bir SaaS yığını üzerinde çalışıyor. Fark vizyon ile icra arasında değil; protokol gate'leri ile ürün olgunluğu arasında.",
+          surfaces_ares_meta: "ARES PROTOCOL · BASE SEPOLIA",
+          surfaces_ares_title: "Protokol yüzeyleri",
+          surfaces_ares_1: "Explorer app.ares-protocol.xyz üzerinde canlı",
+          surfaces_ares_2: "API health endpoint'i 200 OK dönüyor",
+          surfaces_ares_3: "Skorlar, ajanlar, uyuşmazlıklar ve kayıt canlı API yüzeyleri",
+          surfaces_ares_4: "Uyuşmazlık akışı şu anda 24 toplam, 18 sonuçlanmış, 6 bekleyen kayıt gösteriyor",
+          surfaces_ares_link_1: "Explorer →",
+          surfaces_ares_link_2: "Sağlık →",
+          surfaces_docly_meta: "DOCLY.WORK · PRODÜKSİYON",
+          surfaces_docly_title: "Ürün yüzeyleri",
+          surfaces_docly_1: "Production site docly.work üzerinde canlı",
+          surfaces_docly_2: "Faturalama Paddle üzerinden aktif",
+          surfaces_docly_3: "Kimlik doğrulama Supabase üzerinden aktif",
+          surfaces_docly_4: "OpenAPI keşfi ve async processing geliştiriciler ile ajanlar için açık",
+          surfaces_docly_link_1: "Site →",
+          surfaces_docly_link_2: "OpenAPI →",
+          about_kicker: "// REARC HAKKINDA",
+          about_heading: "Ajanik internet için bir güven şirketi.",
+          about_meta: "ANA ŞİRKET",
+          about_title: "ReARC Labs, arayüz katmanının altında çalışır.",
+          about_copy: "ReARC bir registry ya da discovery ürünü değildir. Bir ajana ne kadar güvenileceğine ve başarısız olduğunda ne olacağına karar veren katmandır. ARES, otonom ajanlar için yaptırım katmanını kurar. Docly ise ekibin deterministik workflow altyapısını gelir üreten yazılıma çevirebildiğini kanıtlar.",
+          about_panel_1_title: "Önce yaptırım",
+          about_panel_1_copy: "Slash, uyuşmazlık penceresi veya stake olmadan itibar sadece UI'dır.",
+          about_panel_2_title: "Sevkiyat disiplini",
+          about_panel_2_copy: "Testnet protokol yürütmesi ve canlı SaaS ürün paralel ilerliyor.",
+          about_panel_3_title: "Entegratörler için inşa edildi",
+          about_panel_3_copy: "AI altyapı ekipleri, ajan platformları ve Web3 geliştiricileri güven katmanını mevcut akışlarına takabilir.",
+          cta_kicker: "// REARC İLE İNŞA ET",
+          cta_heading: "Güven Altyapısı Üzerine İnşa Et",
+          cta_raise_line: "Ön-Tur Açık — 750K $ · SAFE + Token Warrant",
+          cta_copy: "ARES Protocol Base Sepolia üzerinde canlı; mainnet hedefi Q2 2026. Erken entegrasyon partnerleri, güven skorlama, uyuşmazlık yaptırımı ve programlanabilir itibar hook'larına öncelikli erişim alır.",
+          cta_raise_contact: "contact@rearclabs.com",
+          cta_button_primary: "ARES'i İncele",
+          cta_button_secondary: "contact@rearclabs.com",
+          cta_contact_aria: "ReARC Labs ile e-posta üzerinden iletişime geç",
+          footer_brandline: "Ajanik İnternet İçin Güven Altyapısı",
+          footer_tagline: "ReARC Labs, otonom ajanların her yüksek riskli etkileşime kimlik, itibar ve sonuç taşımasını sağlayan sistemleri kurar.",
+          footer_links_heading: "Bağlantılar",
+          footer_legal_heading: "Yasal",
+          footer_privacy_link: "Gizlilik Politikası",
+          footer_terms_link: "Şartlar",
+          footer_copyright: "© 2026 ReARC Labs",
+          footer_privacy_copy: "<strong style=\"color: var(--text-primary);\">Gizlilik Politikası:</strong> ReARC Labs ürünleri; minimum veri saklama, açık işlem yüzeyleri ve şeffaf entegrasyon sınırları etrafında tasarlanmıştır.",
+          footer_terms_copy: "<strong style=\"color: var(--text-primary);\">Şartlar:</strong> Ürün erişimi ve protokol entegrasyonları; hizmete özel limitlere, protokol risk açıklamalarına ve ilgili partner sözleşmelerine tabidir.",
+          copy_hint: "Kopyala",
+          copy_copied: "Kopyalandı!",
+          copy_retry: "Tekrar Dene"
+        }
+      };
       let vantaEffect = null;
+
+      i18nNodes.forEach(function (node) {
+        if (!englishContent.has(node.dataset.i18n)) {
+          englishContent.set(node.dataset.i18n, node.innerHTML);
+        }
+      });
+
+      i18nAriaNodes.forEach(function (node) {
+        const key = node.dataset.i18nAriaLabel;
+        if (!englishAria.has(key)) {
+          englishAria.set(key, node.getAttribute("aria-label") || "");
+        }
+      });
+
+      function getTranslation(lang, key) {
+        if (lang === "tr" && translations.tr[key] !== undefined) {
+          return translations.tr[key];
+        }
+        return englishContent.get(key);
+      }
+
+      function getAriaTranslation(lang, key) {
+        if (lang === "tr" && translations.tr[key] !== undefined) {
+          return translations.tr[key];
+        }
+        return englishAria.get(key);
+      }
+
+      function getCopyLabel(lang, state) {
+        const map = lang === "tr" ? translations.tr : null;
+        if (state === "copied") {
+          return map ? map.copy_copied : "Copied!";
+        }
+        if (state === "retry") {
+          return map ? map.copy_retry : "Retry";
+        }
+        return map ? map.copy_hint : englishContent.get("copy_hint") || "Copy";
+      }
+
+      function applyLanguage(lang) {
+        const activeLang = lang === "tr" ? "tr" : "en";
+
+        i18nNodes.forEach(function (node) {
+          const key = node.dataset.i18n;
+          const value = getTranslation(activeLang, key);
+          if (typeof value === "string") {
+            node.innerHTML = value;
+          }
+        });
+
+        i18nAriaNodes.forEach(function (node) {
+          const key = node.dataset.i18nAriaLabel;
+          const value = getAriaTranslation(activeLang, key);
+          if (typeof value === "string") {
+            node.setAttribute("aria-label", value);
+          }
+        });
+
+        document.documentElement.lang = activeLang;
+        document.title = activeLang === "tr" ? translations.tr.meta_title : englishMeta.title;
+        if (metaDescription) {
+          metaDescription.content = activeLang === "tr" ? translations.tr.meta_description : englishMeta.description;
+        }
+        if (metaOgTitle) {
+          metaOgTitle.content = activeLang === "tr" ? translations.tr.meta_title : englishMeta.ogTitle;
+        }
+        if (metaOgDescription) {
+          metaOgDescription.content = activeLang === "tr" ? translations.tr.meta_description : englishMeta.ogDescription;
+        }
+
+        localeButtons.forEach(function (button) {
+          const isActive = button.dataset.lang === activeLang;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        copyButtons.forEach(function (button) {
+          const hint = button.querySelector(".copy-hint");
+          const baseLabel = getCopyLabel(activeLang, "default");
+          button.dataset.originalLabel = baseLabel;
+          button.classList.remove("is-copied");
+          window.clearTimeout(button.copyTimer);
+          if (hint) {
+            hint.textContent = baseLabel;
+          }
+        });
+
+        try {
+          window.localStorage.setItem("rearc-lang", activeLang);
+        } catch (error) {
+          void error;
+        }
+      }
 
       function syncHeader() {
         header.classList.toggle("is-scrolled", window.scrollY > 24);
@@ -1918,6 +3346,57 @@
         body.classList.toggle("menu-open", isOpen);
         menuToggle.setAttribute("aria-expanded", String(isOpen));
         mobilePanel.setAttribute("aria-hidden", String(!isOpen));
+      }
+
+      function attachCopyHandlers() {
+        copyButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            const value = button.dataset.copy;
+            const hint = button.querySelector(".copy-hint");
+            const currentLang = document.documentElement.lang === "tr" ? "tr" : "en";
+            const originalLabel = button.dataset.originalLabel || (hint ? hint.textContent : getCopyLabel(currentLang, "default"));
+
+            button.dataset.originalLabel = originalLabel;
+
+            if (!value || !navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+              if (hint) {
+                hint.textContent = getCopyLabel(currentLang, "retry");
+              }
+              window.clearTimeout(button.copyTimer);
+              button.copyTimer = window.setTimeout(function () {
+                if (hint) {
+                  hint.textContent = originalLabel;
+                }
+              }, 2000);
+              return;
+            }
+
+            navigator.clipboard.writeText(value).then(function () {
+              button.classList.add("is-copied");
+              if (hint) {
+                hint.textContent = getCopyLabel(currentLang, "copied");
+              }
+
+              window.clearTimeout(button.copyTimer);
+              button.copyTimer = window.setTimeout(function () {
+                button.classList.remove("is-copied");
+                if (hint) {
+                  hint.textContent = originalLabel;
+                }
+              }, 2000);
+            }).catch(function () {
+              if (hint) {
+                hint.textContent = getCopyLabel(currentLang, "retry");
+              }
+              window.clearTimeout(button.copyTimer);
+              button.copyTimer = window.setTimeout(function () {
+                if (hint) {
+                  hint.textContent = originalLabel;
+                }
+              }, 2000);
+            });
+          });
+        });
       }
 
       function animateCount(element) {
@@ -2029,6 +3508,25 @@
           }
         });
       }
+
+      attachCopyHandlers();
+      localeButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          applyLanguage(button.dataset.lang);
+        });
+      });
+
+      let initialLang = "en";
+      try {
+        const storedLang = window.localStorage.getItem("rearc-lang");
+        if (storedLang === "tr" || storedLang === "en") {
+          initialLang = storedLang;
+        }
+      } catch (error) {
+        void error;
+      }
+
+      applyLanguage(initialLang);
 
       if (reducedMotion.matches) {
         revealItems.forEach(function (item) {
