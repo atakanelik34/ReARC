@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReARC Labs | Agent Roster</title>
+  <meta name="description" content="ReARC Labs autonomous agent roster. Live AI trading agents in a pixel-art mission control office.">
+  <meta name="theme-color" content="#050810">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #04050a;
+      --bg-primary: #050810;
+      --bg-secondary: #080d1a;
+      --panel: rgba(8, 8, 12, 0.88);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --low: #6b7280;
+      --accent-cyan: #00e5ff;
+      --accent-amber: #ffb300;
+      --header-h: 84px;
+      --logo-flat: #eff3f8;
+      --zeus: #22c55e;
+      --poseidon: #f59e0b;
+      --triton: #a855f7;
+      --hermes: #ec4899;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(180deg, #050810 0%, #060b15 34%, #04070e 100%);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      position: relative;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(0, 229, 255, 0.2), transparent 35%),
+        linear-gradient(160deg, rgba(8, 13, 26, 0.85), rgba(5, 8, 16, 1));
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.88;
+      background:
+        linear-gradient(180deg, rgba(5, 8, 16, 0) 0%, rgba(5, 8, 16, 0) 60%, rgba(5, 8, 16, 0.95) 100%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.025) 0 1px,
+          transparent 1px 78px
+        );
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.12;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(0, 229, 255, 0.15), transparent 30%),
+        radial-gradient(circle at 80% 18%, rgba(255, 179, 0, 0.14), transparent 26%),
+        linear-gradient(180deg, rgba(5, 8, 16, 0.12), rgba(5, 8, 16, 0.85));
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 1.75rem));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 120;
+      padding: 1rem 0;
+      transition:
+        background-color 220ms ease,
+        border-color 220ms ease,
+        backdrop-filter 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(5, 8, 16, 0.82);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    .nav-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      background: rgba(5, 8, 16, 0.55);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+      font-family: "Syne", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      color: var(--logo-flat);
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.28));
+      flex: 0 0 auto;
+    }
+
+    .brand-word {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      min-width: 0;
+      color: var(--logo-flat);
+    }
+
+    .brand-word small {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.58em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240, 244, 255, 0.58);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.95rem, 1.2vw, 1.8rem);
+      font-size: clamp(1.25rem, 1.85vw + 0.15rem, 1.9rem);
+      font-weight: 500;
+      color: #8892aa;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 0.45rem 0;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #f0f4ff;
+      outline: none;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after,
+    .nav-links a.is-active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .button {
+      --button-text: #02131c;
+      --button-bg: var(--accent-cyan);
+      --button-border: rgba(0, 229, 255, 0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 48px;
+      padding: 0.72rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--button-border);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 700;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+      color: var(--button-text);
+      background: var(--button-bg);
+      transition:
+        transform 180ms ease,
+        box-shadow 220ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease;
+      cursor: pointer;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+      box-shadow: 0 22px 60px rgba(0, 229, 255, 0.32);
+    }
+
+    .button-outline {
+      color: var(--text);
+      border-color: rgba(0, 229, 255, 0.26);
+      background: rgba(0, 229, 255, 0.05);
+      box-shadow: inset 0 0 0 1px rgba(0, 229, 255, 0.04);
+    }
+
+    .button-outline:hover,
+    .button-outline:focus-visible {
+      color: #02131c;
+      background: var(--accent-cyan);
+      border-color: rgba(0, 229, 255, 0.7);
+      box-shadow: 0 18px 48px rgba(0, 229, 255, 0.24);
+    }
+
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6);
+      animation: pulse-ring 2.6s ease-out infinite;
+    }
+
+    .locale-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.28rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      flex: 0 0 auto;
+    }
+
+    .locale-button {
+      min-width: 56px;
+      min-height: 38px;
+      padding: 0.42rem 0.8rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #8892aa;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition:
+        color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+    }
+
+    .locale-button:hover,
+    .locale-button:focus-visible {
+      color: #f0f4ff;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .locale-button.is-active {
+      color: #02131c;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.96), rgba(97, 245, 255, 0.88));
+      box-shadow: 0 10px 24px rgba(0, 229, 255, 0.18);
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      color: #f0f4ff;
+      background: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .mobile-panel {
+      display: none;
+      border: 1px solid rgba(0, 229, 255, 0.12);
+      border-radius: 24px;
+      background: rgba(6, 10, 18, 0.94);
+      backdrop-filter: blur(24px);
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+      transform: translateY(-10px);
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        max-height 180ms ease,
+        margin-top 180ms ease,
+        padding 180ms ease,
+        border-width 180ms ease;
+    }
+
+    .mobile-panel.is-open {
+      max-height: 420px;
+      margin-top: 0.9rem;
+      padding: 1rem;
+      border-width: 1px;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-panel nav {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .mobile-panel a {
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      color: #8892aa;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .mobile-panel .button {
+      margin-top: 0.7rem;
+      width: 100%;
+    }
+
+    .mobile-panel .locale-toggle {
+      display: flex;
+      width: 100%;
+      margin-top: 0.7rem;
+    }
+
+    .mobile-panel .locale-button {
+      flex: 1;
+    }
+
+    #canvas-layer {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      bottom: 32px;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    #office-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    #bubble-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .bubble {
+      position: absolute;
+      max-width: 190px;
+      border-radius: 0;
+      background: #1e1e2e;
+      border: 1px solid currentColor;
+      box-shadow: 2px 2px 0 #000;
+      padding: 5px 7px;
+      font-size: 9px;
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      transform: translate(-50%, -100%);
+      opacity: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 4px solid currentColor;
+      transform: translateX(-50%);
+    }
+
+    #agent-cards {
+      position: fixed;
+      inset: var(--header-h) 0 32px 0;
+      z-index: 8;
+      pointer-events: none;
+    }
+
+    .agent-card {
+      position: absolute;
+      width: 220px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 2px solid var(--accent);
+      border-radius: 0;
+      padding: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 2px 2px 0 rgba(0, 0, 0, 0.8);
+      pointer-events: none;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, border-top-color 0.2s ease;
+    }
+
+    .agent-card.hover {
+      border-top-color: var(--accent-bright);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 2px 2px 0 rgba(0, 0, 0, 0.8), 0 0 20px color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+
+    .agent-card.flash {
+      animation: flashCard 1s ease;
+    }
+
+    @keyframes flashCard {
+      0% { box-shadow: 0 0 0 rgba(0,0,0,0); }
+      40% { box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 70%, transparent), 2px 2px 0 rgba(0,0,0,0.8); }
+      100% { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 2px 2px 0 rgba(0,0,0,0.8); }
+    }
+
+    .agent-card[data-agent="zeus"] { top: 20%; left: 8%; --accent: #3b82f6; --accent-bright: #60a5fa; }
+    .agent-card[data-agent="poseidon"] { top: 20%; right: 8%; --accent: #0d9488; --accent-bright: #2dd4bf; }
+    .agent-card[data-agent="triton"] { bottom: 22%; left: 8%; --accent: #06b6d4; --accent-bright: #22d3ee; }
+    .agent-card[data-agent="hermes"] { bottom: 22%; right: 8%; --accent: #ec4899; --accent-bright: #f472b6; }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--badge);
+      box-shadow: 0 0 10px var(--badge);
+      animation: pulse 1.6s ease-in-out infinite;
+      flex: 0 0 6px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .agent-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f9fafb;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-badge {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      color: var(--badge);
+      border: 1px solid color-mix(in srgb, var(--badge) 35%, transparent);
+      background: color-mix(in srgb, var(--badge) 16%, transparent);
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .agent-role {
+      margin-top: 7px;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+    }
+
+    .card-divider {
+      margin: 8px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .agent-description {
+      margin: 0;
+      font-size: 10px;
+      color: #6b7280;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 34px;
+    }
+
+    .agent-strategy {
+      margin: 6px 0 0 0;
+      font-size: 9px;
+      color: #7f8a9d;
+      line-height: 1.45;
+      letter-spacing: 0.03em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 26px;
+      text-transform: none;
+    }
+
+    .card-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .card-actions a,
+    .card-actions button {
+      pointer-events: auto;
+      flex: 1;
+      min-height: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
+      color: #9ca3af;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease;
+      text-decoration: none;
+    }
+
+    .card-actions a:hover,
+    .card-actions a:focus-visible,
+    .card-actions button:hover,
+    .card-actions button:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .card-actions button[disabled] {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: auto;
+    }
+
+    #mission-hud {
+      position: fixed;
+      top: calc(var(--header-h) + 10px);
+      right: 10px;
+      z-index: 90;
+      width: 138px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 7px;
+      backdrop-filter: blur(8px);
+      font-size: 8px;
+      line-height: 1.5;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hud-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .hud-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #d1d5db;
+    }
+
+    .hud-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
+      background: currentColor;
+      flex: 0 0 6px;
+    }
+
+    .hud-status {
+      color: var(--low);
+    }
+
+    #ticker {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 32px;
+      z-index: 100;
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      font-size: 10px;
+      color: #4b5563;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: ticker 30s linear infinite;
+      will-change: transform;
+    }
+
+    .ticker-segment {
+      padding-right: 42px;
+    }
+
+    .t-zeus { color: #22c55e; }
+    .t-poseidon { color: #f59e0b; }
+    .t-triton { color: #a855f7; }
+    .t-hermes { color: #ec4899; }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.55);
+      }
+      70% {
+        box-shadow: 0 0 0 16px rgba(0, 229, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+      }
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    #mobile-cards {
+      display: none;
+    }
+
+    .mobile-card {
+      background: rgba(8, 8, 12, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 2px solid var(--accent);
+      border-radius: 0;
+      padding: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6), 2px 2px 0 rgba(0,0,0,0.8);
+    }
+
+    .mobile-card + .mobile-card {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow: hidden;
+      }
+
+      :root {
+        --header-h: 72px;
+      }
+
+      .nav-links,
+      .button-outline,
+      .locale-toggle {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .site-header {
+        padding: 0.6rem 0;
+      }
+
+      .nav-shell .brand-word {
+        font-size: 1.12rem;
+      }
+
+      #canvas-layer {
+        top: var(--header-h);
+        bottom: auto;
+        height: calc(50vh - 6px);
+      }
+
+      #agent-cards,
+      #mission-hud {
+        display: none;
+      }
+
+      #mobile-cards {
+        display: block;
+        position: fixed;
+        top: calc(var(--header-h) + 50vh);
+        left: 0;
+        right: 0;
+        bottom: 32px;
+        z-index: 60;
+        overflow: auto;
+        padding: 10px;
+        background: linear-gradient(180deg, rgba(3,4,10,0.2), rgba(3,4,10,0.9));
+      }
+
+      .mobile-panel {
+        display: block;
+      }
+
+      .ticker-track {
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        animation-duration: 40s;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-dot,
+      .ticker-track {
+        animation: none !important;
+      }
+
+      .agent-card,
+      .card-actions a,
+      .card-actions button {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="vanta-bg" aria-hidden="true"></div>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden;">
+    <defs>
+      <symbol id="rearc-logo-mark" viewBox="0 0 320 340">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M96 289V57H174C229 57 270 97 270 146C270 193 238 228 189 234L268 321H212L156 255H132V321H96Z" stroke-width="18"/>
+          <path d="M132 177H171C196 177 215 159 215 136C215 111 196 95 171 95H132V177Z" stroke-width="16"/>
+          <path d="M30 206C70 150 147 110 246 96C274 92 294 93 306 98C293 113 280 128 264 142C210 190 132 230 53 239C34 241 22 240 14 236C18 228 23 217 30 206Z" stroke-width="18"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+  <header class="site-header" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-shell">
+        <a class="brand" href="/" aria-label="ReARC Labs home">
+          <svg class="brand-mark" viewBox="0 0 320 340" aria-hidden="true">
+            <use href="#rearc-logo-mark"></use>
+          </svg>
+          <span class="brand-word">ReARC <small>LTD</small></span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/#products">Products</a>
+          <a href="/#ares-deep">ARES</a>
+          <a href="/#docly-deep">Docly</a>
+          <a href="/agents/" class="is-active">Agents</a>
+          <a href="/#about">About</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">
+            <span class="signal-dot" aria-hidden="true"></span>
+            <span>Explore ARES</span>
+          </a>
+          <div class="locale-toggle" role="group" aria-label="Language switcher">
+            <button class="locale-button is-active" type="button" data-lang="en" aria-pressed="true">ENG</button>
+            <button class="locale-button" type="button" data-lang="tr" aria-pressed="false">TR</button>
+          </div>
+          <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 7H20"></path>
+              <path d="M4 12H20"></path>
+              <path d="M4 17H14"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-panel" id="mobile-menu" aria-label="Mobile menu" aria-hidden="true">
+        <nav>
+          <a href="/#products" data-nav-link>Products</a>
+          <a href="/#ares-deep" data-nav-link>ARES</a>
+          <a href="/#docly-deep" data-nav-link>Docly</a>
+          <a href="/agents/" data-nav-link>Agents</a>
+          <a href="/#about" data-nav-link>About</a>
+        </nav>
+        <div class="locale-toggle" role="group" aria-label="Language switcher">
+          <button class="locale-button is-active" type="button" data-lang="en-mobile" aria-pressed="true">ENG</button>
+          <button class="locale-button" type="button" data-lang="tr-mobile" aria-pressed="false">TR</button>
+        </div>
+        <a class="button button-outline" href="https://ares-protocol.xyz/" target="_blank" rel="noreferrer">Explore ARES</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="canvas-layer" aria-label="Agent Office Simulation">
+    <canvas id="office-canvas"></canvas>
+    <div id="bubble-layer"></div>
+  </section>
+
+  <aside id="agent-cards" aria-label="Agent cards"></aside>
+
+  <aside id="mission-hud" aria-label="Mission control status"></aside>
+
+  <section id="mobile-cards" aria-label="Mobile agent cards"></section>
+
+  <footer id="ticker" aria-label="Live status ticker">
+    <div class="ticker-track" id="ticker-track"></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+  <script>
+    const TILE_SIZE = 16;
+    const ZOOM = 3;
+    const GRID_COLS = 20;
+    const GRID_ROWS = 14;
+    const BASE_SPEED = 1.5;
+    const POSEIDON_SPEED = 0.9;
+    const WALK_FPS = 8;
+    const MAX_DT = 0.05;
+    const WALK_BOUNDS = {
+      minX: 2,
+      maxX: 17,
+      minY: 2,
+      maxY: 11
+    };
+    const header = document.querySelector(".site-header");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobilePanel = document.getElementById("mobile-menu");
+    const navLinks = document.querySelectorAll("[data-nav-link]");
+    const localeButtons = document.querySelectorAll(".locale-button");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let vantaEffect = null;
+
+    function syncHeader() {
+      if (!header) return;
+      header.classList.toggle("is-scrolled", window.scrollY > 24);
+    }
+
+    function closeMenu() {
+      if (!mobilePanel || !menuToggle) return;
+      mobilePanel.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      mobilePanel.setAttribute("aria-hidden", "true");
+    }
+
+    function toggleMenu() {
+      if (!mobilePanel || !menuToggle) return;
+      const isOpen = mobilePanel.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      mobilePanel.setAttribute("aria-hidden", String(!isOpen));
+    }
+
+    function shouldUseVanta() {
+      return window.innerWidth > 900 && !reducedMotionQuery.matches;
+    }
+
+    function destroyVanta() {
+      if (vantaEffect && typeof vantaEffect.destroy === "function") {
+        vantaEffect.destroy();
+        vantaEffect = null;
+      }
+    }
+
+    function initVanta() {
+      if (vantaEffect || !shouldUseVanta() || !window.VANTA || !window.THREE) {
+        return;
+      }
+      vantaEffect = window.VANTA.NET({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0x00e5ff,
+        backgroundColor: 0x050810,
+        points: 12.0,
+        maxDistance: 22.0,
+        spacing: 18.0
+      });
+    }
+
+    function manageVanta() {
+      if (shouldUseVanta()) initVanta();
+      else destroyVanta();
+    }
+
+    function toSprite(rows, palette) {
+      return rows.map(function (row) {
+        return row.split("").map(function (key) {
+          return key === "." ? "" : palette[key];
+        });
+      });
+    }
+
+    const SPRITES = {
+      zeus: {
+        idle: toSprite([
+          "................",
+          ".....hhhh.......",
+          "....hvvvvh......",
+          "....hbvvbh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "....sbbbbs......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b......b.....",
+          "...b......b.....",
+          "................",
+          "................",
+          "................"
+        ], { b: "#3B82F6", s: "#1D4ED8", h: "#BFDBFE", v: "#ffffff" }),
+        walk_a: toSprite([
+          "................",
+          ".....hhhh.......",
+          "....hvvvvh......",
+          "....hbvvbh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "....sbbbbs......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "....b....b......",
+          "...b......b.....",
+          "..b.............",
+          "................",
+          "................"
+        ], { b: "#3B82F6", s: "#1D4ED8", h: "#BFDBFE", v: "#ffffff" }),
+        walk_b: toSprite([
+          "................",
+          ".....hhhh.......",
+          "....hvvvvh......",
+          "....hbvvbh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "....sbbbbs......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b....b.......",
+          "...b......b.....",
+          "........b.......",
+          "................",
+          "................"
+        ], { b: "#3B82F6", s: "#1D4ED8", h: "#BFDBFE", v: "#ffffff" }),
+        typing: toSprite([
+          "................",
+          ".....hhhh.......",
+          "....hvvvvh......",
+          "....hbvvbh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bbhhhhbb.....",
+          "...bbbbbbbb.....",
+          "....bb..bb......",
+          "....b....b......",
+          "................",
+          "................",
+          "................"
+        ], { b: "#3B82F6", s: "#1D4ED8", h: "#BFDBFE", v: "#ffffff" })
+      },
+      poseidon: {
+        idle: toSprite([
+          "................",
+          "......hh........",
+          ".....hbbh.......",
+          "....hbbbbh......",
+          "....bbhhbb......",
+          "....bbbbbb......",
+          "...sbbbbbbs.....",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b......b.....",
+          "...b......b.....",
+          "................",
+          "................",
+          "................"
+        ], { b: "#0D9488", s: "#0F766E", h: "#99F6E4", v: "#e2e8f0" }),
+        walk_a: toSprite([
+          "................",
+          "......hh........",
+          ".....hbbh.......",
+          "....hbbbbh......",
+          "....bbhhbb......",
+          "....bbbbbb......",
+          "...sbbbbbbs.....",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "....b....b......",
+          "...b......b.....",
+          "..b.............",
+          "................",
+          "................"
+        ], { b: "#0D9488", s: "#0F766E", h: "#99F6E4", v: "#e2e8f0" }),
+        walk_b: toSprite([
+          "................",
+          "......hh........",
+          ".....hbbh.......",
+          "....hbbbbh......",
+          "....bbhhbb......",
+          "....bbbbbb......",
+          "...sbbbbbbs.....",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b....b.......",
+          "...b......b.....",
+          "........b.......",
+          "................",
+          "................"
+        ], { b: "#0D9488", s: "#0F766E", h: "#99F6E4", v: "#e2e8f0" }),
+        typing: toSprite([
+          "................",
+          "......hh........",
+          ".....hbbh.......",
+          "....hbbbbh......",
+          "....bbhhbb......",
+          "....bbbbbb......",
+          "...sbbbbbbs.....",
+          "...ssbbbbss.....",
+          "....bb..bb......",
+          "...bbhhhhbb.....",
+          "...bbbbbbbb.....",
+          "....bb..bb......",
+          "....b....b......",
+          "................",
+          "................",
+          "................"
+        ], { b: "#0D9488", s: "#0F766E", h: "#99F6E4", v: "#e2e8f0" })
+      },
+      triton: {
+        idle: toSprite([
+          ".......h........",
+          "......hhh.......",
+          ".....hvvvh......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b......b.....",
+          "...b......b.....",
+          "................",
+          "................",
+          "................"
+        ], { b: "#06B6D4", s: "#0E7490", h: "#A5F3FC", v: "#f0fdf4" }),
+        walk_a: toSprite([
+          ".......h........",
+          "......hhh.......",
+          ".....hvvvh......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "....b....b......",
+          "...b......b.....",
+          "..b.............",
+          "................",
+          "................"
+        ], { b: "#06B6D4", s: "#0E7490", h: "#A5F3FC", v: "#f0fdf4" }),
+        walk_b: toSprite([
+          ".......h........",
+          "......hhh.......",
+          ".....hvvvh......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b....b.......",
+          "...b......b.....",
+          "........b.......",
+          "................",
+          "................"
+        ], { b: "#06B6D4", s: "#0E7490", h: "#A5F3FC", v: "#f0fdf4" }),
+        typing: toSprite([
+          ".......h........",
+          "......hhh.......",
+          ".....hvvvh......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bbhhhhbb.....",
+          "...bbbbbbbb.....",
+          "....bb..bb......",
+          "....b....b......",
+          "................",
+          "................",
+          "................"
+        ], { b: "#06B6D4", s: "#0E7490", h: "#A5F3FC", v: "#f0fdf4" })
+      },
+      hermes: {
+        idle: toSprite([
+          "................",
+          "......hh........",
+          ".....hvvh.......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b......b.....",
+          "...b......b.....",
+          "................",
+          "................",
+          "................"
+        ], { b: "#EC4899", s: "#BE185D", h: "#FBCFE8", v: "#ffffff" }),
+        walk_a: toSprite([
+          "................",
+          "......hh........",
+          ".....hvvh.......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "....b....b......",
+          "...b......b.....",
+          "..b.............",
+          "................",
+          "................"
+        ], { b: "#EC4899", s: "#BE185D", h: "#FBCFE8", v: "#ffffff" }),
+        walk_b: toSprite([
+          "................",
+          "......hh........",
+          ".....hvvh.......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bb....bb.....",
+          "...b....b.......",
+          "...b......b.....",
+          "........b.......",
+          "................",
+          "................"
+        ], { b: "#EC4899", s: "#BE185D", h: "#FBCFE8", v: "#ffffff" }),
+        typing: toSprite([
+          "................",
+          "......hh........",
+          ".....hvvh.......",
+          "....hvbbvh......",
+          "....bbhhbb......",
+          ".....bbbb.......",
+          "...ssbbbbss.....",
+          "...sbbbbbbs.....",
+          "....bb..bb......",
+          "...bbhhhhbb.....",
+          "...bbbbbbbb.....",
+          "....bb..bb......",
+          "....b....b......",
+          "................",
+          "................",
+          "................"
+        ], { b: "#EC4899", s: "#BE185D", h: "#FBCFE8", v: "#ffffff" })
+      }
+    };
+
+    const OFFICE_LAYOUT = {
+      desks: {
+        zeus: { col: 3, row: 2, glow: "#3B82F6", quadrant: { x0: 1, x1: 8, y0: 1, y1: 6 } },
+        poseidon: { col: 13, row: 2, glow: "#0D9488", quadrant: { x0: 11, x1: 18, y0: 1, y1: 6 } },
+        triton: { col: 3, row: 9, glow: "#06B6D4", quadrant: { x0: 1, x1: 8, y0: 8, y1: 12 } },
+        hermes: { col: 13, row: 9, glow: "#EC4899", quadrant: { x0: 11, x1: 18, y0: 8, y1: 12 } }
+      }
+    };
+
+    const AGENT_DEFS = {
+      zeus: {
+        name: "ZEUS",
+        role: "Weather Trading Bot",
+        status: "PAPER MODE",
+        statusShort: "PAPER",
+        badge: "#22c55e",
+        accent: "#3B82F6",
+        accentShadow: "#1D4ED8",
+        description: "Monitors Polymarket weather markets across 30+ cities. Multi-signal pipeline: 4 weather models + market odds divergence. Scores opportunities by edge, executes paper positions on GCP VM.",
+        strategy: "Forecast vs. market mismatch -> enter mispriced temperature bucket",
+        speech: ["scanning markets...", "signal found", "calculating edge", "position sizing...", "weather data OK", "4 models loaded", "NYC: +18% edge", "chicago scan OK"],
+        logsPath: "/zeus",
+        dashboardPath: "/zeus"
+      },
+      poseidon: {
+        name: "POSEIDON",
+        role: "Whale Copy Trading Bot",
+        status: "IN DEVELOPMENT",
+        statusShort: "DEV",
+        badge: "#f59e0b",
+        accent: "#0D9488",
+        accentShadow: "#0F766E",
+        description: "Tracks high-signal wallets on Polymarket public API. Scores wallets by win rate, PnL, market diversity. Mirrors whale positions with 30s delay buffer.",
+        strategy: "Whitelist 20-30 trusted whales -> follow $200+ moves -> 3-layer signal filter (wallet quality + momentum + time gate)",
+        speech: ["in development...", "coming soon", "designing...", "architecture..."],
+        logsPath: "",
+        dashboardPath: ""
+      },
+      triton: {
+        name: "TRITON",
+        role: "Self-Tuning BTC Trading Bot",
+        status: "LIVE",
+        statusShort: "LIVE",
+        badge: "#a855f7",
+        accent: "#06B6D4",
+        accentShadow: "#10B981",
+        description: "Trades BTC UP/DOWN markets on Polymarket. Reads Kraken 1m OHLC, Binance funding rate, Fear & Greed index + regime detection. Self-tunes every 120 minutes via Claude API. Kill switch active.",
+        strategy: "ATR-based regime (trending/ranging/volatile) -> config override -> TP/SL/TIME_EXIT with trailing stop. Auto config audit log.",
+        speech: ["reading regime...", "BTC: trending up", "entry filter ok", "tuner running...", "config updated", "trailing TP active", "regime: ranging", "kill switch: off"],
+        logsPath: "/triton",
+        dashboardPath: "/triton"
+      },
+      hermes: {
+        name: "HERMES",
+        role: "Polymarket Arbitrage Engine",
+        status: "ACTIVE",
+        statusShort: "ACTIVE",
+        badge: "#ec4899",
+        accent: "#EC4899",
+        accentShadow: "#BE185D",
+        description: "Runs 3 parallel arbitrage strategies simultaneously. NegRisk arb (YES+NO < $0.97), Dead Certainty (UMA oracle plays), High Confidence (>93% outcome, <4h to close). Never sleeps.",
+        strategy: "NegRisk scan every 30s | UMA ProposePrice listener (WebSocket) | HC scan every 60s | Max 5 concurrent positions | -15% daily stop",
+        speech: ["neg risk found", "YES+NO = $0.94", "UMA proposal OK", "high conf hit", "arb executing", "3 strats scanning", "DC entry: $0.89", "HC: 96% -> buy"],
+        logsPath: "/hermes",
+        dashboardPath: "/hermes"
+      }
+    };
+
+    const AGENT_IMAGE_PATHS = {
+      zeus: { path: "/agents/characters/sheets/zeus.png", frameCount: 24, frameWidth: 128, frameHeight: 128 },
+      poseidon: { path: "/agents/characters/sheets/poseidon.png", frameCount: 24, frameWidth: 128, frameHeight: 128 },
+      triton: { path: "/agents/characters/sheets/triton.png", frameCount: 24, frameWidth: 128, frameHeight: 128 },
+      hermes: { path: "/agents/characters/sheets/hermes.png", frameCount: 24, frameWidth: 128, frameHeight: 128 }
+    };
+    const OFFICE_BG_PATH = "/agents/background/office.png?v=2";
+    const AGENT_IDS = ["zeus", "poseidon", "triton", "hermes"];
+    const AMBIENT_DIALOGUES = {
+      zeus: ["scan pass complete", "weather edge +12%", "signal clean, check risk", "model sync done"],
+      poseidon: ["whale watch active", "copy window opening", "dev mode calibrating", "buffer set to 30s"],
+      triton: ["regime switched to trend", "tp/sl tuned", "latency stable", "entry filter green"],
+      hermes: ["arb spread detected", "nagrisk below 0.97", "uma feed updated", "position cap respected"]
+    };
+
+    const GameState = {
+      canvas: null,
+      ctx: null,
+      dpr: Math.max(1, window.devicePixelRatio || 1),
+      layerRect: null,
+      scale: ZOOM,
+      offsetX: 0,
+      offsetY: 0,
+      now: 0,
+      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      isMobile: window.matchMedia("(max-width: 768px)").matches,
+      characters: [],
+      bubbles: new Map(),
+      effects: [],
+      hoveredAgentId: "",
+      greetingLocks: new Set(),
+      cardNodes: new Map(),
+      mobileCardNodes: new Map(),
+      startedAt: 0,
+      agentImages: new Map(),
+      officeBackground: null,
+      nextAmbientChatAt: 0,
+      pendingAmbientReplies: []
+    };
+
+    function bfs(start, goal, blocked) {
+      const key = function (x, y) { return x + "," + y; };
+      const queue = [start];
+      const seen = new Set([key(start.x, start.y)]);
+      const parent = new Map();
+      const dirs = [
+        { x: 1, y: 0 },
+        { x: -1, y: 0 },
+        { x: 0, y: 1 },
+        { x: 0, y: -1 }
+      ];
+      while (queue.length > 0) {
+        const cur = queue.shift();
+        if (cur.x === goal.x && cur.y === goal.y) {
+          const path = [];
+          let walk = key(goal.x, goal.y);
+          while (walk !== key(start.x, start.y)) {
+            const xy = walk.split(",");
+            path.push({ x: Number(xy[0]), y: Number(xy[1]) });
+            walk = parent.get(walk);
+          }
+          path.reverse();
+          return path;
+        }
+        for (let i = 0; i < dirs.length; i += 1) {
+          const nx = cur.x + dirs[i].x;
+          const ny = cur.y + dirs[i].y;
+          if (nx < 0 || ny < 0 || nx >= GRID_COLS || ny >= GRID_ROWS) continue;
+          const nk = key(nx, ny);
+          if (seen.has(nk) || blocked.has(nk)) continue;
+          seen.add(nk);
+          parent.set(nk, key(cur.x, cur.y));
+          queue.push({ x: nx, y: ny });
+        }
+      }
+      return [];
+    }
+
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function clampTileToBounds(tile) {
+      return {
+        x: Math.max(WALK_BOUNDS.minX, Math.min(WALK_BOUNDS.maxX, tile.x)),
+        y: Math.max(WALK_BOUNDS.minY, Math.min(WALK_BOUNDS.maxY, tile.y))
+      };
+    }
+
+    function worldToScreen(tx, ty) {
+      const px = TILE_SIZE * GameState.scale;
+      return {
+        x: GameState.offsetX + tx * px,
+        y: GameState.offsetY + ty * px
+      };
+    }
+
+    function screenToWorld(x, y) {
+      const px = TILE_SIZE * GameState.scale;
+      const tx = Math.floor((x - GameState.offsetX) / px);
+      const ty = Math.floor((y - GameState.offsetY) / px);
+      return { tx: tx, ty: ty };
+    }
+
+    function getCharacterRenderBox(char, bobOffset, walkStride) {
+      const px = TILE_SIZE * GameState.scale;
+      const screen = worldToScreen(char.tileX, char.tileY);
+      const width = px * 2.2;
+      const height = px * 2.2;
+      const drawX = screen.x + px * 0.5 - width * 0.5 + (walkStride || 0);
+      const drawY = screen.y + px * 1.02 - height + (bobOffset || 0);
+      return {
+        x: drawX,
+        y: drawY,
+        width: width,
+        height: height
+      };
+    }
+
+    function loadAssets() {
+      const ids = Object.keys(AGENT_IMAGE_PATHS);
+      const jobs = ids.map(function (id) {
+        return new Promise(function (resolve) {
+          const config = AGENT_IMAGE_PATHS[id];
+          const img = new Image();
+          img.onload = function () {
+            GameState.agentImages.set(id, {
+              image: img,
+              frameCount: config.frameCount,
+              frameWidth: config.frameWidth,
+              frameHeight: config.frameHeight
+            });
+            resolve();
+          };
+          img.onerror = function () {
+            resolve();
+          };
+          img.src = config.path;
+        });
+      });
+      jobs.push(new Promise(function (resolve) {
+        const bg = new Image();
+        bg.onload = function () {
+          GameState.officeBackground = bg;
+          resolve();
+        };
+        bg.onerror = function () {
+          resolve();
+        };
+        bg.src = OFFICE_BG_PATH;
+      }));
+      return Promise.all(jobs);
+    }
+
+    function buildBlockedMap(forAgentId) {
+      const blocked = new Set();
+      for (let y = 0; y < GRID_ROWS; y += 1) {
+        for (let x = 0; x < GRID_COLS; x += 1) {
+          if (
+            x < WALK_BOUNDS.minX ||
+            x > WALK_BOUNDS.maxX ||
+            y < WALK_BOUNDS.minY ||
+            y > WALK_BOUNDS.maxY
+          ) {
+            blocked.add(x + "," + y);
+          }
+        }
+      }
+      const deskKeys = Object.keys(OFFICE_LAYOUT.desks);
+      for (let i = 0; i < deskKeys.length; i += 1) {
+        const id = deskKeys[i];
+        const d = OFFICE_LAYOUT.desks[id];
+        for (let y = d.row; y <= d.row + 1; y += 1) {
+          for (let x = d.col; x <= d.col + 2; x += 1) {
+            blocked.add(x + "," + y);
+          }
+        }
+      }
+      const own = GameState.characters.find(function (c) { return c.id === forAgentId; });
+      if (own) {
+        blocked.delete(own.deskChair.x + "," + own.deskChair.y);
+      }
+      for (let i = 0; i < GameState.characters.length; i += 1) {
+        const c = GameState.characters[i];
+        if (c.id === forAgentId) continue;
+        blocked.add(Math.round(c.tileX) + "," + Math.round(c.tileY));
+      }
+      return blocked;
+    }
+
+    function createCharacter(id, index) {
+      const def = AGENT_DEFS[id];
+      const desk = OFFICE_LAYOUT.desks[id];
+      const chair = { x: desk.col + 1, y: desk.row + 2 };
+      return {
+        id: id,
+        index: index,
+        def: def,
+        desk: desk,
+        deskChair: chair,
+        tileX: chair.x,
+        tileY: chair.y,
+        state: "SPAWNING",
+        stateTimer: 0,
+        stateDuration: randomRange(3, 8),
+        path: [],
+        pathFailStart: 0,
+        targetType: "desk",
+        targetTile: { x: chair.x, y: chair.y },
+        walkFrameTimer: 0,
+        walkFrame: "walk_a",
+        facing: "right",
+        visible: GameState.reducedMotion,
+        spawnStart: index * 0.2,
+        spawnEnd: index * 0.2 + 0.6,
+        bubbleCooldown: 0,
+        freeze: false,
+        clickFlashUntil: 0,
+        greetingQueue: [],
+        greetingPause: 0,
+        greetingPendingPause: 0,
+        monitorFlicker: 0
+      };
+    }
+
+    function spawnBubble(char, text) {
+      const now = GameState.now;
+      GameState.bubbles.set(char.id, {
+        id: char.id,
+        text: text,
+        start: now,
+        fadeIn: 0.2,
+        hold: 2.5,
+        fadeOut: 0.5,
+        color: char.def.accent
+      });
+    }
+
+    function pickAmbientSpeaker() {
+      const candidates = GameState.characters.filter(function (char) {
+        return char.visible && !GameState.greetingLocks.has(char.id);
+      });
+      if (!candidates.length) return null;
+      return candidates[randomInt(0, candidates.length - 1)];
+    }
+
+    function pickAmbientReceiver(speakerId) {
+      const candidates = GameState.characters.filter(function (char) {
+        return char.id !== speakerId && char.visible;
+      });
+      if (!candidates.length) return null;
+      return candidates[randomInt(0, candidates.length - 1)];
+    }
+
+    function enqueueAmbientResponse(receiver, speaker) {
+      const responses = [
+        "copy that",
+        "received",
+        "on it",
+        "syncing now",
+        "good catch"
+      ];
+      GameState.pendingAmbientReplies.push({
+        at: GameState.now + randomRange(1.1, 2.1),
+        receiverId: receiver.id,
+        text: "to " + speaker.def.name + ": " + responses[randomInt(0, responses.length - 1)]
+      });
+    }
+
+    function updateAmbientDialogue() {
+      if (GameState.now < GameState.nextAmbientChatAt) return;
+      const speaker = pickAmbientSpeaker();
+      if (!speaker) return;
+      const receiver = pickAmbientReceiver(speaker.id);
+      if (!receiver) return;
+      const lines = AMBIENT_DIALOGUES[speaker.id] || ["status nominal"];
+      const line = lines[randomInt(0, lines.length - 1)];
+      spawnBubble(speaker, "to " + receiver.def.name + ": " + line);
+      enqueueAmbientResponse(receiver, speaker);
+      GameState.nextAmbientChatAt = GameState.now + randomRange(6.5, 11.5);
+    }
+
+    function flushAmbientReplies() {
+      if (!GameState.pendingAmbientReplies.length) return;
+      const remaining = [];
+      for (let i = 0; i < GameState.pendingAmbientReplies.length; i += 1) {
+        const reply = GameState.pendingAmbientReplies[i];
+        if (GameState.now < reply.at) {
+          remaining.push(reply);
+          continue;
+        }
+        const receiver = GameState.characters.find(function (char) { return char.id === reply.receiverId; });
+        if (receiver && receiver.visible) {
+          spawnBubble(receiver, reply.text);
+        }
+      }
+      GameState.pendingAmbientReplies = remaining;
+    }
+
+    function setWalkTo(char, tile, targetType) {
+      const safeTarget = clampTileToBounds(tile);
+      const blocked = buildBlockedMap(char.id);
+      const start = { x: Math.round(char.tileX), y: Math.round(char.tileY) };
+      const path = bfs(start, safeTarget, blocked);
+      if (!path.length) {
+        if (!char.pathFailStart) char.pathFailStart = GameState.now;
+        if ((GameState.now - char.pathFailStart) > 3) {
+          char.tileX = char.deskChair.x;
+          char.tileY = char.deskChair.y;
+          char.path = [];
+          char.state = "IDLE_DESK";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(3, 8);
+          char.pathFailStart = 0;
+        }
+        return false;
+      }
+      char.path = path;
+      char.targetTile = { x: safeTarget.x, y: safeTarget.y };
+      char.targetType = targetType;
+      char.state = "WALKING";
+      char.stateTimer = 0;
+      char.pathFailStart = 0;
+      return true;
+    }
+
+    function pickRandomQuadrantTile(char) {
+      const q = char.desk.quadrant;
+      let tx = randomInt(q.x0, q.x1);
+      let ty = randomInt(q.y0, q.y1);
+      const clamped = clampTileToBounds({ x: tx, y: ty });
+      tx = clamped.x;
+      ty = clamped.y;
+      if (tx === char.deskChair.x && ty === char.deskChair.y) {
+        tx = Math.min(WALK_BOUNDS.maxX, tx + 1);
+      }
+      return { x: tx, y: ty };
+    }
+
+    function updateWalking(char, dt) {
+      if (!char.path.length) {
+        if (char.targetType === "greeting") {
+          char.state = "IDLE_RANDOM";
+          char.stateTimer = 0;
+          char.stateDuration = 0.2;
+          return;
+        }
+        if (char.targetType === "desk") {
+          char.state = "TYPING";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(5, 15);
+          if (char.id === "poseidon") char.stateDuration = randomRange(3, 7);
+          const speechPool = char.id === "poseidon" ? AGENT_DEFS.poseidon.speech : char.def.speech;
+          spawnBubble(char, speechPool[randomInt(0, speechPool.length - 1)]);
+        } else {
+          char.state = "IDLE_RANDOM";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(1, 3);
+        }
+        return;
+      }
+      const next = char.path[0];
+      const speed = char.id === "poseidon" ? POSEIDON_SPEED : BASE_SPEED;
+      const dx = next.x - char.tileX;
+      const dy = next.y - char.tileY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 0.001) {
+        char.tileX = next.x;
+        char.tileY = next.y;
+        char.path.shift();
+        return;
+      }
+      const step = speed * dt;
+      if (step >= dist) {
+        char.tileX = next.x;
+        char.tileY = next.y;
+        char.path.shift();
+      } else {
+        char.tileX += (dx / dist) * step;
+        char.tileY += (dy / dist) * step;
+      }
+      if (Math.abs(dx) > 0.01) {
+        char.facing = dx < 0 ? "left" : "right";
+      }
+      char.walkFrameTimer += dt;
+      if (char.walkFrameTimer > 1 / WALK_FPS) {
+        char.walkFrame = char.walkFrame === "walk_a" ? "walk_b" : "walk_a";
+        char.walkFrameTimer = 0;
+      }
+    }
+
+    function updateGreeting(char, dt) {
+      if (!char.greetingQueue.length && char.greetingPause <= 0) {
+        return false;
+      }
+      if (char.greetingPause > 0) {
+        char.greetingPause -= dt;
+        return true;
+      }
+      if (!char.path.length && char.greetingQueue.length) {
+        const next = char.greetingQueue.shift();
+        char.greetingPendingPause = next.pause || 0;
+        setWalkTo(char, { x: next.x, y: next.y }, "greeting");
+      }
+      if (char.state === "WALKING") {
+        updateWalking(char, dt);
+      }
+      if (!char.path.length && char.greetingPendingPause > 0) {
+        char.greetingPause = char.greetingPendingPause;
+        char.greetingPendingPause = 0;
+      }
+      if (!char.path.length && !char.greetingQueue.length) {
+        GameState.greetingLocks.delete(char.id);
+        setWalkTo(char, char.deskChair, "desk");
+      }
+      return true;
+    }
+
+    function updateCharacterAI(char, dt) {
+      if (!char.visible) {
+        if (GameState.reducedMotion || GameState.now >= char.spawnEnd) {
+          char.visible = true;
+          char.state = "IDLE_DESK";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(3, 8);
+        }
+        return;
+      }
+
+      if (GameState.greetingLocks.has(char.id)) {
+        updateGreeting(char, dt);
+        return;
+      }
+
+      if (GameState.reducedMotion) {
+        char.tileX = char.deskChair.x;
+        char.tileY = char.deskChair.y;
+        char.path = [];
+        char.stateTimer += dt;
+        if (char.state !== "TYPING" && char.stateTimer >= char.stateDuration) {
+          char.state = "TYPING";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(2.5, 5.5);
+          const speechPool = char.id === "poseidon" ? AGENT_DEFS.poseidon.speech : char.def.speech;
+          spawnBubble(char, speechPool[randomInt(0, speechPool.length - 1)]);
+        } else if (char.state === "TYPING" && char.stateTimer >= char.stateDuration) {
+          char.state = "IDLE_DESK";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(3, 8);
+        } else if (char.state !== "TYPING") {
+          char.state = "IDLE_DESK";
+        }
+        return;
+      }
+
+      if (char.freeze) {
+        char.facing = "right";
+        char.state = "IDLE_DESK";
+        char.path = [];
+        return;
+      }
+
+      char.stateTimer += dt;
+
+      if (char.state === "WALKING") {
+        updateWalking(char, dt);
+        return;
+      }
+
+      if (char.state === "IDLE_DESK") {
+        if (char.stateTimer >= char.stateDuration) {
+          const chance = char.id === "poseidon" ? 0.2 : 0.25;
+          if (Math.random() < chance) {
+            const randomTile = pickRandomQuadrantTile(char);
+            setWalkTo(char, randomTile, "random");
+            return;
+          }
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(3, 8);
+        }
+        return;
+      }
+
+      if (char.state === "IDLE_RANDOM") {
+        if (char.stateTimer >= char.stateDuration) {
+          setWalkTo(char, char.deskChair, "desk");
+        }
+        return;
+      }
+
+      if (char.state === "TYPING") {
+        if (char.stateTimer >= char.stateDuration) {
+          char.state = "IDLE_DESK";
+          char.stateTimer = 0;
+          char.stateDuration = randomRange(3, 8);
+        }
+        return;
+      }
+    }
+
+    function drawSprite(frame, sx, sy, flip) {
+      const ctx = GameState.ctx;
+      const px = GameState.scale;
+      for (let y = 0; y < 16; y += 1) {
+        for (let x = 0; x < 16; x += 1) {
+          const color = frame[y][x];
+          if (!color) continue;
+          const fx = flip ? (15 - x) : x;
+          ctx.fillStyle = color;
+          ctx.fillRect(sx + fx * px, sy + y * px, px, px);
+        }
+      }
+    }
+
+    function drawRoundedRectPath(ctx, x, y, w, h, r) {
+      const rr = Math.max(0, Math.min(r, Math.min(w, h) * 0.5));
+      ctx.beginPath();
+      ctx.moveTo(x + rr, y);
+      ctx.lineTo(x + w - rr, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + rr);
+      ctx.lineTo(x + w, y + h - rr);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+      ctx.lineTo(x + rr, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - rr);
+      ctx.lineTo(x, y + rr);
+      ctx.quadraticCurveTo(x, y, x + rr, y);
+      ctx.closePath();
+    }
+
+    function drawFloor(time) {
+      const ctx = GameState.ctx;
+      const width = GameState.layerRect.width;
+      const height = GameState.layerRect.height;
+      ctx.fillStyle = "rgba(5, 8, 16, 0.34)";
+      ctx.fillRect(0, 0, width, height);
+      const px = TILE_SIZE * GameState.scale;
+      const officeW = GRID_COLS * px;
+      const officeH = GRID_ROWS * px;
+      const bg = GameState.officeBackground;
+
+      if (bg) {
+        const size = Math.min(officeW, officeH);
+        const bx = GameState.offsetX + (officeW - size) * 0.5;
+        const by = GameState.offsetY + (officeH - size) * 0.5;
+        ctx.drawImage(bg, bx, by, size, size);
+        ctx.fillStyle = "rgba(3,5,12,0.2)";
+        ctx.fillRect(bx, by, size, size);
+
+        const fade = ctx.createRadialGradient(bx + size * 0.5, by + size * 0.5, size * 0.26, bx + size * 0.5, by + size * 0.5, size * 0.72);
+        fade.addColorStop(0, "rgba(10,16,32,0)");
+        fade.addColorStop(1, "rgba(2,4,10,0.55)");
+        ctx.fillStyle = fade;
+        ctx.fillRect(bx, by, size, size);
+
+        const borderInset = px * 0.92;
+        const borderX = bx + borderInset;
+        const borderY = by + borderInset;
+        const borderW = size - borderInset * 2;
+        const borderH = size - borderInset * 2;
+        const radius = px * 0.7;
+        ctx.save();
+        drawRoundedRectPath(ctx, borderX, borderY, borderW, borderH, radius);
+        ctx.strokeStyle = "rgba(43, 78, 180, 0.9)";
+        ctx.lineWidth = Math.max(1.6, px * 0.1);
+        ctx.shadowColor = "rgba(37, 99, 235, 0.55)";
+        ctx.shadowBlur = px * 1.5;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        drawRoundedRectPath(ctx, borderX, borderY, borderW, borderH, radius);
+        ctx.strokeStyle = "rgba(147, 197, 253, 0.35)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.restore();
+      } else {
+        ctx.strokeStyle = "rgba(255,255,255,0.03)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x <= GRID_COLS; x += 1) {
+          const sx = GameState.offsetX + x * px;
+          ctx.beginPath();
+          ctx.moveTo(sx, GameState.offsetY);
+          ctx.lineTo(sx, GameState.offsetY + GRID_ROWS * px);
+          ctx.stroke();
+        }
+        for (let y = 0; y <= GRID_ROWS; y += 1) {
+          const sy = GameState.offsetY + y * px;
+          ctx.beginPath();
+          ctx.moveTo(GameState.offsetX, sy);
+          ctx.lineTo(GameState.offsetX + GRID_COLS * px, sy);
+          ctx.stroke();
+        }
+      }
+      const pulse = 0.5 + 0.5 * Math.sin(time * 0.8);
+      const grd = ctx.createRadialGradient(width / 2, height / 2, width * 0.08, width / 2, height / 2, width * 0.7);
+      grd.addColorStop(0, "rgba(4,9,24," + (0.08 + pulse * 0.04) + ")");
+      grd.addColorStop(1, "rgba(2,3,8,0.8)");
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    function drawDesk(char, time) {
+      const ctx = GameState.ctx;
+      const d = char.desk;
+      const topLeft = worldToScreen(d.col, d.row);
+      const px = TILE_SIZE * GameState.scale;
+      const deskW = px * 3;
+      const deskH = px * 2;
+      const pulse = 0.5 + 0.5 * Math.sin(time * 1.25 + char.index * 0.8);
+      const glowAlphaBase = char.id === "poseidon" ? 0.03 : 0.06;
+      const glowAlpha = glowAlphaBase + pulse * (char.id === "poseidon" ? 0.02 : 0.04);
+      const boosted = GameState.hoveredAgentId === char.id ? 0.15 : glowAlpha;
+      const glow = ctx.createRadialGradient(topLeft.x + deskW / 2, topLeft.y + deskH + px * 0.5, px * 0.4, topLeft.x + deskW / 2, topLeft.y + deskH + px * 0.5, px * 3.5);
+      glow.addColorStop(0, colorWithAlpha(char.def.accent, boosted));
+      glow.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = glow;
+      ctx.fillRect(topLeft.x - px * 2, topLeft.y - px * 0.5, deskW + px * 4, deskH + px * 4);
+
+      if (GameState.officeBackground) {
+        if (char.state === "TYPING") {
+          const chairPos = worldToScreen(char.deskChair.x, char.deskChair.y);
+          ctx.fillStyle = colorWithAlpha(char.def.accent, 0.35);
+          ctx.fillRect(chairPos.x + px * 0.36, chairPos.y + px * 0.36, px * 0.28, px * 0.28);
+        }
+        return;
+      }
+
+      ctx.fillStyle = "#1a1a2e";
+      ctx.fillRect(topLeft.x, topLeft.y, deskW, deskH);
+      ctx.fillStyle = "#2a2a4e";
+      ctx.fillRect(topLeft.x, topLeft.y, deskW, px * 0.25);
+
+      const monitorX = topLeft.x + px * 0.5;
+      const monitorY = topLeft.y + px * 0.2;
+      const monitorW = px * 2;
+      const monitorH = px;
+      ctx.fillStyle = "#10131d";
+      ctx.fillRect(monitorX, monitorY, monitorW, monitorH);
+
+      let monitorAlpha = 0.4;
+      if (char.state === "TYPING") monitorAlpha = 0.8;
+      if (GameState.hoveredAgentId === char.id) monitorAlpha = 0.95;
+      if (char.id === "poseidon") monitorAlpha = 0.28 + Math.random() * 0.2;
+      ctx.fillStyle = colorWithAlpha(char.def.accent, monitorAlpha);
+      ctx.fillRect(monitorX + px * 0.1, monitorY + px * 0.1, monitorW - px * 0.2, monitorH - px * 0.2);
+
+      if (char.id === "poseidon") {
+        for (let i = 0; i < 15; i += 1) {
+          const nx = monitorX + Math.random() * monitorW;
+          const ny = monitorY + Math.random() * monitorH;
+          ctx.fillStyle = colorWithAlpha("#d1d5db", 0.15 + Math.random() * 0.35);
+          ctx.fillRect(nx, ny, Math.max(1, px * 0.1), Math.max(1, px * 0.1));
+        }
+      } else if (char.state === "TYPING") {
+        for (let i = 0; i < 8; i += 1) {
+          const fx = monitorX + Math.random() * monitorW;
+          const fy = monitorY + Math.random() * monitorH;
+          ctx.fillStyle = colorWithAlpha("#ffffff", 0.15 + Math.random() * 0.35);
+          ctx.fillRect(fx, fy, Math.max(1, px * 0.08), Math.max(1, px * 0.08));
+        }
+      }
+
+      const chairX = worldToScreen(char.deskChair.x, char.deskChair.y).x;
+      const chairY = worldToScreen(char.deskChair.x, char.deskChair.y).y;
+      ctx.fillStyle = "#151827";
+      ctx.fillRect(chairX, chairY, px, px);
+      ctx.fillStyle = "#222843";
+      ctx.fillRect(chairX, chairY, px, px * 0.22);
+    }
+
+    function drawCharacter(char, time) {
+      if (!char.visible) return;
+      const px = TILE_SIZE * GameState.scale;
+      const bob = Math.sin((time + char.index) * Math.PI) * 0.6 * GameState.scale;
+      const stride = char.state === "WALKING"
+        ? (char.walkFrame === "walk_a" ? -0.5 * GameState.scale : 0.5 * GameState.scale)
+        : 0;
+      const box = getCharacterRenderBox(char, bob, stride);
+      const sprite = GameState.agentImages.get(char.id);
+
+      if (sprite && sprite.image) {
+        const frameIndex = getAgentSheetFrame(char, time, sprite.frameCount);
+        const srcX = frameIndex * sprite.frameWidth;
+        GameState.ctx.save();
+        if (char.facing === "left") {
+          GameState.ctx.translate(box.x + box.width * 0.5, 0);
+          GameState.ctx.scale(-1, 1);
+          GameState.ctx.translate(-(box.x + box.width * 0.5), 0);
+        }
+        GameState.ctx.drawImage(
+          sprite.image,
+          srcX,
+          0,
+          sprite.frameWidth,
+          sprite.frameHeight,
+          box.x,
+          box.y,
+          box.width,
+          box.height
+        );
+        GameState.ctx.restore();
+      } else {
+        const frameKey = char.state === "TYPING" ? "typing" : (char.state === "WALKING" ? char.walkFrame : "idle");
+        const frame = SPRITES[char.id][frameKey];
+        const fallbackX = box.x + px * 0.33;
+        const fallbackY = box.y + px * 0.33;
+        drawSprite(frame, fallbackX, fallbackY, char.facing === "left");
+      }
+
+      if (char.state === "TYPING") {
+        const glowX = box.x + box.width * 0.5;
+        const glowY = box.y + box.height * 0.6;
+        const glow = GameState.ctx.createRadialGradient(glowX, glowY, px * 0.2, glowX, glowY, px * 1.9);
+        glow.addColorStop(0, colorWithAlpha(char.def.accent, 0.35));
+        glow.addColorStop(1, "rgba(0,0,0,0)");
+        GameState.ctx.fillStyle = glow;
+        GameState.ctx.fillRect(glowX - px * 2, glowY - px * 2, px * 4, px * 4);
+      }
+    }
+
+    function drawMatrixEffects(time) {
+      if (GameState.reducedMotion) return;
+      const ctx = GameState.ctx;
+      const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#%*@?ｱｲｳｴｵｶｷｸｹｺ";
+      for (let i = 0; i < GameState.effects.length; i += 1) {
+        const eff = GameState.effects[i];
+        if (time < eff.start || time > eff.end) continue;
+        const progress = (time - eff.start) / (eff.end - eff.start);
+        const alpha = 1 - progress;
+        ctx.font = Math.max(8, Math.floor(8 * GameState.scale)) + "px 'JetBrains Mono'";
+        ctx.textAlign = "center";
+        for (let c = 0; c < eff.columns.length; c += 1) {
+          const col = eff.columns[c];
+          const x = eff.x + col.x * GameState.scale;
+          const y = eff.y + ((progress * col.speed + col.offset) % eff.h);
+          const ch = charset[(Math.floor(progress * 100 + c * 7) + col.offset) % charset.length];
+          ctx.fillStyle = "rgba(0,255,65," + (alpha * 0.9) + ")";
+          ctx.fillText(ch, x, y);
+          ctx.fillStyle = "rgba(0,255,65," + (alpha * 0.5) + ")";
+          ctx.fillText(ch, x, y - 10 * GameState.scale);
+        }
+      }
+    }
+
+    function colorWithAlpha(hex, alpha) {
+      const h = hex.replace("#", "");
+      const bigint = parseInt(h, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+    }
+
+    function getAgentSheetFrame(char, time, frameCount) {
+      if (!frameCount || frameCount < 2) return 0;
+      const t = time + char.index * 0.19;
+      const idleMax = Math.max(2, Math.floor(frameCount * 0.5));
+      const typingStart = Math.max(0, frameCount - Math.floor(frameCount * 0.33));
+      if (char.state === "WALKING") {
+        return Math.floor(t * 12) % frameCount;
+      }
+      if (char.state === "TYPING") {
+        const span = Math.max(2, frameCount - typingStart);
+        return typingStart + (Math.floor(t * 10) % span);
+      }
+      return Math.floor(t * 4) % idleMax;
+    }
+
+    function drawScene(time) {
+      const ctx = GameState.ctx;
+      ctx.clearRect(0, 0, GameState.layerRect.width, GameState.layerRect.height);
+      drawFloor(time);
+      for (let i = 0; i < GameState.characters.length; i += 1) drawDesk(GameState.characters[i], time);
+      drawMatrixEffects(time);
+      const ordered = GameState.characters.slice().sort(function (a, b) { return a.tileY - b.tileY; });
+      for (let i = 0; i < ordered.length; i += 1) drawCharacter(ordered[i], time);
+    }
+
+    function syncBubbles() {
+      const layer = document.getElementById("bubble-layer");
+      const rect = GameState.layerRect;
+      const headerSafe = window.innerWidth <= 768 ? 78 : 96;
+      const minTop = Math.max(0, headerSafe - rect.top);
+      const now = GameState.now;
+      const remove = [];
+      GameState.bubbles.forEach(function (bubble, id) {
+        const char = GameState.characters.find(function (c) { return c.id === id; });
+        if (!char || !char.visible) {
+          remove.push(id);
+          return;
+        }
+        const total = bubble.fadeIn + bubble.hold + bubble.fadeOut;
+        const age = now - bubble.start;
+        if (age > total) {
+          remove.push(id);
+          return;
+        }
+        let node = layer.querySelector('[data-bubble="' + id + '"]');
+        if (!node) {
+          node = document.createElement("div");
+          node.className = "bubble";
+          node.dataset.bubble = id;
+          layer.appendChild(node);
+        }
+        node.style.color = bubble.color;
+        node.textContent = bubble.text;
+        const screen = worldToScreen(char.tileX, char.tileY);
+        node.style.left = screen.x + TILE_SIZE * GameState.scale * 0.5 + "px";
+        const targetTop = screen.y - TILE_SIZE * GameState.scale * 0.28;
+        const clampedTop = Math.max(minTop, targetTop);
+        node.style.top = clampedTop + "px";
+        if (GameState.reducedMotion) {
+          node.style.opacity = "1";
+        } else if (age < bubble.fadeIn) {
+          node.style.opacity = String(age / bubble.fadeIn);
+        } else if (age < bubble.fadeIn + bubble.hold) {
+          node.style.opacity = "1";
+        } else {
+          const rem = age - (bubble.fadeIn + bubble.hold);
+          node.style.opacity = String(Math.max(0, 1 - rem / bubble.fadeOut));
+        }
+      });
+      for (let i = 0; i < remove.length; i += 1) {
+        GameState.bubbles.delete(remove[i]);
+        const dead = layer.querySelector('[data-bubble="' + remove[i] + '"]');
+        if (dead) dead.remove();
+      }
+    }
+
+    function gameLoop(timestamp) {
+      if (!GameState.lastTs) {
+        GameState.lastTs = timestamp;
+        GameState.startedAt = timestamp;
+      }
+      const dt = Math.min((timestamp - GameState.lastTs) / 1000, MAX_DT);
+      GameState.lastTs = timestamp;
+      GameState.now = (timestamp - GameState.startedAt) / 1000;
+      for (let i = 0; i < GameState.characters.length; i += 1) {
+        const char = GameState.characters[i];
+        char.freeze = GameState.hoveredAgentId === char.id;
+        updateCharacterAI(char, dt);
+      }
+      flushAmbientReplies();
+      updateAmbientDialogue();
+      drawScene(GameState.now);
+      syncBubbles();
+      syncUI();
+      window.requestAnimationFrame(gameLoop);
+    }
+
+    function triggerGreeting(char) {
+      if (GameState.reducedMotion) {
+        spawnBubble(char, char.def.name + " · " + char.def.role);
+        const reducedNode = GameState.cardNodes.get(char.id);
+        if (reducedNode) {
+          reducedNode.classList.remove("flash");
+          void reducedNode.offsetWidth;
+          reducedNode.classList.add("flash");
+        }
+        return;
+      }
+      const cx = Math.round(char.tileX);
+      const cy = Math.round(char.tileY);
+      const minX = Math.max(WALK_BOUNDS.minX, cx - 3);
+      const maxX = Math.min(WALK_BOUNDS.maxX, cx + 3);
+      char.greetingQueue = [
+        { x: minX, y: cy, pause: 0.25 },
+        { x: maxX, y: cy, pause: 0.25 },
+        { x: char.deskChair.x, y: char.deskChair.y, pause: 0 }
+      ];
+      char.greetingPause = 0;
+      char.greetingPendingPause = 0;
+      char.path = [];
+      GameState.greetingLocks.add(char.id);
+      spawnBubble(char, char.def.name + " · " + char.def.role);
+      const node = GameState.cardNodes.get(char.id);
+      if (node) {
+        node.classList.remove("flash");
+        void node.offsetWidth;
+        node.classList.add("flash");
+      }
+    }
+
+    function handleHoverFromMouse(clientX, clientY) {
+      if (GameState.isMobile) {
+        GameState.hoveredAgentId = "";
+        return;
+      }
+      let hovered = "";
+      GameState.cardNodes.forEach(function (node, id) {
+        const r = node.getBoundingClientRect();
+        if (clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom) {
+          hovered = id;
+        }
+      });
+      GameState.hoveredAgentId = hovered;
+    }
+
+    function attachInteractions() {
+      const layer = document.getElementById("canvas-layer");
+      layer.addEventListener("click", function (event) {
+        const rect = layer.getBoundingClientRect();
+        const lx = event.clientX - rect.left;
+        const ly = event.clientY - rect.top;
+        for (let i = 0; i < GameState.characters.length; i += 1) {
+          const c = GameState.characters[i];
+          const box = getCharacterRenderBox(c, 0, 0);
+          if (
+            lx >= box.x &&
+            lx <= box.x + box.width &&
+            ly >= box.y &&
+            ly <= box.y + box.height
+          ) {
+            triggerGreeting(c);
+            break;
+          }
+        }
+      });
+      document.addEventListener("mousemove", function (event) {
+        handleHoverFromMouse(event.clientX, event.clientY);
+      });
+      document.addEventListener("mouseleave", function () {
+        GameState.hoveredAgentId = "";
+      });
+      window.addEventListener("resize", function () {
+        GameState.isMobile = window.matchMedia("(max-width: 768px)").matches;
+        document.body.classList.toggle("is-mobile", GameState.isMobile);
+        resizeCanvas();
+      });
+    }
+
+    function buildTicker() {
+      const text = '<span class="ticker-segment">⚡ <span class="t-zeus">ZEUS:</span> PAPER MODE · scanning 30+ cities · 🌊 <span class="t-poseidon">POSEIDON:</span> IN DEVELOPMENT · whale tracker architecture · ⚙ <span class="t-triton">TRITON:</span> LIVE · BTC 5m regime engine · self-tuning enabled · ✦ <span class="t-hermes">HERMES:</span> ACTIVE · 3 arb strategies running · neg-risk + UMA + high-conf · ⚔ ReARC Labs Agent Network · v0.2 · rearclabs.com</span>';
+      const track = document.getElementById("ticker-track");
+      track.innerHTML = text + text;
+    }
+
+    function makeCard(def, id, mobile) {
+      const root = document.createElement("article");
+      root.className = mobile ? "mobile-card" : "agent-card";
+      root.dataset.agent = id;
+      root.style.setProperty("--badge", def.badge);
+      const logsDisabled = !def.logsPath;
+      const dashDisabled = !def.dashboardPath;
+      root.innerHTML =
+        '<div class="card-head">' +
+          '<div class="card-left">' +
+            '<span class="pulse-dot"></span>' +
+            '<span class="agent-name">' + def.name + '</span>' +
+          "</div>" +
+          '<span class="status-badge">' + def.statusShort + "</span>" +
+        "</div>" +
+        '<div class="agent-role">' + def.role + "</div>" +
+        '<div class="card-divider"></div>' +
+        '<p class="agent-description">' + def.description + "</p>" +
+        '<p class="agent-strategy" title="' + def.strategy.replace(/"/g, "&quot;") + '">STRATEGY: ' + def.strategy + "</p>" +
+        '<div class="card-actions">' +
+          (logsDisabled
+            ? '<button type="button" disabled title="Coming soon">▸ LOGS</button>'
+            : '<a href="' + def.logsPath + '" aria-label="' + def.name + ' logs">▸ LOGS</a>') +
+          (dashDisabled
+            ? '<button type="button" disabled title="Coming soon">↗ DASHBOARD</button>'
+            : '<a href="' + def.dashboardPath + '" aria-label="' + def.name + ' dashboard">↗ DASHBOARD</a>') +
+        "</div>";
+      return root;
+    }
+
+    function buildCardsAndHud() {
+      const desktop = document.getElementById("agent-cards");
+      const mobile = document.getElementById("mobile-cards");
+      const hud = document.getElementById("mission-hud");
+      const ids = Object.keys(AGENT_DEFS);
+      for (let i = 0; i < ids.length; i += 1) {
+        const id = ids[i];
+        const card = makeCard(AGENT_DEFS[id], id, false);
+        const mCard = makeCard(AGENT_DEFS[id], id, true);
+        desktop.appendChild(card);
+        mobile.appendChild(mCard);
+        GameState.cardNodes.set(id, card);
+        GameState.mobileCardNodes.set(id, mCard);
+      }
+      hud.innerHTML =
+        '<div class="hud-row"><span class="hud-label"><span class="hud-dot" style="color:#22c55e"></span>ZEUS</span><span class="hud-status" style="color:#22c55e">PAPER</span></div>' +
+        '<div class="hud-row"><span class="hud-label"><span class="hud-dot" style="color:#f59e0b"></span>POSEIDON</span><span class="hud-status" style="color:#f59e0b">DEV</span></div>' +
+        '<div class="hud-row"><span class="hud-label"><span class="hud-dot" style="color:#a855f7"></span>TRITON</span><span class="hud-status" style="color:#a855f7">LIVE</span></div>' +
+        '<div class="hud-row"><span class="hud-label"><span class="hud-dot" style="color:#ec4899"></span>HERMES</span><span class="hud-status" style="color:#ec4899">ACTIVE</span></div>';
+    }
+
+    function syncUI() {
+      GameState.cardNodes.forEach(function (node, id) {
+        node.classList.toggle("hover", GameState.hoveredAgentId === id);
+      });
+    }
+
+    function startSpawn() {
+      if (GameState.reducedMotion) {
+        for (let i = 0; i < GameState.characters.length; i += 1) {
+          GameState.characters[i].visible = true;
+          GameState.characters[i].state = "IDLE_DESK";
+        }
+        return;
+      }
+      for (let i = 0; i < GameState.characters.length; i += 1) {
+        const c = GameState.characters[i];
+        const d = c.desk;
+        const start = c.spawnStart;
+        const end = c.spawnEnd;
+        const anchor = worldToScreen(d.col, d.row);
+        const columns = [];
+        for (let k = 0; k < 16; k += 1) {
+          columns.push({
+            x: (k * TILE_SIZE * 3) / 16 + Math.random() * 6,
+            offset: randomInt(0, 80),
+            speed: randomRange(24, 60)
+          });
+        }
+        GameState.effects.push({
+          id: c.id,
+          start: start,
+          end: end,
+          x: anchor.x,
+          y: anchor.y,
+          w: TILE_SIZE * GameState.scale * 3,
+          h: TILE_SIZE * GameState.scale * 3,
+          columns: columns
+        });
+      }
+    }
+
+    function resizeCanvas() {
+      const layer = document.getElementById("canvas-layer");
+      const canvas = GameState.canvas;
+      const rect = layer.getBoundingClientRect();
+      GameState.layerRect = rect;
+      const dpr = GameState.dpr;
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
+      const ctx = GameState.ctx;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+      const officeW = GRID_COLS * TILE_SIZE;
+      const officeH = GRID_ROWS * TILE_SIZE;
+      const fit = Math.min(rect.width / officeW, rect.height / officeH);
+      GameState.scale = GameState.isMobile ? fit : Math.min(ZOOM, fit);
+      const drawW = officeW * GameState.scale;
+      const drawH = officeH * GameState.scale;
+      GameState.offsetX = (rect.width - drawW) / 2;
+      GameState.offsetY = (rect.height - drawH) / 2;
+    }
+
+    function initOffice() {
+      GameState.canvas = document.getElementById("office-canvas");
+      GameState.ctx = GameState.canvas.getContext("2d");
+      const ids = Object.keys(AGENT_DEFS);
+      GameState.characters = ids.map(function (id, idx) {
+        return createCharacter(id, idx);
+      });
+      resizeCanvas();
+      buildTicker();
+      buildCardsAndHud();
+      attachInteractions();
+      startSpawn();
+      syncHeader();
+      manageVanta();
+      GameState.nextAmbientChatAt = randomRange(4.5, 7.5);
+      window.requestAnimationFrame(gameLoop);
+    }
+
+    document.fonts.ready.then(function () {
+      if (menuToggle && mobilePanel) {
+        menuToggle.addEventListener("click", toggleMenu);
+        navLinks.forEach(function (link) {
+          link.addEventListener("click", closeMenu);
+        });
+      }
+      localeButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          localeButtons.forEach(function (item) {
+            item.classList.remove("is-active");
+            item.setAttribute("aria-pressed", "false");
+          });
+          button.classList.add("is-active");
+          button.setAttribute("aria-pressed", "true");
+        });
+      });
+      window.addEventListener("scroll", syncHeader, { passive: true });
+      window.addEventListener("resize", function () {
+        manageVanta();
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+      reducedMotionQuery.addEventListener("change", manageVanta);
+      loadAssets().then(function () {
+        initOffice();
+      });
+    });
+  </script>
+</body>
+</html>
